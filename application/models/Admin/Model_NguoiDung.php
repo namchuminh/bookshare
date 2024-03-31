@@ -53,6 +53,20 @@ class Model_NguoiDung extends CI_Model {
 		return $result;
 	}
 
+	public function getCashFlow($manguoidung,$start = 0, $end = 10)
+	{
+		$sql = "SELECT * FROM dongtien WHERE MaNguoiDung = ? ORDER BY MaDongTien DESC LIMIT ?, ?";
+		$result = $this->db->query($sql, array($manguoidung, $start, $end));
+		return $result->result_array();
+	}
+
+	public function checkNumberCashFlow($manguoidung)
+	{
+		$sql = "SELECT * FROM dongtien WHERE MaNguoiDung = ?";
+		$result = $this->db->query($sql,array($manguoidung));
+		return $result->num_rows();
+	}
+
 }
 
 /* End of file Model_ChuyenMuc.php */

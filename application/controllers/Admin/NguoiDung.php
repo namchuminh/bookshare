@@ -161,6 +161,59 @@ class NguoiDung extends CI_Controller {
 		$this->session->set_flashdata('success', 'Trừ '.number_format($sotientru).' VND cho người dùng thành công!');
 		return redirect(base_url('admin/nguoi-dung/'.$manguoidung.'/vi-tien/'));
 	}
+
+	public function cashFlow($manguoidung){
+		if(count($this->Model_NguoiDung->getById($manguoidung)) <= 0){
+			$this->session->set_flashdata('error', 'Người dùng không tồn tại!');
+			return redirect(base_url('admin/nguoi-dung/'));
+		}
+
+		$data['detail'] = $this->Model_NguoiDung->getById($manguoidung);
+
+		$totalRecords = $this->Model_NguoiDung->checkNumberCashFlow($manguoidung);
+		$recordsPerPage = 10;
+		$totalPages = ceil($totalRecords / $recordsPerPage); 
+
+		$data['totalPages'] = $totalPages;
+		$data['list'] = $this->Model_NguoiDung->getCashFlow($manguoidung);
+		$data['title'] = "Thông tin dòng tiền người dùng";
+		return $this->load->view('Admin/View_DongTienNguoiDung', $data);
+	}
+
+	public function pageCashFlow($manguoidung,$trang){
+		if(count($this->Model_NguoiDung->getById($manguoidung)) <= 0){
+			$this->session->set_flashdata('error', 'Người dùng không tồn tại!');
+			return redirect(base_url('admin/nguoi-dung/'));
+		}
+
+		$data['detail'] = $this->Model_NguoiDung->getById($manguoidung);
+
+		$data['title'] = "Thông tin dòng tiền người dùng";
+		$totalRecords = $this->Model_NguoiDung->checkNumberCashFlow($manguoidung);
+		$recordsPerPage = 10;
+		$totalPages = ceil($totalRecords / $recordsPerPage); 
+
+		if($trang < 1){
+			return redirect(base_url('admin/nguoi-dung/'.$manguoidung.'/dong-tien/'));
+		}
+
+		if($trang > $totalPages){
+			return redirect(base_url('admin/nguoi-dung/'.$manguoidung.'/dong-tien/'));
+		}
+
+		$start = ($trang - 1) * $recordsPerPage;
+
+
+		if($start == 0){
+			$data['totalPages'] = $totalPages;
+			$data['list'] = $this->Model_NguoiDung->getCashFlow($manguoidung);
+			return $this->load->view('Admin/View_DongTienNguoiDung', $data);
+		}else{
+			$data['totalPages'] = $totalPages;
+			$data['list'] = $this->Model_NguoiDung->getCashFlow($manguoidung,$start);
+			return $this->load->view('Admin/View_DongTienNguoiDung', $data);
+		}
+	}
 }
 
 /* End of file ChuyenMuc.php */

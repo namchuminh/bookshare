@@ -44,6 +44,8 @@ $route['admin/nguoi-dung/(:any)/trang-thai'] = 'Admin/NguoiDung/status/$1';
 $route['admin/nguoi-dung/(:any)/vi-tien'] = 'Admin/NguoiDung/wallet/$1';
 $route['admin/nguoi-dung/vi-tien/tru'] = 'Admin/NguoiDung/subMoney';
 $route['admin/nguoi-dung/vi-tien/cong'] = 'Admin/NguoiDung/addMoney';
+$route['admin/nguoi-dung/(:any)/dong-tien'] = 'Admin/NguoiDung/cashFlow/$1';
+$route['admin/nguoi-dung/(:any)/dong-tien/(:any)/trang'] = 'Admin/NguoiDung/pageCashFlow/$1/$2';
 
 
 $route['admin/ca-nhan'] = 'Admin/CaNhan';

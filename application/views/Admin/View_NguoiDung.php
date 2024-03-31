@@ -40,6 +40,7 @@
                       <th>Chủ Tài Khoản</th>
                       <th>Trạng Thái</th>
                       <th>Ví Tiền</th>
+                      <th>Dòng Tiền</th>
                       <th>Hành Động</th>
                     </tr>
                   </thead>
@@ -74,8 +75,14 @@
                         </td>
                         <td>
                           <a href="<?php echo base_url('admin/nguoi-dung/'.$value['MaNguoiDung'].'/vi-tien/'); ?>" class="btn btn-success" style="color: white;">
-                              <i class="fa-solid fa-money-check-dollar"></i>
+                              <i class="fa-solid fa-credit-card"></i>
                                 <span>VÍ TIỀN</span>
+                            </a>
+                        </td>
+                        <td>
+                          <a href="<?php echo base_url('admin/nguoi-dung/'.$value['MaNguoiDung'].'/dong-tien/'); ?>" class="btn btn-info" style="color: white;">
+                              <i class="fa-solid fa-money-check-dollar"></i>
+                                <span>DÒNG TIỀN</span>
                             </a>
                         </td>
 	                      <td>
