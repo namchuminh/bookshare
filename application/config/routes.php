@@ -37,10 +37,13 @@ $route['admin/lien-he/(:any)/xem'] = 'Admin/LienHe/view/$1';
 
 $route['admin/cau-hinh'] = 'Admin/CauHinh';
 
-$route['admin/khach-hang'] = 'Admin/KhachHang';
-$route['admin/khach-hang/(:any)/trang'] = 'Admin/KhachHang/page/$1';
-$route['admin/khach-hang/(:any)/xem'] = 'Admin/KhachHang/view/$1';
-$route['admin/khach-hang/(:any)/trang-thai'] = 'Admin/KhachHang/status/$1';
+$route['admin/nguoi-dung'] = 'Admin/NguoiDung';
+$route['admin/nguoi-dung/(:any)/trang'] = 'Admin/NguoiDung/page/$1';
+$route['admin/nguoi-dung/(:any)/xem'] = 'Admin/NguoiDung/view/$1';
+$route['admin/nguoi-dung/(:any)/trang-thai'] = 'Admin/NguoiDung/status/$1';
+$route['admin/nguoi-dung/(:any)/vi-tien'] = 'Admin/NguoiDung/wallet/$1';
+$route['admin/nguoi-dung/vi-tien/tru'] = 'Admin/NguoiDung/subMoney';
+$route['admin/nguoi-dung/vi-tien/cong'] = 'Admin/NguoiDung/addMoney';
 
 
 $route['admin/ca-nhan'] = 'Admin/CaNhan';

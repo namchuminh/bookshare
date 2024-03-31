@@ -122,29 +122,14 @@
               </p>
             </a>
           </li><nav></nav>
-          <li class="nav-header">QUẢN LÝ CỬA HÀNG</li>
+          <li class="nav-header">QUẢN LÝ NGƯỜI DÙNG</li>
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fa-solid fa-newspaper"></i>
+            <a href="<?php echo base_url('admin/nguoi-dung/'); ?>" class="nav-link">
+              <i class="nav-icon fa-solid fa-user"></i>
               <p>
-                Tin Tức
-                <i class="right fas fa-angle-left"></i>
+                Người Dùng
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="<?php echo base_url('admin/tin-tuc/') ?>" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Danh Sách</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="<?php echo base_url('admin/tin-tuc/them/') ?>" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Thêm Mới</p>
-                </a>
-              </li>
-            </ul>
           </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
