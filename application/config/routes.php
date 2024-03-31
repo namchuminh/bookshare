@@ -64,9 +64,6 @@ $route['admin/muon-sach/(:any)/huy'] = 'Admin/MuonSach/cancel/$1';
 $route['admin/muon-sach/(:any)/trang-thai'] = 'Admin/MuonSach/status/$1';
 $route['admin/muon-sach/tim-kiem'] = 'Admin/MuonSach/search';
 $route['admin/muon-sach/tim-kiem/(:any)/trang'] = 'Admin/MuonSach/pageSearch/$1';
-$route['admin/muon-sach/thong-ke'] = 'Admin/MuonSach/type';
-$route['admin/muon-sach/thong-ke/(:any)/trang'] = 'Admin/MuonSach/pageType/$1';
-
 
 
 $route['admin/sach'] = 'Admin/Sach';

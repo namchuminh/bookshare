@@ -127,93 +127,60 @@ class MuonSach extends CI_Controller {
 
 	public function search()
 	{
-		if(!isset($_POST['madonhang']) && !isset($_POST['thanhtoan']) && !isset($_POST['trangthai'])){
+		if(!isset($_POST['mamuonsach']) && !isset($_POST['ngaymuon']) && !isset($_POST['ngaytra'])){
 			return redirect(base_url('admin/muon-sach/'));
 		}
 
-		$madonhang = $this->input->post('madonhang');
-		$trangthai = $this->input->post('trangthai');
-		$thanhtoan = $this->input->post('thanhtoan');
+		$mamuonsach = $this->input->post('mamuonsach');
+		$ngaymuon = $this->input->post('ngaymuon');
+		$ngaytra = $this->input->post('ngaytra');
 
-		if(empty($madonhang) && empty($trangthai) && empty($thanhtoan)){
+		if(empty($mamuonsach) && empty($ngaymuon) && empty($ngaytra)){
 			return redirect(base_url('admin/muon-sach/'));
 		}
 
 		
 		$data['post'] = array(
-			'madonhang' => $madonhang,
-			'trangthai' => $trangthai,
-			'thanhtoan' => $thanhtoan,
+			'mamuonsach' => $mamuonsach,
+			'ngaymuon' => $ngaymuon,
+			'ngaytra' => $ngaytra,
 		);
 
-		if($thanhtoan == -1){
-			$thanhtoan = 0;
-		}
-
-		if($trangthai == -1){
-			$trangthai = 0;
-		}
-
-		if(empty($_POST['thanhtoan']) || !isset($_POST['thanhtoan'])){
-			$thanhtoan = -1;
-		}
-
-		if(empty($_POST['trangthai']) || !isset($_POST['trangthai'])){
-			$trangthai = -1;
-		}
-
-
-		$totalRecords = $this->Model_MuonSach->checkNumberSearch($madonhang,$thanhtoan,$trangthai);
+		$totalRecords = $this->Model_MuonSach->checkNumberSearch($mamuonsach,$ngaymuon,$ngaytra);
 		$recordsPerPage = 10;
 		$totalPages = ceil($totalRecords / $recordsPerPage); 
 
 		$data['totalPages'] = $totalPages;
-		$data['list'] = $this->Model_MuonSach->search($madonhang,$thanhtoan,$trangthai);
-		$data['title'] = "Danh sách hóa đơn";
+		$data['list'] = $this->Model_MuonSach->search($mamuonsach,$ngaymuon,$ngaytra);
+		$data['title'] = "Danh sách đang mượn";
 		return $this->load->view('Admin/View_MuonSachTimKiem', $data);
 
 	}
 
 
 	public function pageSearch($trang){
-		if(!isset($_GET['madonhang']) && !isset($_GET['thanhtoan']) && !isset($_GET['trangthai'])){
+		if(!isset($_GET['mamuonsach']) && !isset($_GET['ngaymuon']) && !isset($_GET['ngaytra'])){
 			return redirect(base_url('admin/muon-sach/'));
 		}
 
-		$madonhang = $this->input->get('madonhang');
-		$trangthai = $this->input->get('trangthai');
-		$thanhtoan = $this->input->get('thanhtoan');
+		$mamuonsach = $this->input->get('mamuonsach');
+		$ngaymuon = $this->input->get('ngaymuon');
+		$ngaytra = $this->input->get('ngaytra');
 
-		if(empty($madonhang) && empty($trangthai) && empty($thanhtoan)){
+		if(empty($mamuonsach) && empty($ngaymuon) && empty($ngaytra)){
 			return redirect(base_url('admin/muon-sach/'));
 		}
 
 		
 		$data['post'] = array(
-			'madonhang' => $madonhang,
-			'trangthai' => $trangthai,
-			'thanhtoan' => $thanhtoan,
+			'mamuonsach' => $mamuonsach,
+			'ngaymuon' => $ngaymuon,
+			'ngaytra' => $ngaytra,
 		);
 
-		if($thanhtoan == -1){
-			$thanhtoan = 0;
-		}
 
-		if($trangthai == -1){
-			$trangthai = 0;
-		}
-
-		if(empty($_GET['thanhtoan']) || !isset($_GET['thanhtoan'])){
-			$thanhtoan = -1;
-		}
-
-		if(empty($_GET['trangthai']) || !isset($_GET['trangthai'])){
-			$trangthai = -1;
-		}
-
-
-		$data['title'] = "Danh sách hóa đơn";
-		$totalRecords = $this->Model_MuonSach->checkNumberSearch($madonhang,$thanhtoan,$trangthai);
+		$data['title'] = "Danh sách đang mượn";
+		$totalRecords = $this->Model_MuonSach->checkNumberSearch($mamuonsach,$ngaymuon,$ngaytra);
 		$recordsPerPage = 10;
 		$totalPages = ceil($totalRecords / $recordsPerPage); 
 
@@ -230,81 +197,15 @@ class MuonSach extends CI_Controller {
 
 		if($start == 0){
 			$data['totalPages'] = $totalPages;
-			$data['list'] = $this->Model_MuonSach->search($madonhang,$thanhtoan,$trangthai);
+			$data['list'] = $this->Model_MuonSach->search($mamuonsach,$ngaymuon,$ngaytra);
 			return $this->load->view('Admin/View_MuonSachTimKiem', $data);
 		}else{
 			$data['totalPages'] = $totalPages;
-			$data['list'] = $this->Model_MuonSach->search($madonhang,$thanhtoan,$trangthai,$start);
+			$data['list'] = $this->Model_MuonSach->search($mamuonsach,$ngaymuon,$ngaytra,$start);
 			return $this->load->view('Admin/View_MuonSachTimKiem', $data);
 		}
 	}
 
-	public function type(){
-		if(!isset($_GET['type'])){
-			return redirect(base_url('admin/muon-sach/'));
-		}
-
-		$type = $this->input->get('type');
-
-		if(($type != "thang") && ($type != "tuan")){
-			return redirect(base_url('admin/muon-sach/'));
-		}
-
-		$data['post'] = array(
-			"type" => $type
-		);
-
-		$totalRecords = $this->Model_MuonSach->checkNumberType($type);
-		$recordsPerPage = 10;
-		$totalPages = ceil($totalRecords / $recordsPerPage); 
-
-		$data['totalPages'] = $totalPages;
-		$data['list'] = $this->Model_MuonSach->getType($type);
-		$data['title'] = "Danh sách hóa đơn";
-		return $this->load->view('Admin/View_MuonSachThongKe', $data);
-	}
-
-	public function pageType($trang){
-		if(!isset($_GET['type'])){
-			return redirect(base_url('admin/muon-sach/'));
-		}
-
-		$type = $this->input->get('type');
-
-		if(($type != "thang") && ($type != "tuan")){
-			return redirect(base_url('admin/muon-sach/'));
-		}
-
-		$data['post'] = array(
-			"type" => $type
-		);
-
-		$data['title'] = "Danh sách hóa đơn";
-		$totalRecords = $this->Model_MuonSach->checkNumberType($type);
-		$recordsPerPage = 10;
-		$totalPages = ceil($totalRecords / $recordsPerPage); 
-
-		if($trang < 1){
-			return redirect(base_url('admin/muon-sach/'));
-		}
-
-		if($trang > $totalPages){
-			return redirect(base_url('admin/muon-sach/'));
-		}
-
-		$start = ($trang - 1) * $recordsPerPage;
-
-
-		if($start == 0){
-			$data['totalPages'] = $totalPages;
-			$data['list'] = $this->Model_MuonSach->getType($type);
-			return $this->load->view('Admin/View_MuonSachThongKe', $data);
-		}else{
-			$data['totalPages'] = $totalPages;
-			$data['list'] = $this->Model_MuonSach->getType($type,$start);
-			return $this->load->view('Admin/View_MuonSachThongKe', $data);
-		}
-	}
 }
 
 /* End of file ChuyenMuc.php */

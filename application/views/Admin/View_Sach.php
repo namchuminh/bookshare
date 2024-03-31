@@ -93,7 +93,7 @@
                         <td>
                           <a href="<?php echo base_url('admin/sach/'.$value['MaSach'].'/trang-thai/'); ?>" class="btn btn-success" style="color: white;">
                           <i class="fa-solid fa-thumbtack"></i>
-                            <span>TRẠNG THÁI</span>
+                            <span>ĐỔI TRẠNG THÁI</span>
                           </a>
                         </td>
 	                      <td>
