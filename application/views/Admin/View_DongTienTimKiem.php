@@ -75,6 +75,7 @@
                 </table>
               </div>
               <div class="card-footer clearfix">
+                <a href="<?php echo base_url('admin/dong-tien/') ?>" class="btn btn-success">Quay Lại</a>
                 <ul class="pagination pagination-sm m-0 float-right">
                   <?php for($i = 1; $i <= $totalPages; $i++){ ?>
                       <li class="page-item"><a class="page-link" href="<?php echo base_url('admin/dong-tien/tim-kiem/'.$i.'/trang/?taikhoan='.$post['taikhoan'].'&thoigian='.$post['thoigian']) ?>"><?php echo $i; ?></a></li>

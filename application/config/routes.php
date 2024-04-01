@@ -31,9 +31,11 @@ $route['admin/rut-tien/them'] = 'Admin/RutTien/add';
 $route['admin/rut-tien/(:any)/sua'] = 'Admin/RutTien/update/$1';
 $route['admin/rut-tien/(:any)/xoa'] = 'Admin/RutTien/delete/$1';
 
-$route['admin/lien-he'] = 'Admin/LienHe';
-$route['admin/lien-he/(:any)/trang'] = 'Admin/LienHe/page/$1';
-$route['admin/lien-he/(:any)/xem'] = 'Admin/LienHe/view/$1';
+$route['admin/rut-tien'] = 'Admin/RutTien';
+$route['admin/rut-tien/(:any)/trang'] = 'Admin/RutTien/page/$1';
+$route['admin/rut-tien/(:any)/xem'] = 'Admin/RutTien/view/$1';
+$route['admin/rut-tien/(:any)/xac-nhan'] = 'Admin/RutTien/accept/$1';
+$route['admin/rut-tien/(:any)/huy'] = 'Admin/RutTien/cancel/$1';
 
 $route['admin/cau-hinh'] = 'Admin/CauHinh';
 

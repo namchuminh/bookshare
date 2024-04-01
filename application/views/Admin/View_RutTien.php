@@ -5,12 +5,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Quản Lý Liên Hệ</h1>
+            <h1>Quản Lý Rút Tiền</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="<?php echo base_url('admin/'); ?>">Trang Chủ</a></li>
-              <li class="breadcrumb-item active">Quản Lý Liên Hệ</li>
+              <li class="breadcrumb-item active">Quản Lý Rút Tiền</li>
             </ol>
           </div>
         </div>
@@ -30,27 +30,39 @@
                   <thead>
                     <tr>
                       <th>#</th>
-                      <th>Tên Khách Hàng</th>
-                      <th>Tiêu Đề</th>
+                      <th>Hình Ảnh</th>
+                      <th>Tài Khoản</th>
+                      <th>Số Tiền Rút</th>
                       <th>Thời Gian</th>
-                      <th>Hành Động</th>
+                      <th>Trạng Thái</th>
+                      <th>Xử Lý Rút Tiền</th>
                     </tr>
                   </thead>
                   <tbody>
                   	<?php foreach ($list as $key => $value): ?>
 	                    <tr>
 	                      <td><?php echo $key + 1; ?></td>
-	                      <td>
-                          <a href="<?php echo base_url('admin/khach-hang/'.$value['MaKhachHang'].'/xem/'); ?>"><?php echo $value['HoTen']; ?></a>
+	                       <td>
+                          <img src="<?php echo $value['AnhChinh']; ?>" style="width: 100px; height: 100px;">
                         </td>
-	                      <td><?php echo $value['TieuDe']; ?></td>
+                        <td><a href="<?php echo base_url('admin/nguoi-dung/'.$value['MaNguoiDung'].'/vi-tien/') ?>"><?php echo $value['TaiKhoan']; ?></a></td>
+	                      <td><?php echo number_format($value['SoTienRut']); ?> VND</td>
 	                      <td>
 	                      	<?php echo $value['ThoiGian']; ?>
 	                      </td>
+                        <td>
+                          <?php if($value['TrangThai'] == 0){ ?>
+                            Đã Hủy Rút Tiền
+                          <?php }else if($value['TrangThai'] == 1){ ?>
+                            Chờ Admin Duyệt
+                          <?php }else if($value['TrangThai'] == 2){ ?>
+                            Đã Rút Tiền
+                          <?php } ?>
+                        </td>
 	                      <td>
-	                      	<a href="<?php echo base_url('admin/lien-he/'.$value['MaLienHe'].'/xem/'); ?>" class="btn btn-primary" style="color: white;">
-	                      		<i class="fas fa-edit"></i>
-                            	<span>XEM CHI TIẾT</span>
+	                      	<a href="<?php echo base_url('admin/rut-tien/'.$value['MaRutTien'].'/xem/'); ?>" class="btn btn-primary" style="color: white;">
+	                      		<i class="fa-solid fa-money-bills"></i>
+                            	<span>XỬ LÝ RÚT TIỀN</span>
                           </a>
 	                      </td>
 	                    </tr>
@@ -61,7 +73,7 @@
               <div class="card-footer clearfix">
                 <ul class="pagination pagination-sm m-0 float-right">
                 	<?php for($i = 1; $i <= $totalPages; $i++){ ?>
-                  		<li class="page-item"><a class="page-link" href="<?php echo base_url('admin/lien-he/'.$i.'/trang/') ?>"><?php echo $i; ?></a></li>
+                  		<li class="page-item"><a class="page-link" href="<?php echo base_url('admin/rut-tien/'.$i.'/trang/') ?>"><?php echo $i; ?></a></li>
                   	<?php } ?>      
                 </ul>
               </div>

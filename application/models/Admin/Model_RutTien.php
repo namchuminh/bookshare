@@ -10,49 +10,35 @@ class Model_RutTien extends CI_Model {
 		
 	}
 
-	public function add($code,$soluong,$dasudung,$giatrigiam,$thoigian){
-		$data = array(
-	        "Code" => $code,
-	        "SoLuong" => $soluong,
-	        "DaSuDung" => $dasudung,
-	        "GiaTriGiam" => $giatrigiam,
-	        "ThoiGian" => $thoigian
-	    );
-
-	    $this->db->insert('magiamgia', $data);
-	    $lastInsertedId = $this->db->insert_id();
-
-	    return $lastInsertedId;
-	}
-
 	public function checkNumber()
 	{
-		$sql = "SELECT * FROM magiamgia WHERE TrangThai = 1";
+		$sql = "SELECT ruttien.*, nguoidung.MaNguoiDung, nguoidung.TaiKhoan, nguoidung.AnhChinh FROM nguoidung, ruttien WHERE nguoidung.PhanQuyen = 0 AND nguoidung.MaNguoiDung = ruttien.MaNguoiDung";
 		$result = $this->db->query($sql);
 		return $result->num_rows();
 	}
 
 	public function getAll($start = 0, $end = 10){
-		$sql = "SELECT * FROM magiamgia WHERE TrangThai = 1 ORDER BY MaGiamGia DESC LIMIT ?, ?";
+		$sql = "SELECT ruttien.*, nguoidung.MaNguoiDung, nguoidung.TaiKhoan, nguoidung.AnhChinh FROM nguoidung, ruttien WHERE nguoidung.PhanQuyen = 0 AND nguoidung.MaNguoiDung = ruttien.MaNguoiDung ORDER BY ruttien.MaRutTien DESC LIMIT ?, ?";
 		$result = $this->db->query($sql, array($start, $end));
 		return $result->result_array();
 	}
 
-	public function getById($MaGiamGia){
-		$sql = "SELECT * FROM magiamgia WHERE MaGiamGia = ? AND TrangThai = 1";
-		$result = $this->db->query($sql, array($MaGiamGia));
+	public function getById($MaRutTien){
+		$sql = "SELECT ruttien.*, nguoidung.TenNganHang, nguoidung.TaiKhoan, nguoidung.SoTaiKhoan, nguoidung.ChuTaiKhoan FROM nguoidung, ruttien WHERE nguoidung.PhanQuyen = 0 AND nguoidung.MaNguoiDung = ruttien.MaNguoiDung AND ruttien.MaRutTien = ?";
+		$result = $this->db->query($sql, array($MaRutTien));
 		return $result->result_array();
 	}
 
-	public function update($code,$soluong,$giatrigiam,$thoigian,$MaGiamGia){
-		$sql = "UPDATE magiamgia SET Code = ?, SoLuong = ?, GiaTriGiam = ?, ThoiGian = ? WHERE MaGiamGia = ?";
-		$result = $this->db->query($sql, array($code,$soluong,$giatrigiam,$thoigian,$MaGiamGia));
+
+	public function accept($MaRutTien){
+		$sql = "UPDATE ruttien SET TrangThai = 2 WHERE MaRutTien = ?";
+		$result = $this->db->query($sql, array($MaRutTien));
 		return $result;
 	}
 
-	public function delete($MaGiamGia){
-		$sql = "UPDATE magiamgia SET TrangThai = 0 WHERE MaGiamGia = ?";
-		$result = $this->db->query($sql, array($MaGiamGia));
+	public function cancel($MaRutTien){
+		$sql = "UPDATE ruttien SET TrangThai = 0 WHERE MaRutTien = ?";
+		$result = $this->db->query($sql, array($MaRutTien));
 		return $result;
 	}
 
