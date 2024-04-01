@@ -47,6 +47,7 @@
                   <thead>
                     <tr>
                       <th>#</th>
+                      <th>Hình Ảnh</th>
                       <th>Người Dùng</th>
                       <th>Số Tiền Cũ</th>
                       <th>Số Tiền Thay Đổi</th>
@@ -59,6 +60,9 @@
                     <?php foreach ($list as $key => $value): ?>
                       <tr>
                         <td><?php echo $key + 1; ?></td>
+                        <td>
+                          <img src="<?php echo $value['AnhChinh']; ?>" style="width: 100px; height: 100px;">
+                        </td>
                         <td><a href="<?php echo base_url('admin/nguoi-dung/'.$value['MaNguoiDung'].'/dong-tien/') ?>"><?php echo $value['TaiKhoan']; ?></a></td>
                         <td><?php echo number_format($value['SoTienTruoc']); ?> VND</td>
                         <td><?php echo number_format($value['SoTienThayDoi']); ?> VND</td>

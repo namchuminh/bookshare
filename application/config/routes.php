@@ -25,11 +25,11 @@ $route['admin/dong-tien/tim-kiem'] = 'Admin/DongTien/search';
 $route['admin/dong-tien/tim-kiem/(:any)/trang'] = 'Admin/DongTien/pageSearch/$1';
 
 
-$route['admin/ma-giam-gia'] = 'Admin/MaGiamGia';
-$route['admin/ma-giam-gia/(:any)/trang'] = 'Admin/MaGiamGia/page/$1';
-$route['admin/ma-giam-gia/them'] = 'Admin/MaGiamGia/add';
-$route['admin/ma-giam-gia/(:any)/sua'] = 'Admin/MaGiamGia/update/$1';
-$route['admin/ma-giam-gia/(:any)/xoa'] = 'Admin/MaGiamGia/delete/$1';
+$route['admin/rut-tien'] = 'Admin/RutTien';
+$route['admin/rut-tien/(:any)/trang'] = 'Admin/RutTien/page/$1';
+$route['admin/rut-tien/them'] = 'Admin/RutTien/add';
+$route['admin/rut-tien/(:any)/sua'] = 'Admin/RutTien/update/$1';
+$route['admin/rut-tien/(:any)/xoa'] = 'Admin/RutTien/delete/$1';
 
 $route['admin/lien-he'] = 'Admin/LienHe';
 $route['admin/lien-he/(:any)/trang'] = 'Admin/LienHe/page/$1';

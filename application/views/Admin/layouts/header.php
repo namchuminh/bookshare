@@ -140,10 +140,10 @@
             </a>
           </li>
           <li class="nav-item has-treeview">
-            <a href="<?php echo base_url('admin/lien-he/'); ?>" class="nav-link">
-              <i class="nav-icon fa-solid fa-address-book"></i>
+            <a href="<?php echo base_url('admin/rut-tien/'); ?>" class="nav-link">
+              <i class="nav-icon fa-solid fa-money-bills"></i>
               <p>
-                Liên Hệ
+                Rút Tiền
               </p>
             </a>
           </li>
