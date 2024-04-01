@@ -132,27 +132,12 @@
             </a>
           </li>
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fa-solid fa-barcode"></i>
+            <a href="<?php echo base_url('admin/dong-tien/'); ?>" class="nav-link">
+              <i class="nav-icon fa-solid fa-money-check-dollar"></i>
               <p>
-                Mã Giảm Giá
-                <i class="right fas fa-angle-left"></i>
+                Dòng Tiền
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="<?php echo base_url('admin/ma-giam-gia/') ?>" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Danh Sách</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="<?php echo base_url('admin/ma-giam-gia/them/') ?>" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Thêm Mới</p>
-                </a>
-              </li>
-            </ul>
           </li>
           <li class="nav-item has-treeview">
             <a href="<?php echo base_url('admin/lien-he/'); ?>" class="nav-link">

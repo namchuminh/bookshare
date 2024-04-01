@@ -19,11 +19,11 @@ $route['admin/chuyen-muc/them'] = 'Admin/ChuyenMuc/add';
 $route['admin/chuyen-muc/(:any)/sua'] = 'Admin/ChuyenMuc/update/$1';
 $route['admin/chuyen-muc/(:any)/xoa'] = 'Admin/ChuyenMuc/delete/$1';
 
-$route['admin/tin-tuc'] = 'Admin/TinTuc';
-$route['admin/tin-tuc/(:any)/trang'] = 'Admin/TinTuc/page/$1';
-$route['admin/tin-tuc/them'] = 'Admin/TinTuc/add';
-$route['admin/tin-tuc/(:any)/sua'] = 'Admin/TinTuc/update/$1';
-$route['admin/tin-tuc/(:any)/xoa'] = 'Admin/TinTuc/delete/$1';
+$route['admin/dong-tien'] = 'Admin/DongTien';
+$route['admin/dong-tien/(:any)/trang'] = 'Admin/DongTien/page/$1';
+$route['admin/dong-tien/tim-kiem'] = 'Admin/DongTien/search';
+$route['admin/dong-tien/tim-kiem/(:any)/trang'] = 'Admin/DongTien/pageSearch/$1';
+
 
 $route['admin/ma-giam-gia'] = 'Admin/MaGiamGia';
 $route['admin/ma-giam-gia/(:any)/trang'] = 'Admin/MaGiamGia/page/$1';
