@@ -28,14 +28,14 @@
                 <form class="row" action="<?php echo base_url('admin/nguoi-dung/tim-kiem/') ?>"> 
                   <div class="col-sm-2">
                     <label>Tài Khoản</label>
-                    <input type="text" name="taikhoan" class="form-control" placeholder="Tài khoản">
+                    <input type="text" name="taikhoan" class="form-control" placeholder="Tài khoản" value="<?php if(isset($post['taikhoan'])) { echo $post['taikhoan']; } ?>">
                   </div>
                   <div class="col-sm-2">
                     <label>Trạng Thái</label>
                     <select class="form-control" name="trangthai">
                       <option value>Chọn Trạng Thái</option>
-                      <option value="1">Hoạt Động</option>
-                      <option value="-1">Bị Cấm</option>
+                      <option value="1" <?php if(isset($post['trangthai']) && ($post['trangthai'] == 1)){ echo "selected"; } ?>>Hoạt Động</option>
+                      <option value="-1" <?php if(isset($post['trangthai']) && ($post['trangthai'] == -1)){ echo "selected"; } ?>>Bị Cấm</option>
                     </select>
                   </div>
                   <div class="col-sm-2">
@@ -63,16 +63,16 @@
                     </tr>
                   </thead>
                   <tbody>
-                  	<?php foreach ($list as $key => $value): ?>
-	                    <tr>
-	                      <td><?php echo $key + 1; ?></td>
-	                      <td>
+                    <?php foreach ($list as $key => $value): ?>
+                      <tr>
+                        <td><?php echo $key + 1; ?></td>
+                        <td>
                           <img src="<?php echo $value['AnhChinh']; ?>" style="width: 100px; height: 100px;">
                         </td>
-	                      <td><?php echo $value['HoTen']; ?></td>
-	                      <td>
+                        <td><?php echo $value['HoTen']; ?></td>
+                        <td>
                           <a href="<?php echo base_url('nguoi-dung/'.$value['TaiKhoan'].'/') ?>" target="_blank"><?php echo $value['TaiKhoan']; ?></a>
-	                      </td>
+                        </td>
                         <td>
                           <?php echo $value['SoDienThoai']; ?>
                         </td>
@@ -94,11 +94,11 @@
                                 <span>DÒNG TIỀN</span>
                             </a>
                         </td>
-	                      <td>
+                        <td>
                           <?php if($value['TrangThai'] == 0){ ?>
-  	                      	<a href="<?php echo base_url('admin/nguoi-dung/'.$value['MaNguoiDung'].'/xem/'); ?>" class="btn btn-primary" style="color: white;">
-  	                      		<i class="fa-solid fa-lock-open"></i>
-                              	<span>BỎ CẤM TÀI KHOẢN</span>
+                            <a href="<?php echo base_url('admin/nguoi-dung/'.$value['MaNguoiDung'].'/xem/'); ?>" class="btn btn-primary" style="color: white;">
+                              <i class="fa-solid fa-lock-open"></i>
+                                <span>BỎ CẤM TÀI KHOẢN</span>
                             </a>
                           <?php }else{ ?>
                             <a href="<?php echo base_url('admin/nguoi-dung/'.$value['MaNguoiDung'].'/xem/'); ?>" class="btn btn-danger" style="color: white;">
@@ -106,17 +106,18 @@
                                 <span>CẤM TÀI KHOẢN</span>
                             </a>
                           <?php } ?>
-	                      </td>
-	                    </tr>
+                        </td>
+                      </tr>
                     <?php endforeach ?>
                   </tbody>
                 </table>
               </div>
               <div class="card-footer clearfix">
+                <a href="<?php echo base_url('admin/nguoi-dung/'); ?>" class="btn btn-success">Quay Lại</a>
                 <ul class="pagination pagination-sm m-0 float-right">
-                	<?php for($i = 1; $i <= $totalPages; $i++){ ?>
-                  		<li class="page-item"><a class="page-link" href="<?php echo base_url('admin/nguoi-dung/'.$i.'/trang/') ?>"><?php echo $i; ?></a></li>
-                  	<?php } ?>      
+                  <?php for($i = 1; $i <= $totalPages; $i++){ ?>
+                      <li class="page-item"><a class="page-link" href="<?php echo base_url('admin/nguoi-dung/tim-kiem/'.$i.'/trang/?taikhoan='.$post['taikhoan'].'&trangthai='.$post['trangthai']) ?>"><?php echo $i; ?></a></li>
+                    <?php } ?>      
                 </ul>
               </div>
             </div>

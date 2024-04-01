@@ -55,13 +55,13 @@ class Model_MuonSach extends CI_Model {
 	}
 
 	public function checkNumberSearch($mamuonsach,$ngaymuon,$ngaytra){
-		$sql = "SELECT muonsach.*, nguoidung.MaNguoiDung AS MNDMuon, nguoidung.TaiKhoan, sach.TenSach, sach.MaSach, sach.AnhChinh, sach.MaNguoiDung AS MNDSach FROM muonsach, sach, nguoidung WHERE muonsach.MaSach = sach.MaSach AND muonsach.MaNguoiDung = nguoidung.MaNguoiDung AND muonsach.MaMuonSach = ? OR muonsach.ThoiGian = ? OR muonsach.ThoiGianTra = ? GROUP BY muonsach.MaMuonSach";
+		$sql = "SELECT muonsach.*, nguoidung.MaNguoiDung AS MNDMuon, nguoidung.TaiKhoan, sach.TenSach, sach.MaSach, sach.AnhChinh, sach.MaNguoiDung AS MNDSach FROM muonsach, sach, nguoidung WHERE muonsach.MaSach = sach.MaSach AND muonsach.MaNguoiDung = nguoidung.MaNguoiDung AND (muonsach.MaMuonSach = ? OR DATE(muonsach.ThoiGian) = ? OR muonsach.ThoiGianTra = ?) GROUP BY muonsach.MaMuonSach";
 		$result = $this->db->query($sql, array($mamuonsach,$ngaymuon,$ngaytra));
 		return $result->num_rows();
 	}
 
 	public function search($mamuonsach,$ngaymuon,$ngaytra,$start = 0, $end = 10){
-		$sql = "SELECT muonsach.*, nguoidung.MaNguoiDung AS MNDMuon, nguoidung.TaiKhoan, sach.TenSach, sach.MaSach, sach.AnhChinh, sach.MaNguoiDung AS MNDSach FROM muonsach, sach, nguoidung WHERE muonsach.MaSach = sach.MaSach AND muonsach.MaNguoiDung = nguoidung.MaNguoiDung AND muonsach.MaMuonSach = ? OR DATE(muonsach.ThoiGian) = ? OR muonsach.ThoiGianTra = ? GROUP BY muonsach.MaMuonSach ORDER BY muonsach.MaMuonSach DESC LIMIT ?, ?";
+		$sql = "SELECT muonsach.*, nguoidung.MaNguoiDung AS MNDMuon, nguoidung.TaiKhoan, sach.TenSach, sach.MaSach, sach.AnhChinh, sach.MaNguoiDung AS MNDSach FROM muonsach, sach, nguoidung WHERE muonsach.MaSach = sach.MaSach AND muonsach.MaNguoiDung = nguoidung.MaNguoiDung AND (muonsach.MaMuonSach = ? OR DATE(muonsach.ThoiGian) = ? OR muonsach.ThoiGianTra = ?) GROUP BY muonsach.MaMuonSach ORDER BY muonsach.MaMuonSach DESC LIMIT ?, ?";
 		$result = $this->db->query($sql, array($mamuonsach,$ngaymuon,$ngaytra,$start,$end));
 		return $result->result_array();
 	}

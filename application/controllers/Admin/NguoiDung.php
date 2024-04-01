@@ -214,6 +214,96 @@ class NguoiDung extends CI_Controller {
 			return $this->load->view('Admin/View_DongTienNguoiDung', $data);
 		}
 	}
+
+	public function search(){
+		if(!isset($_GET['taikhoan']) && !isset($_GET['trangthai'])){
+			return redirect(base_url('admin/nguoi-dung/'));
+		}
+
+		$taikhoan = $this->input->get('taikhoan');
+		$trangthai = $this->input->get('trangthai');
+
+		if(empty($taikhoan) && empty($trangthai)){
+			return redirect(base_url('admin/nguoi-dung/'));
+		}
+
+		
+		$data['post'] = array(
+			'taikhoan' => $taikhoan,
+			'trangthai' => $trangthai
+		);
+
+		if($trangthai == -1){
+			$trangthai = 0;
+		}
+
+		if(empty($taikhoan)){
+			$taikhoan = -1;
+		}
+
+		$totalRecords = $this->Model_NguoiDung->checkNumberSearch($taikhoan,$trangthai);
+		$recordsPerPage = 10;
+		$totalPages = ceil($totalRecords / $recordsPerPage); 
+
+		$data['totalPages'] = $totalPages;
+		$data['list'] = $this->Model_NguoiDung->search($taikhoan,$trangthai);
+		$data['title'] = "Danh sách người dùng";
+		return $this->load->view('Admin/View_NguoiDungTimKiem', $data);
+	}
+
+	public function pageSearch($trang){
+		if(!isset($_GET['taikhoan']) && !isset($_GET['trangthai'])){
+			return redirect(base_url('admin/nguoi-dung/'));
+		}
+
+		$taikhoan = $this->input->get('taikhoan');
+		$trangthai = $this->input->get('trangthai');
+
+		if(empty($taikhoan) && empty($trangthai)){
+			return redirect(base_url('admin/nguoi-dung/'));
+		}
+
+		
+		$data['post'] = array(
+			'taikhoan' => $taikhoan,
+			'trangthai' => $trangthai
+		);
+
+
+		if($trangthai == -1){
+			$trangthai = 0;
+		}
+
+		if(empty($taikhoan)){
+			$taikhoan = -1;
+		}
+
+		$data['title'] = "Danh sách người dùng";
+		$totalRecords = $this->Model_NguoiDung->checkNumberSearch($taikhoan,$trangthai);
+		$recordsPerPage = 10;
+		$totalPages = ceil($totalRecords / $recordsPerPage); 
+
+		if($trang < 1){
+			return redirect(base_url('admin/nguoi-dung/'));
+		}
+
+		if($trang > $totalPages){
+			return redirect(base_url('admin/nguoi-dung/'));
+		}
+
+		$start = ($trang - 1) * $recordsPerPage;
+
+
+		if($start == 0){
+			$data['totalPages'] = $totalPages;
+			$data['list'] = $this->Model_NguoiDung->search($taikhoan,$trangthai);
+			return $this->load->view('Admin/View_NguoiDungTimKiem', $data);
+		}else{
+			$data['totalPages'] = $totalPages;
+			$data['list'] = $this->Model_NguoiDung->search($taikhoan,$trangthai,$start);
+			return $this->load->view('Admin/View_NguoiDungTimKiem', $data);
+		}
+	}
 }
 
 /* End of file ChuyenMuc.php */

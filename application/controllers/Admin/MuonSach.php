@@ -127,13 +127,13 @@ class MuonSach extends CI_Controller {
 
 	public function search()
 	{
-		if(!isset($_POST['mamuonsach']) && !isset($_POST['ngaymuon']) && !isset($_POST['ngaytra'])){
+		if(!isset($_GET['mamuonsach']) && !isset($_GET['ngaymuon']) && !isset($_GET['ngaytra'])){
 			return redirect(base_url('admin/muon-sach/'));
 		}
 
-		$mamuonsach = $this->input->post('mamuonsach');
-		$ngaymuon = $this->input->post('ngaymuon');
-		$ngaytra = $this->input->post('ngaytra');
+		$mamuonsach = $this->input->get('mamuonsach');
+		$ngaymuon = $this->input->get('ngaymuon');
+		$ngaytra = $this->input->get('ngaytra');
 
 		if(empty($mamuonsach) && empty($ngaymuon) && empty($ngaytra)){
 			return redirect(base_url('admin/muon-sach/'));

@@ -12,7 +12,7 @@ class Model_NguoiDung extends CI_Model {
 
 	public function checkNumber()
 	{
-		$sql = "SELECT * FROM nguoidung";
+		$sql = "SELECT * FROM nguoidung WHERE PhanQuyen = 0";
 		$result = $this->db->query($sql);
 		return $result->num_rows();
 	}
@@ -65,6 +65,21 @@ class Model_NguoiDung extends CI_Model {
 		$sql = "SELECT * FROM dongtien WHERE MaNguoiDung = ?";
 		$result = $this->db->query($sql,array($manguoidung));
 		return $result->num_rows();
+	}
+
+	public function checkNumberSearch($taikhoan,$trangthai){
+		$taikhoan = '%'.$taikhoan.'%';
+		$sql = "SELECT * FROM nguoidung WHERE PhanQuyen = 0 AND (TaiKhoan LIKE ? OR TrangThai = ?)";
+		$result = $this->db->query($sql,array($taikhoan, $trangthai));
+		return $result->num_rows();
+	}
+
+	public function search($taikhoan,$trangthai,$start = 0,$end = 10)
+	{
+		$taikhoan = '%'.$taikhoan.'%';
+		$sql = "SELECT * FROM nguoidung WHERE PhanQuyen = 0 AND (TaiKhoan LIKE ? OR TrangThai = ?) ORDER BY MaNguoiDung DESC LIMIT ?, ?";
+		$result = $this->db->query($sql, array($taikhoan, $trangthai, $start, $end));
+		return $result->result_array();
 	}
 
 }

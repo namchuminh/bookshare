@@ -25,7 +25,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <form class="row" method="POST" action="<?php echo base_url('admin/muon-sach/tim-kiem/') ?>"> 
+                <form class="row" action="<?php echo base_url('admin/muon-sach/tim-kiem/') ?>"> 
                   <div class="col-sm-2">
                     <label>Mã Mượn Sách</label>
                     <input type="text" name="mamuonsach" class="form-control" placeholder="Mã mượn sách">
