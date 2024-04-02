@@ -132,18 +132,26 @@
             </a>
           </li>
           <li class="nav-item has-treeview">
-            <a href="<?php echo base_url('admin/dong-tien/'); ?>" class="nav-link">
-              <i class="nav-icon fa-solid fa-money-check-dollar"></i>
+            <a href="<?php echo base_url('admin/nap-tien/'); ?>" class="nav-link">
+              <i class="nav-icon fa-solid fa-money-bills"></i>
               <p>
-                Dòng Tiền
+                Nạp Tiền
               </p>
             </a>
           </li>
           <li class="nav-item has-treeview">
             <a href="<?php echo base_url('admin/rut-tien/'); ?>" class="nav-link">
-              <i class="nav-icon fa-solid fa-money-bills"></i>
+              <i class="nav-icon fa-solid fa-money-bill-transfer"></i>
               <p>
                 Rút Tiền
+              </p>
+            </a>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="<?php echo base_url('admin/dong-tien/'); ?>" class="nav-link">
+              <i class="nav-icon fa-solid fa-money-check-dollar"></i>
+              <p>
+                Dòng Tiền
               </p>
             </a>
           </li>

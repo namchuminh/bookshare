@@ -9,19 +9,19 @@ class CaNhan extends CI_Controller {
 			return redirect(base_url('admin/dang-nhap/'));
 		}
 
-		$this->load->model('Admin/Model_NhanVien');
+		$this->load->model('Admin/Model_CaNhan');
 	}
 
 	public function index()
 	{
 		$data['title'] = "Thông tin cá nhân";
-		$data['detail'] = $this->Model_NhanVien->getById($this->session->userdata('manhanvien'));
+		$data['detail'] = $this->Model_CaNhan->getById($this->session->userdata('manguoidung'));
 		if ($this->input->server('REQUEST_METHOD') === 'POST') {
 			$hoten = $this->input->post('hoten');
 			$email = $this->input->post('email');
 			$sodienthoai = $this->input->post('sodienthoai');
 			$taikhoan = $this->input->post('taikhoan');
-			$matkhau = $this->Model_NhanVien->getById($this->session->userdata('manhanvien'))[0]['MatKhau'];
+			$matkhau = $this->Model_CaNhan->getById($this->session->userdata('manguoidung'))[0]['MatKhau'];
 
 			if(empty($hoten) || empty($email) || empty($sodienthoai) || empty($taikhoan)){
 				$data['error'] = "Vui lòng nhập đủ thông tin!";
@@ -46,10 +46,10 @@ class CaNhan extends CI_Controller {
 				$matkhau = md5($this->input->post('matkhau'));
 			}
 
-			$this->Model_NhanVien->update($hoten,$taikhoan,$matkhau,$email,$sodienthoai,$this->session->userdata('manhanvien'));
+			$this->Model_CaNhan->update($hoten,$taikhoan,$matkhau,$email,$sodienthoai,$this->session->userdata('manguoidung'));
 
 			$data['success'] = "Lưu thông tin cá nhân thành công!";
-			$data['detail'] = $this->Model_NhanVien->getById($this->session->userdata('manhanvien'));
+			$data['detail'] = $this->Model_CaNhan->getById($this->session->userdata('manguoidung'));
 			return $this->load->view('Admin/View_CaNhan', $data);
 		}
 		return $this->load->view('Admin/View_CaNhan', $data);
