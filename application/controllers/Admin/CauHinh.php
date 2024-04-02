@@ -22,12 +22,12 @@ class CauHinh extends CI_Controller {
 			$diachi = $this->input->post('diachi');
 			$email = $this->input->post('email');
 			$sodienthoai = $this->input->post('sodienthoai');
-			$phiship = $this->input->post('phiship');
-			$mienphiship = $this->input->post('mienphiship');
+			$phiruttien = $this->input->post('phiruttien');
 			$logo = $this->Model_CauHinh->getAll()[0]['Logo'];
-			$qrnganhang = $this->Model_CauHinh->getAll()[0]['QRNganHang'];
+			$favicon = $this->Model_CauHinh->getAll()[0]['Favicon'];
+			$maqrnaptien = $this->Model_CauHinh->getAll()[0]['MaQRNapTien'];
 
-			if(empty($tenwebsite) || empty($motaweb) || empty($diachi) || empty($email) || empty($sodienthoai) || empty($phiship) || empty($mienphiship)){
+			if(empty($tenwebsite) || empty($motaweb) || empty($diachi) || empty($email) || empty($sodienthoai) || empty($phiruttien)){
 				$data['error'] = "Vui lòng nhập đủ thông tin!";
 				return $this->load->view('Admin/View_CauHinh', $data);
 			}
@@ -40,13 +40,8 @@ class CauHinh extends CI_Controller {
 			}
 
 
-			if(!is_numeric($phiship) || $phiship <= 0){
-				$data['error'] = "Vui lòng nhập phí giao hàng hợp lệ!";
-				return $this->load->view('Admin/View_CauHinh', $data);
-			}
-
-			if(!is_numeric($mienphiship) || $mienphiship <= 0){
-				$data['error'] = "Vui lòng nhập giá trị miễn phí giao hàng hợp lệ!";
+			if(!is_numeric($phiruttien) || ($phiruttien < 1) || ($phiruttien > 100)){
+				$data['error'] = "Vui lòng nhập phí rút tiền là một số từ 1 đến 100!";
 				return $this->load->view('Admin/View_CauHinh', $data);
 			}
 
@@ -60,12 +55,17 @@ class CauHinh extends CI_Controller {
 				$logo = base_url('uploads')."/".$img['file_name'];
 			}
 
-			if ($this->upload->do_upload('qrnganhang')){
+			if ($this->upload->do_upload('favicon')){
 				$img = $this->upload->data();
-				$qrnganhang = base_url('uploads')."/".$img['file_name'];
+				$favicon = base_url('uploads')."/".$img['file_name'];
 			}
 
-			$this->Model_CauHinh->update($tenwebsite,$motaweb,$logo,$diachi,$email,$sodienthoai,$phiship,$mienphiship,$qrnganhang);
+			if ($this->upload->do_upload('maqrnaptien')){
+				$img = $this->upload->data();
+				$maqrnaptien = base_url('uploads')."/".$img['file_name'];
+			}
+
+			$this->Model_CauHinh->update($tenwebsite,$motaweb,$logo,$favicon,$diachi,$email,$sodienthoai,$maqrnaptien,$phiruttien);
 
 			$data['success'] = "Lưu cấu hình thành công!";
 			$data['detail'] = $this->Model_CauHinh->getAll();

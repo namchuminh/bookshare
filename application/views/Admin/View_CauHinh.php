@@ -46,8 +46,8 @@
                 </div>
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="ten">QR Chuyển Khoản</label>
-                    <input type="file" class="form-control" name="qrnganhang">
+                    <label for="ten">Favicon Website</label>
+                    <input type="file" class="form-control" name="favicon">
                   </div>
                 </div>
                 <div class="col-md-12">
@@ -70,14 +70,14 @@
                 </div>
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="ten">Phí Ship</label>
-                    <input type="number" class="form-control" placeholder="Phí giao hàng" name="phiship" value="<?php echo $detail[0]['PhiShip']; ?>">
+                    <label for="ten">QR Nạp Tiền</label>
+                    <input type="file" class="form-control" name="maqrnaptien">
                   </div>
                 </div>
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="ten">Miễn Phí Ship</label>
-                    <input type="number" class="form-control" placeholder="Miễn phí giao hàng" name="mienphiship" value="<?php echo $detail[0]['MienPhiShip']; ?>">
+                    <label for="ten">Phí Rút Tiền (Phần Trăm %)</label>
+                    <input type="number" class="form-control" placeholder="Phí rút tiền của người dùng (%)" name="phiruttien" value="<?php echo $detail[0]['PhiRutTien']; ?>">
                   </div>
                 </div>
               </div> 
@@ -91,3 +91,4 @@
     <!-- /.content -->
 </div>
 <?php require(APPPATH.'views/admin/layouts/footer.php'); ?>
+
