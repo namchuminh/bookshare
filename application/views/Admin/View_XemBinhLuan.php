@@ -46,6 +46,31 @@
                 </div>
                 <div class="col-md-12">
                   <div class="form-group">
+                    <label for="ten">Đánh Giá</label>
+                    <br>
+                    <?php if($detail[0]['SoSao'] != 0){ ?>
+                      <span>
+                        <?php for($i = 1; $i <= 5; $i++){ ?>
+                          <?php if($i <= $detail[0]['SoSao']){ ?>
+                            <i class="fa-solid fa-star"></i>
+                          <?php }else{ ?>
+                            <i class="fa-regular fa-star"></i>
+                          <?php } ?>
+                        <?php } ?>
+                      </span>
+                    <?php }else{ ?>
+                      <span>
+                        <i class="fa-regular fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                      </span>
+                    <?php } ?>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
                     <label for="ten">Nội Dung</label>
                     <textarea class="form-control" disabled rows="4"><?php echo $detail[0]['NoiDung']; ?></textarea>
                   </div>
@@ -65,5 +90,9 @@
     background-color: white;
     opacity: 1;
   }
+
+  .fa-star{
+      color: #F6BC3E;
+    }
 </style>
 <?php require(APPPATH.'views/admin/layouts/footer.php'); ?>

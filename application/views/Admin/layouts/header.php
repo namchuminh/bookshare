@@ -6,7 +6,7 @@
   <title><?php echo $title; ?></title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="<?php echo base_url('public/dist/img/AdminLTELogo.png') ?>">
+  <link rel="icon" type="image/x-icon" href="<?php echo base_url('public/admin/dist/img/AdminLTELogo.png') ?>">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <!-- Ionicons -->
@@ -161,14 +161,6 @@
               <i class="nav-icon fa-solid fa-comments"></i>
               <p>
                 Bình Luận
-              </p>
-            </a>
-          </li>
-          <li class="nav-item has-treeview">
-            <a href="<?php echo base_url('admin/danh-gia/'); ?>" class="nav-link">
-              <i class="nav-icon fa-solid fa-star"></i>
-              <p>
-                Đánh Giá
               </p>
             </a>
           </li>

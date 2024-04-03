@@ -32,6 +32,7 @@
                       <th>#</th>
                       <th>Tên Sách</th>
                       <th>Người Bình Luận</th>
+                      <th>Đánh Giá</th>
                       <th>Nội Dung</th>
                       <th>Thời Gian</th>
                       <th>Xem Bình Luận</th>
@@ -45,6 +46,27 @@
                           <a href="<?php echo base_url('admin/sach/'.$value['MaSach'].'/sua/') ?>"><?php echo $value['TenSach']; ?></a>
                         </td>
                         <td><a href="<?php echo base_url('admin/nguoi-dung/'.$value['MaNguoiDung'].'/xem/') ?>"><?php echo $value['TaiKhoan']; ?></a></td>
+                        <td>
+                          <?php if($value['SoSao'] != 0){ ?>
+                            <span>
+                              <?php for($i = 1; $i <= 5; $i++){ ?>
+                                <?php if($i <= $value['SoSao']){ ?>
+                                  <i class="fa-solid fa-star"></i>
+                                <?php }else{ ?>
+                                  <i class="fa-regular fa-star"></i>
+                                <?php } ?>
+                              <?php } ?>
+                            </span>
+                          <?php }else{ ?>
+                            <span>
+                              <i class="fa-regular fa-star"></i>
+                              <i class="fa-regular fa-star"></i>
+                              <i class="fa-regular fa-star"></i>
+                              <i class="fa-regular fa-star"></i>
+                              <i class="fa-regular fa-star"></i>
+                            </span>
+                          <?php } ?>
+                        </td>
                         <td>
                           <?php if(strlen($value['NoiDung']) < 100){ ?>
                             <?php echo substr($value['NoiDung'], 0, 100); ?>
@@ -69,7 +91,7 @@
               <div class="card-footer clearfix">
                 <ul class="pagination pagination-sm m-0 float-right">
                   <?php for($i = 1; $i <= $totalPages; $i++){ ?>
-                      <li class="page-item"><a class="page-link" href="<?php echo base_url('admin/rut-tien/'.$i.'/trang/') ?>"><?php echo $i; ?></a></li>
+                      <li class="page-item"><a class="page-link" href="<?php echo base_url('admin/binh-luan/'.$i.'/trang/') ?>"><?php echo $i; ?></a></li>
                     <?php } ?>      
                 </ul>
               </div>
@@ -82,4 +104,9 @@
     </section>
     <!-- /.content -->
   </div>
+  <style type="text/css">
+    .fa-star{
+      color: #F6BC3E;
+    }
+  </style>
 <?php require(APPPATH.'views/admin/layouts/footer.php'); ?>

@@ -65,7 +65,6 @@ class BinhLuan extends CI_Controller {
 	}
 
 
-
 	public function delete($mabinhluan)
 	{
 		if(count($this->Model_BinhLuan->getById($mabinhluan)) <= 0){
