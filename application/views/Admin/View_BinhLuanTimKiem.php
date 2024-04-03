@@ -28,18 +28,18 @@
                 <form class="row" action="<?php echo base_url('admin/binh-luan/tim-kiem/') ?>"> 
                   <div class="col-sm-2">
                     <label>Tên Sách</label>
-                    <input type="text" name="tensach" class="form-control" placeholder="Tên sách">
+                    <input type="text" name="tensach" class="form-control" placeholder="Tên sách" value="<?php echo $post['tensach']; ?>">
                   </div>
                   <div class="col-sm-2">
                     <label>Đánh Giá</label>
                     <select name="sosao" class="form-control">
                       <option value="" selected>Chọn Số Sao</option>
-                      <option value="-1">Chưa Đánh Giá</option>
-                      <option value="1">1 Sao</option>
-                      <option value="2">2 Sao</option>
-                      <option value="3">3 Sao</option>
-                      <option value="4">4 Sao</option>
-                      <option value="5">5 Sao</option>
+                      <option value="-1" <?php if($post['sosao'] == -1){ echo "selected"; } ?>>Chưa Đánh Giá</option>
+                      <option value="1" <?php if($post['sosao'] == 1){ echo "selected"; } ?>>1 Sao</option>
+                      <option value="2" <?php if($post['sosao'] == 2){ echo "selected"; } ?>>2 Sao</option>
+                      <option value="3" <?php if($post['sosao'] == 3){ echo "selected"; } ?>>3 Sao</option>
+                      <option value="4" <?php if($post['sosao'] == 4){ echo "selected"; } ?>>4 Sao</option>
+                      <option value="5" <?php if($post['sosao'] == 5){ echo "selected"; } ?>>5 Sao</option>
                     </select>
                   </div>
                   <div class="col-sm-2">
@@ -114,9 +114,10 @@
                 </table>
               </div>
               <div class="card-footer clearfix">
+                <a href="<?php echo base_url('admin/binh-luan/'); ?>" class="btn btn-success">Quay Lại</a>
                 <ul class="pagination pagination-sm m-0 float-right">
                   <?php for($i = 1; $i <= $totalPages; $i++){ ?>
-                      <li class="page-item"><a class="page-link" href="<?php echo base_url('admin/binh-luan/'.$i.'/trang/') ?>"><?php echo $i; ?></a></li>
+                      <li class="page-item"><a class="page-link" href="<?php echo base_url('admin/binh-luan/tim-kiem/'.$i.'/trang/?tensach='.$post['tensach'].'&sosao='.$post['sosao']) ?>"><?php echo $i; ?></a></li>
                     <?php } ?>      
                 </ul>
               </div>

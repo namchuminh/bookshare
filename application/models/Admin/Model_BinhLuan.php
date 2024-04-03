@@ -36,6 +36,18 @@ class Model_BinhLuan extends CI_Model {
 		return $result;
 	}
 
+	public function search($tensach, $sosao, $start = 0, $end = 10){
+		$sql = "SELECT binhluan.*, nguoidung.MaNguoiDung, nguoidung.TaiKhoan, sach.TenSach, sach.MaSach FROM nguoidung, binhluan, sach WHERE binhluan.TrangThai = 1 AND binhluan.MaNguoiDung = nguoidung.MaNguoiDung AND binhluan.MaSach = sach.MaSach AND (sach.TenSach = ? OR binhluan.SoSao = ?) ORDER BY binhluan.MaBinhLuan DESC LIMIT ?, ?";
+		$result = $this->db->query($sql, array($tensach, $sosao, $start, $end));
+		return $result->result_array();
+	}
+
+	public function checkNumberSearch($tensach, $sosao){
+		$sql = "SELECT binhluan.*, nguoidung.MaNguoiDung, nguoidung.TaiKhoan, sach.TenSach, sach.MaSach FROM nguoidung, binhluan, sach WHERE binhluan.TrangThai = 1 AND binhluan.MaNguoiDung = nguoidung.MaNguoiDung AND binhluan.MaSach = sach.MaSach AND (sach.TenSach = ? OR binhluan.SoSao = ?)";
+		$result = $this->db->query($sql, array($tensach, $sosao));
+		return $result->num_rows();
+	}
+
 }
 
 /* End of file Model_ChuyenMuc.php */

@@ -76,6 +76,91 @@ class BinhLuan extends CI_Controller {
 		$this->session->set_flashdata('success', 'Xóa bình luận thành công!');
 		return redirect(base_url('admin/binh-luan/'));
 	}
+
+	public function search()
+	{
+		if(!isset($_GET['tensach']) && !isset($_GET['sosao'])){
+			return redirect(base_url('admin/binh-luan/'));
+		}
+
+		$tensach = $this->input->get('tensach');
+		$sosao = $this->input->get('sosao');
+
+		if(empty($tensach) && empty($sosao)){
+			return redirect(base_url('admin/binh-luan/'));
+		}
+
+		
+		$data['post'] = array(
+			'tensach' => $tensach,
+			'sosao' => $sosao
+		);
+
+		if($sosao == -1){
+			$sosao = 0;
+		}
+
+		$totalRecords = $this->Model_BinhLuan->checkNumberSearch($tensach,$sosao);
+		$recordsPerPage = 10;
+		$totalPages = ceil($totalRecords / $recordsPerPage); 
+
+		$data['totalPages'] = $totalPages;
+		$data['list'] = $this->Model_BinhLuan->search($tensach,$sosao);
+		$data['title'] = "Danh sách bình luận";
+		return $this->load->view('Admin/View_BinhLuanTimKiem', $data);
+
+	}
+
+
+	public function pageSearch($trang){
+		if(!isset($_GET['tensach']) && !isset($_GET['sosao'])){
+			return redirect(base_url('admin/binh-luan/'));
+		}
+
+		$tensach = $this->input->get('tensach');
+		$sosao = $this->input->get('sosao');
+
+		if(empty($tensach) && empty($sosao)){
+			return redirect(base_url('admin/binh-luan/'));
+		}
+
+		
+		$data['post'] = array(
+			'tensach' => $tensach,
+			'sosao' => $sosao
+		);
+
+		if($sosao == -1){
+			$sosao = 0;
+		}
+
+
+		$data['title'] = "Danh sách bình luận";
+		$totalRecords = $this->Model_BinhLuan->checkNumberSearch($tensach,$sosao);
+		$recordsPerPage = 10;
+		$totalPages = ceil($totalRecords / $recordsPerPage); 
+
+		if($trang < 1){
+			return redirect(base_url('admin/binh-luan/'));
+		}
+
+		if($trang > $totalPages){
+			return redirect(base_url('admin/binh-luan/'));
+		}
+
+		$start = ($trang - 1) * $recordsPerPage;
+
+
+		if($start == 0){
+			$data['totalPages'] = $totalPages;
+			$data['list'] = $this->Model_BinhLuan->search($tensach,$sosao);
+			return $this->load->view('Admin/View_BinhLuanTimKiem', $data);
+		}else{
+			$data['totalPages'] = $totalPages;
+			$data['list'] = $this->Model_BinhLuan->search($tensach,$sosao,$start);
+			return $this->load->view('Admin/View_BinhLuanTimKiem', $data);
+		}
+	}
 }
 
 /* End of file BinhLuan.php */
