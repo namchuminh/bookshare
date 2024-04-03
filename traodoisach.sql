@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 31, 2024 at 04:25 PM
+-- Generation Time: Apr 03, 2024 at 12:11 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -32,8 +32,18 @@ CREATE TABLE `binhluan` (
   `MaNguoiDung` int(11) NOT NULL,
   `MaSach` int(11) NOT NULL,
   `NoiDung` varchar(500) NOT NULL,
+  `SoSao` int(11) NOT NULL DEFAULT 0,
+  `ThoiGian` datetime NOT NULL DEFAULT current_timestamp(),
   `TrangThai` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `binhluan`
+--
+
+INSERT INTO `binhluan` (`MaBinhLuan`, `MaNguoiDung`, `MaSach`, `NoiDung`, `SoSao`, `ThoiGian`, `TrangThai`) VALUES
+(1, 3, 1, 'Không tốt', 4, '2024-04-03 15:59:36', 1),
+(2, 2, 1, 'ABCDE', 0, '2024-04-03 16:48:09', 1);
 
 -- --------------------------------------------------------
 
@@ -45,10 +55,20 @@ CREATE TABLE `cauhinh` (
   `TenWebsite` text NOT NULL,
   `MoTaWeb` text NOT NULL,
   `Logo` text NOT NULL,
+  `Favicon` text NOT NULL,
   `DiaChi` text NOT NULL,
   `SoDienThoai` text NOT NULL,
-  `Email` text NOT NULL
+  `Email` text NOT NULL,
+  `MaQRNapTien` text NOT NULL,
+  `PhiRutTien` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `cauhinh`
+--
+
+INSERT INTO `cauhinh` (`TenWebsite`, `MoTaWeb`, `Logo`, `Favicon`, `DiaChi`, `SoDienThoai`, `Email`, `MaQRNapTien`, `PhiRutTien`) VALUES
+('Website ABC', 'Website ABC', 'http://localhost/book/uploads/logo_dark1.png', 'http://localhost/book/uploads/logo_dark2.png', 'Website ABC', '0999999999', 'chiasesach@gmail.com', 'http://localhost/book/uploads/z4617362741623_98c0302df70bfe02dd581fa8a0e35aa612.jpg', 20);
 
 -- --------------------------------------------------------
 
@@ -75,20 +95,6 @@ INSERT INTO `chuyenmuc` (`MaChuyenMuc`, `TenChuyenMuc`, `HinhAnh`, `DuongDan`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `danhgia`
---
-
-CREATE TABLE `danhgia` (
-  `MaDanhGia` int(11) NOT NULL,
-  `MaSach` int(11) NOT NULL,
-  `MaNguoiDung` int(11) NOT NULL,
-  `SoSao` int(11) NOT NULL,
-  `TrangThai` int(11) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `dongtien`
 --
 
@@ -98,7 +104,7 @@ CREATE TABLE `dongtien` (
   `SoTienTruoc` int(11) NOT NULL,
   `SoTienThayDoi` int(11) NOT NULL,
   `SoTienHienTai` int(11) NOT NULL,
-  `ThoiGian` datetime NOT NULL,
+  `ThoiGian` datetime NOT NULL DEFAULT current_timestamp(),
   `NoiDung` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -107,9 +113,11 @@ CREATE TABLE `dongtien` (
 --
 
 INSERT INTO `dongtien` (`MaDongTien`, `MaNguoiDung`, `SoTienTruoc`, `SoTienThayDoi`, `SoTienHienTai`, `ThoiGian`, `NoiDung`) VALUES
-(10, 2, 600000, 600000, 0, '0000-00-00 00:00:00', 'Admin trừ 600,000 VND khỏi tài khoản!'),
-(11, 2, 0, 100000, 100000, '0000-00-00 00:00:00', 'Admin cộng 100,000 VND vào tài khoản!'),
-(12, 2, 100000, 10000, 90000, '0000-00-00 00:00:00', 'Admin trừ 10,000 VND khỏi tài khoản!');
+(14, 2, 0, 5000000, 5000000, '2024-03-31 00:40:57', 'Admin cộng 5,000,000 VND vào tài khoản!'),
+(15, 2, 5000000, 100000, 4900000, '2024-04-01 00:41:00', 'Admin trừ 100,000 VND khỏi tài khoản!'),
+(16, 3, 150000, 100000, 50000, '2024-04-01 19:43:39', 'Admin trừ tiền rút 100,000 VND của tài khoản!'),
+(17, 3, 50000, 500000, 550000, '2024-04-01 19:44:28', 'Admin cộng 500,000 VND vào tài khoản!'),
+(18, 3, 550000, 100000, 450000, '2024-04-01 19:44:40', 'Admin trừ tiền rút 100,000 VND của tài khoản!');
 
 -- --------------------------------------------------------
 
@@ -125,19 +133,13 @@ CREATE TABLE `giaodien` (
   `TrangThai` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `lienhe`
+-- Dumping data for table `giaodien`
 --
 
-CREATE TABLE `lienhe` (
-  `MaLienHe` int(11) NOT NULL,
-  `MaNguoiDung` int(11) NOT NULL,
-  `TieuDe` varchar(255) NOT NULL,
-  `NoiDung` text NOT NULL,
-  `ThoiGian` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+INSERT INTO `giaodien` (`MaGiaoDien`, `MaChuyenMuc`, `HinhAnh`, `LoaiGiaoDien`, `TrangThai`) VALUES
+(1, 1, 'http://localhost/book/uploads/z4617362817818_39cacdb57658e537cb0e22dc18e885d831.jpg', 2, 1),
+(2, 1, 'http://localhost/book/uploads/z4617362745335_4456bfd0f397a69bb165e385ba8916cb4.jpg', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -162,7 +164,8 @@ CREATE TABLE `muonsach` (
 --
 
 INSERT INTO `muonsach` (`MaMuonSach`, `MaSach`, `MaNguoiDung`, `TongTien`, `ThoiGian`, `ThoiGianTra`, `DiaChi`, `SoLuong`, `TrangThai`) VALUES
-(1, 1, 2, 150000, '2024-03-30 12:07:13', '2024-03-31', 'ABC XYZ', 1, 1);
+(1, 1, 2, 150000, '2024-03-30 12:07:13', '2024-03-31', 'ABC XYZ', 1, 1),
+(2, 1, 2, 150000, '2024-03-31 19:47:08', '2024-03-31', 'AVCDE', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -192,7 +195,8 @@ CREATE TABLE `nguoidung` (
 
 INSERT INTO `nguoidung` (`MaNguoiDung`, `AnhChinh`, `TaiKhoan`, `MatKhau`, `SoDienThoai`, `Email`, `HoTen`, `PhanQuyen`, `TenNganHang`, `SoTaiKhoan`, `ChuTaiKhoan`, `NgayThamGia`, `TrangThai`) VALUES
 (1, NULL, 'admin', '21232f297a57a5a743894a0e4a801fc3', '0999888999', 'admin@gmail.com', 'Quản Trị Viên', 1, NULL, NULL, NULL, '2024-03-31 16:12:10', 1),
-(2, 'https://vnn-imgs-a1.vgcloud.vn/image1.ictnews.vn/_Files/2020/03/17/trend-avatar-1.jpg', 'chuminhnam', '21232f297a57a5a743894a0e4a801fc3', '0999888999', 'chuminhnam@gmail.com', 'Nguyễn Văn An', 0, 'MB BANK', '1110110246810', 'CHU MINH NAM', '2024-03-31 16:12:10', 1);
+(2, 'https://vnn-imgs-a1.vgcloud.vn/image1.ictnews.vn/_Files/2020/03/17/trend-avatar-1.jpg', 'chuminhnam', '21232f297a57a5a743894a0e4a801fc3', '0999888999', 'chuminhnam@gmail.com', 'Nguyễn Văn An', 0, 'MB BANK', '1110110246810', 'CHU MINH NAM', '2024-03-31 16:12:10', 1),
+(3, 'https://vnn-imgs-a1.vgcloud.vn/image1.ictnews.vn/_Files/2020/03/17/trend-avatar-1.jpg', 'nguyenvanbinh', '8cfd26e7161b75586f17fb7a3fc6ad59', '0999999999', 'nguyenvanbinh@gmail.com', 'Nguyễn Văn Bình', 0, 'MB BANK', '1110001141662', 'NGUYEN VAN BINH', '2024-04-01 14:16:28', 1);
 
 -- --------------------------------------------------------
 
@@ -207,6 +211,14 @@ CREATE TABLE `ruttien` (
   `ThoiGian` datetime NOT NULL DEFAULT current_timestamp(),
   `TrangThai` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `ruttien`
+--
+
+INSERT INTO `ruttien` (`MaRutTien`, `MaNguoiDung`, `SoTienRut`, `ThoiGian`, `TrangThai`) VALUES
+(1, 2, 100000, '2024-04-01 18:41:15', 1),
+(2, 3, 100000, '2024-04-01 18:41:15', 2);
 
 -- --------------------------------------------------------
 
@@ -243,6 +255,20 @@ INSERT INTO `sach` (`MaSach`, `TenSach`, `MaChuyenMuc`, `MaNguoiDung`, `TacGia`,
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tocao`
+--
+
+CREATE TABLE `tocao` (
+  `MaToCao` int(11) NOT NULL,
+  `MaNguoiDung` int(11) NOT NULL,
+  `TieuDe` varchar(255) NOT NULL,
+  `NoiDung` text NOT NULL,
+  `ThoiGian` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `vitien`
 --
 
@@ -259,7 +285,8 @@ CREATE TABLE `vitien` (
 --
 
 INSERT INTO `vitien` (`MaViTien`, `MaNguoiDung`, `SoDuKhaDung`, `DaSuDung`, `TongNap`) VALUES
-(1, 2, 90000, 0, 0);
+(1, 2, 4900000, 0, 0),
+(2, 3, 450000, 14200, 1500000);
 
 -- --------------------------------------------------------
 
@@ -293,14 +320,6 @@ ALTER TABLE `chuyenmuc`
   ADD PRIMARY KEY (`MaChuyenMuc`);
 
 --
--- Indexes for table `danhgia`
---
-ALTER TABLE `danhgia`
-  ADD PRIMARY KEY (`MaDanhGia`),
-  ADD KEY `MaSach` (`MaSach`,`MaNguoiDung`),
-  ADD KEY `MaNguoiDung` (`MaNguoiDung`);
-
---
 -- Indexes for table `dongtien`
 --
 ALTER TABLE `dongtien`
@@ -313,13 +332,6 @@ ALTER TABLE `dongtien`
 ALTER TABLE `giaodien`
   ADD PRIMARY KEY (`MaGiaoDien`),
   ADD KEY `MaChuyenMuc` (`MaChuyenMuc`);
-
---
--- Indexes for table `lienhe`
---
-ALTER TABLE `lienhe`
-  ADD PRIMARY KEY (`MaLienHe`),
-  ADD KEY `MaNguoiDung` (`MaNguoiDung`);
 
 --
 -- Indexes for table `muonsach`
@@ -351,6 +363,13 @@ ALTER TABLE `sach`
   ADD KEY `MaNguoiDung` (`MaNguoiDung`);
 
 --
+-- Indexes for table `tocao`
+--
+ALTER TABLE `tocao`
+  ADD PRIMARY KEY (`MaToCao`),
+  ADD KEY `MaNguoiDung` (`MaNguoiDung`);
+
+--
 -- Indexes for table `vitien`
 --
 ALTER TABLE `vitien`
@@ -373,7 +392,7 @@ ALTER TABLE `yeuthich`
 -- AUTO_INCREMENT for table `binhluan`
 --
 ALTER TABLE `binhluan`
-  MODIFY `MaBinhLuan` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `MaBinhLuan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `chuyenmuc`
@@ -382,46 +401,34 @@ ALTER TABLE `chuyenmuc`
   MODIFY `MaChuyenMuc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `danhgia`
---
-ALTER TABLE `danhgia`
-  MODIFY `MaDanhGia` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `dongtien`
 --
 ALTER TABLE `dongtien`
-  MODIFY `MaDongTien` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `MaDongTien` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `giaodien`
 --
 ALTER TABLE `giaodien`
-  MODIFY `MaGiaoDien` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `lienhe`
---
-ALTER TABLE `lienhe`
-  MODIFY `MaLienHe` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `MaGiaoDien` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `muonsach`
 --
 ALTER TABLE `muonsach`
-  MODIFY `MaMuonSach` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `MaMuonSach` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `nguoidung`
 --
 ALTER TABLE `nguoidung`
-  MODIFY `MaNguoiDung` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `MaNguoiDung` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `ruttien`
 --
 ALTER TABLE `ruttien`
-  MODIFY `MaRutTien` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `MaRutTien` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `sach`
@@ -430,10 +437,16 @@ ALTER TABLE `sach`
   MODIFY `MaSach` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `tocao`
+--
+ALTER TABLE `tocao`
+  MODIFY `MaToCao` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `vitien`
 --
 ALTER TABLE `vitien`
-  MODIFY `MaViTien` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `MaViTien` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `yeuthich`
@@ -453,13 +466,6 @@ ALTER TABLE `binhluan`
   ADD CONSTRAINT `binhluan_ibfk_2` FOREIGN KEY (`MaNguoiDung`) REFERENCES `nguoidung` (`MaNguoiDung`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
--- Constraints for table `danhgia`
---
-ALTER TABLE `danhgia`
-  ADD CONSTRAINT `danhgia_ibfk_1` FOREIGN KEY (`MaSach`) REFERENCES `sach` (`MaSach`) ON DELETE CASCADE ON UPDATE NO ACTION,
-  ADD CONSTRAINT `danhgia_ibfk_2` FOREIGN KEY (`MaNguoiDung`) REFERENCES `nguoidung` (`MaNguoiDung`) ON DELETE CASCADE ON UPDATE NO ACTION;
-
---
 -- Constraints for table `dongtien`
 --
 ALTER TABLE `dongtien`
@@ -470,12 +476,6 @@ ALTER TABLE `dongtien`
 --
 ALTER TABLE `giaodien`
   ADD CONSTRAINT `giaodien_ibfk_1` FOREIGN KEY (`MaChuyenMuc`) REFERENCES `chuyenmuc` (`MaChuyenMuc`) ON DELETE CASCADE ON UPDATE NO ACTION;
-
---
--- Constraints for table `lienhe`
---
-ALTER TABLE `lienhe`
-  ADD CONSTRAINT `lienhe_ibfk_1` FOREIGN KEY (`MaNguoiDung`) REFERENCES `nguoidung` (`MaNguoiDung`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `muonsach`
@@ -490,6 +490,12 @@ ALTER TABLE `muonsach`
 ALTER TABLE `sach`
   ADD CONSTRAINT `sach_ibfk_1` FOREIGN KEY (`MaNguoiDung`) REFERENCES `nguoidung` (`MaNguoiDung`) ON DELETE CASCADE ON UPDATE NO ACTION,
   ADD CONSTRAINT `sach_ibfk_2` FOREIGN KEY (`MaChuyenMuc`) REFERENCES `chuyenmuc` (`MaChuyenMuc`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tocao`
+--
+ALTER TABLE `tocao`
+  ADD CONSTRAINT `tocao_ibfk_1` FOREIGN KEY (`MaNguoiDung`) REFERENCES `nguoidung` (`MaNguoiDung`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `vitien`
