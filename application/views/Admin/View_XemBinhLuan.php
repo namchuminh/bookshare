@@ -5,13 +5,13 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Quản Lý Mã Giảm Giá</h1>
+            <h1>Quản Lý Bình Luận</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="<?php echo base_url('admin/'); ?>">Trang Chủ</a></li>
-              <li class="breadcrumb-item"><a href="<?php echo base_url('admin/ma-giam-gia/'); ?>">Quản Lý Mã Giảm Giá</a></li>
-              <li class="breadcrumb-item active"><?php echo $detail[0]['Code']; ?></li>
+              <li class="breadcrumb-item"><a href="<?php echo base_url('admin/binh-luan/'); ?>">Quản Lý Bình Luận</a></li>
+              <li class="breadcrumb-item active"><?php echo $detail[0]['TenSach']; ?></li>
             </ol>
           </div>
         </div>
@@ -28,31 +28,31 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="ten">Code Giảm Giá</label>
-                    <input type="text" class="form-control" id="magiamgia" placeholder="Code giảm giá" name="code" oninput="this.value = this.value.toUpperCase()" value="<?php echo $detail[0]['Code']; ?>">
+                    <label for="ten">Tên Sách</label>
+                    <input type="text" class="form-control" value="<?php echo $detail[0]['TenSach']; ?>" disabled>
                   </div>
                 </div>
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="ten">Số Lượng Sử Dụng</label>
-                    <input type="number" class="form-control" id="ten" placeholder="Số lượng sử dụng" name="soluong" value="<?php echo $detail[0]['SoLuong']; ?>">
+                    <label for="ten">Người Bình Luận</label>
+                    <input type="text" class="form-control" value="<?php echo $detail[0]['TaiKhoan']; ?>" disabled> 
                   </div>
                 </div>
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="ten">Giá Trị Giảm</label>
-                    <input type="number" class="form-control" id="ten" placeholder="Giá trị giảm" name="giatrigiam" value="<?php echo $detail[0]['GiaTriGiam']; ?>">
+                    <label for="ten">Thời Gian</label>
+                    <input type="text" class="form-control" value="<?php echo date("H:i:s d/m/Y", strtotime($detail[0]['ThoiGian'])); ?>" disabled>
                   </div>
                 </div>
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="ten">Ngày Hết Hạn</label>
-                    <input type="date" class="form-control" id="ten" placeholder="Ngày hết hạn" name="thoigian" value="<?php echo explode(" ",$detail[0]['ThoiGian'])[0]; ?>">
+                    <label for="ten">Nội Dung</label>
+                    <textarea class="form-control" disabled rows="4"><?php echo $detail[0]['NoiDung']; ?></textarea>
                   </div>
                 </div>
               </div> 
-              <a class="btn btn-success" href="<?php echo base_url('admin/ma-giam-gia/'); ?>">Quay Lại</a>
-              <button class="btn btn-primary">Cập Nhật Mã Giảm Giá</button>
+              <a class="btn btn-success" href="<?php echo base_url('admin/binh-luan/'); ?>">Quay Lại</a>
+              <a class="btn btn-danger" href="<?php echo base_url('admin/binh-luan/'.$detail[0]['MaBinhLuan'].'/xoa/'); ?>">Xóa Bình Luận</a>
             </form>
           </div>
         </div>
@@ -60,4 +60,10 @@
     </section>
     <!-- /.content -->
 </div>
+<style type="text/css">
+  .form-control:disabled, .form-control[readonly] {
+    background-color: white;
+    opacity: 1;
+  }
+</style>
 <?php require(APPPATH.'views/admin/layouts/footer.php'); ?>

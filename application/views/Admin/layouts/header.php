@@ -48,7 +48,7 @@
     <a href="<?php echo base_url(); ?>" class="brand-link">
       <img src="<?php echo base_url('public/admin/') ?>dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-light">Quản Lý Cửa Hàng</span>
+      <span class="brand-text font-weight-light">Hệ Thống Quản Trị</span>
     </a>
 
     <!-- Sidebar -->
@@ -141,7 +141,7 @@
           </li>
           <li class="nav-item has-treeview">
             <a href="<?php echo base_url('admin/rut-tien/'); ?>" class="nav-link">
-              <i class="nav-icon fa-solid fa-money-bill-transfer"></i>
+              <i class="nav-icon fa-solid fa-money-check-dollar"></i>
               <p>
                 Rút Tiền
               </p>
@@ -149,26 +149,34 @@
           </li>
           <li class="nav-item has-treeview">
             <a href="<?php echo base_url('admin/dong-tien/'); ?>" class="nav-link">
-              <i class="nav-icon fa-solid fa-money-check-dollar"></i>
+              <i class="nav-icon fa-solid fa-money-bill-transfer"></i>
               <p>
                 Dòng Tiền
               </p>
             </a>
           </li>
-          <li class="nav-header">QUẢN LÝ ĐƠN HÀNG</li>
+          <li class="nav-header">QUẢN LÝ PHẢN HỒI</li>
           <li class="nav-item has-treeview">
-            <a href="<?php echo base_url('admin/hoa-don/'); ?>" class="nav-link">
-              <i class="nav-icon fa-solid fa-cart-shopping"></i>
+            <a href="<?php echo base_url('admin/binh-luan/'); ?>" class="nav-link">
+              <i class="nav-icon fa-solid fa-comments"></i>
               <p>
-                Đơn Hàng
+                Bình Luận
               </p>
             </a>
           </li>
           <li class="nav-item has-treeview">
-            <a href="<?php echo base_url('admin/khach-hang/'); ?>" class="nav-link">
-              <i class="nav-icon fa-solid fa-user"></i>
+            <a href="<?php echo base_url('admin/danh-gia/'); ?>" class="nav-link">
+              <i class="nav-icon fa-solid fa-star"></i>
               <p>
-                Khách Hàng
+                Đánh Giá
+              </p>
+            </a>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="<?php echo base_url('admin/to-cao/'); ?>" class="nav-link">
+              <i class="nav-icon fa-solid fa-flag"></i>
+              <p>
+                Tố Cáo
               </p>
             </a>
           </li>

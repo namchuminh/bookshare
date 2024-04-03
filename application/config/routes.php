@@ -78,6 +78,11 @@ $route['admin/sach/(:any)/xoa'] = 'Admin/Sach/delete/$1';
 $route['admin/sach/(:any)/trang-thai'] = 'Admin/Sach/status/$1';
 
 
+$route['admin/binh-luan'] = 'Admin/BinhLuan';
+$route['admin/binh-luan/(:any)/trang'] = 'Admin/BinhLuan/page/$1';
+$route['admin/binh-luan/(:any)/xem'] = 'Admin/BinhLuan/view/$1';
+$route['admin/binh-luan/(:any)/xoa'] = 'Admin/BinhLuan/delete/$1';
+
 
 $route['san-pham'] = 'Web/SanPham/index';
 $route['san-pham/(:any)'] = 'Web/SanPham/detail/$1';

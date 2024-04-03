@@ -5,12 +5,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Quản Lý Chuyên Mục</h1>
+            <h1>Quản Lý Giao Diện</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="<?php echo base_url('admin/'); ?>">Trang Chủ</a></li>
-              <li class="breadcrumb-item active">Quản Lý Chuyên Mục</li>
+              <li class="breadcrumb-item active">Quản Lý Giao Diện</li>
             </ol>
           </div>
         </div>
@@ -31,7 +31,7 @@
                     <tr>
                       <th>#</th>
                       <th>Hình Ảnh</th>
-                      <th>Tên Chuyên Mục</th>
+                      <th>Tên Giao Diện</th>
                       <th>Loại Giao Diện</th>
                       <th>Hành Động</th>
                     </tr>
