@@ -85,36 +85,11 @@ $route['admin/binh-luan/(:any)/xoa'] = 'Admin/BinhLuan/delete/$1';
 $route['admin/binh-luan/tim-kiem'] = 'Admin/BinhLuan/search';
 $route['admin/binh-luan/tim-kiem/(:any)/trang'] = 'Admin/BinhLuan/pageSearch/$1';
 
-$route['san-pham'] = 'Web/SanPham/index';
-$route['san-pham/(:any)'] = 'Web/SanPham/detail/$1';
-$route['san-pham/trang/(:any)'] = 'Web/SanPham/page/$1';
-
-$route['tin-tuc'] = 'Web/TinTuc/index';
-$route['tin-tuc/(:any)'] = 'Web/TinTuc/detail/$1';
-$route['tin-tuc/trang/(:any)'] = 'Web/TinTuc/page/$1';
-
-$route['chuyen-muc'] = 'Web/ChuyenMuc/index';
-$route['chuyen-muc/(:any)'] = 'Web/ChuyenMuc/detail/$1';
-$route['chuyen-muc/trang/(:any)'] = 'Web/ChuyenMuc/page/$1';
-$route['chuyen-muc/(:any)/trang/(:any)'] = 'Web/ChuyenMuc/detailPage/$1/$2';
-
-$route['lien-he'] = 'Web/LienHe';
-$route['dang-nhap'] = 'Web/DangNhap';
-$route['dang-xuat'] = 'Web/DangXuat';
-$route['dang-ky'] = 'Web/DangNhap/register';
-
-$route['gio-hang'] = 'Web/GioHang';
-$route['gio-hang/sua/(:any)/(:any)'] = 'Web/GioHang/updateNumber/$1/$2';
-$route['gio-hang/them/(:any)/(:any)'] = 'Web/GioHang/add/$1/$2';
-$route['gio-hang/xoa/(:any)'] = 'Web/GioHang/delete/$1';
-$route['gio-hang/giam-gia/(:any)'] = 'Web/GioHang/code/$1';
-
-$route['thanh-toan'] = 'Web/ThanhToan';
-
-$route['khach-hang'] = 'Web/KhachHang';
-$route['khach-hang/sua'] = 'Web/KhachHang/update';
-$route['khach-hang/don-hang/(:any)/xem'] = 'Web/KhachHang/order/$1';
-$route['khach-hang/don-hang/(:any)/huy'] = 'Web/KhachHang/cancel/$1';
 
 
-
+$route['admin/to-cao'] = 'Admin/ToCao';
+$route['admin/to-cao/(:any)/trang'] = 'Admin/ToCao/page/$1';
+$route['admin/to-cao/(:any)/xem'] = 'Admin/ToCao/view/$1';
+$route['admin/to-cao/(:any)/trang-thai'] = 'Admin/ToCao/action/$1';
+$route['admin/to-cao/tim-kiem'] = 'Admin/ToCao/search';
+$route['admin/to-cao/tim-kiem/(:any)/trang'] = 'Admin/ToCao/pageSearch/$1';

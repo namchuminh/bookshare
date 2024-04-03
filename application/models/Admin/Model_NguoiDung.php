@@ -82,6 +82,12 @@ class Model_NguoiDung extends CI_Model {
 		return $result->result_array();
 	}
 
+	public function getIdUser($TaiKhoan){
+		$sql = "SELECT * FROM nguoidung WHERE TaiKhoan = ?";
+		$result = $this->db->query($sql, array($TaiKhoan));
+		return $result->result_array();
+	}
+
 }
 
 /* End of file Model_ChuyenMuc.php */
