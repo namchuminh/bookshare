@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 03, 2024 at 12:11 PM
+-- Generation Time: Apr 04, 2024 at 02:25 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -117,7 +117,11 @@ INSERT INTO `dongtien` (`MaDongTien`, `MaNguoiDung`, `SoTienTruoc`, `SoTienThayD
 (15, 2, 5000000, 100000, 4900000, '2024-04-01 00:41:00', 'Admin trừ 100,000 VND khỏi tài khoản!'),
 (16, 3, 150000, 100000, 50000, '2024-04-01 19:43:39', 'Admin trừ tiền rút 100,000 VND của tài khoản!'),
 (17, 3, 50000, 500000, 550000, '2024-04-01 19:44:28', 'Admin cộng 500,000 VND vào tài khoản!'),
-(18, 3, 550000, 100000, 450000, '2024-04-01 19:44:40', 'Admin trừ tiền rút 100,000 VND của tài khoản!');
+(18, 3, 550000, 100000, 450000, '2024-04-01 19:44:40', 'Admin trừ tiền rút 100,000 VND của tài khoản!'),
+(19, 2, 4900000, 100000, 4800000, '2024-04-04 18:06:16', 'Admin trừ tiền rút 100,000 VND của tài khoản!'),
+(20, 2, 4950000, 150000, 5100000, '2024-04-04 18:53:33', 'Admin cộng tiền nạp 150,000 VND vào tài khoản!'),
+(21, 3, 450000, 100000, 550000, '2024-04-04 18:54:13', 'Admin cộng tiền nạp 100,000 VND vào tài khoản!'),
+(22, 3, 550000, 100000, 650000, '2024-04-04 18:55:05', 'Admin cộng tiền nạp 100,000 VND vào tài khoản!');
 
 -- --------------------------------------------------------
 
@@ -170,6 +174,28 @@ INSERT INTO `muonsach` (`MaMuonSach`, `MaSach`, `MaNguoiDung`, `TongTien`, `Thoi
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `naptien`
+--
+
+CREATE TABLE `naptien` (
+  `MaNapTien` int(11) NOT NULL,
+  `MaNguoiDung` int(11) NOT NULL,
+  `SoTienNap` int(11) NOT NULL,
+  `ThoiGian` datetime NOT NULL DEFAULT current_timestamp(),
+  `TrangThai` int(11) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `naptien`
+--
+
+INSERT INTO `naptien` (`MaNapTien`, `MaNguoiDung`, `SoTienNap`, `ThoiGian`, `TrangThai`) VALUES
+(1, 3, 100000, '2024-04-04 18:41:31', 2),
+(2, 2, 150000, '2024-04-04 18:41:43', 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `nguoidung`
 --
 
@@ -217,7 +243,7 @@ CREATE TABLE `ruttien` (
 --
 
 INSERT INTO `ruttien` (`MaRutTien`, `MaNguoiDung`, `SoTienRut`, `ThoiGian`, `TrangThai`) VALUES
-(1, 2, 100000, '2024-04-01 18:41:15', 1),
+(1, 2, 100000, '2024-04-01 18:41:15', 2),
 (2, 3, 100000, '2024-04-01 18:41:15', 2);
 
 -- --------------------------------------------------------
@@ -261,10 +287,21 @@ INSERT INTO `sach` (`MaSach`, `TenSach`, `MaChuyenMuc`, `MaNguoiDung`, `TacGia`,
 CREATE TABLE `tocao` (
   `MaToCao` int(11) NOT NULL,
   `MaNguoiDung` int(11) NOT NULL,
+  `NanNhan` int(11) NOT NULL,
   `TieuDe` varchar(255) NOT NULL,
   `NoiDung` text NOT NULL,
-  `ThoiGian` datetime NOT NULL DEFAULT current_timestamp()
+  `ThoiGian` datetime NOT NULL DEFAULT current_timestamp(),
+  `TrangThai` int(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `tocao`
+--
+
+INSERT INTO `tocao` (`MaToCao`, `MaNguoiDung`, `NanNhan`, `TieuDe`, `NoiDung`, `ThoiGian`, `TrangThai`) VALUES
+(1, 2, 3, 'Tố cáo 1', 'Nội dung tố cáo 1', '2024-04-03 18:10:19', 2),
+(2, 2, 3, 'ABCDE', 'ABCDE', '2024-04-03 19:27:29', 0),
+(3, 3, 2, 'FGHG', 'abcde', '2024-04-03 19:28:19', 0);
 
 -- --------------------------------------------------------
 
@@ -285,8 +322,8 @@ CREATE TABLE `vitien` (
 --
 
 INSERT INTO `vitien` (`MaViTien`, `MaNguoiDung`, `SoDuKhaDung`, `DaSuDung`, `TongNap`) VALUES
-(1, 2, 4900000, 0, 0),
-(2, 3, 450000, 14200, 1500000);
+(1, 2, 5100000, 0, 0),
+(2, 3, 650000, 14200, 1500000);
 
 -- --------------------------------------------------------
 
@@ -340,6 +377,13 @@ ALTER TABLE `muonsach`
   ADD PRIMARY KEY (`MaMuonSach`),
   ADD KEY `MaNguoiDung` (`MaNguoiDung`),
   ADD KEY `MaSach` (`MaSach`);
+
+--
+-- Indexes for table `naptien`
+--
+ALTER TABLE `naptien`
+  ADD PRIMARY KEY (`MaNapTien`),
+  ADD KEY `MaNguoiDung` (`MaNguoiDung`);
 
 --
 -- Indexes for table `nguoidung`
@@ -404,7 +448,7 @@ ALTER TABLE `chuyenmuc`
 -- AUTO_INCREMENT for table `dongtien`
 --
 ALTER TABLE `dongtien`
-  MODIFY `MaDongTien` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `MaDongTien` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `giaodien`
@@ -417,6 +461,12 @@ ALTER TABLE `giaodien`
 --
 ALTER TABLE `muonsach`
   MODIFY `MaMuonSach` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `naptien`
+--
+ALTER TABLE `naptien`
+  MODIFY `MaNapTien` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `nguoidung`
@@ -440,7 +490,7 @@ ALTER TABLE `sach`
 -- AUTO_INCREMENT for table `tocao`
 --
 ALTER TABLE `tocao`
-  MODIFY `MaToCao` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `MaToCao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `vitien`
@@ -483,6 +533,18 @@ ALTER TABLE `giaodien`
 ALTER TABLE `muonsach`
   ADD CONSTRAINT `muonsach_ibfk_1` FOREIGN KEY (`MaNguoiDung`) REFERENCES `nguoidung` (`MaNguoiDung`) ON DELETE CASCADE ON UPDATE NO ACTION,
   ADD CONSTRAINT `muonsach_ibfk_2` FOREIGN KEY (`MaSach`) REFERENCES `sach` (`MaSach`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `naptien`
+--
+ALTER TABLE `naptien`
+  ADD CONSTRAINT `naptien_ibfk_1` FOREIGN KEY (`MaNguoiDung`) REFERENCES `nguoidung` (`MaNguoiDung`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `ruttien`
+--
+ALTER TABLE `ruttien`
+  ADD CONSTRAINT `ruttien_ibfk_1` FOREIGN KEY (`MaNguoiDung`) REFERENCES `nguoidung` (`MaNguoiDung`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `sach`
