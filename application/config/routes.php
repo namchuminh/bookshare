@@ -36,6 +36,8 @@ $route['admin/rut-tien/(:any)/trang'] = 'Admin/RutTien/page/$1';
 $route['admin/rut-tien/(:any)/xem'] = 'Admin/RutTien/view/$1';
 $route['admin/rut-tien/(:any)/xac-nhan'] = 'Admin/RutTien/accept/$1';
 $route['admin/rut-tien/(:any)/huy'] = 'Admin/RutTien/cancel/$1';
+$route['admin/rut-tien/tim-kiem'] = 'Admin/RutTien/search';
+$route['admin/rut-tien/tim-kiem/(:any)/trang'] = 'Admin/RutTien/pageSearch/$1';
 
 $route['admin/cau-hinh'] = 'Admin/CauHinh';
 

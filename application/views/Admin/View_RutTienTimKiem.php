@@ -28,15 +28,15 @@
                 <form class="row" action="<?php echo base_url('admin/rut-tien/tim-kiem/') ?>"> 
                   <div class="col-sm-2">
                     <label>Tài Khoản</label>
-                    <input type="text" name="taikhoan" class="form-control" placeholder="Tài khoản">
+                    <input type="text" name="taikhoan" class="form-control" placeholder="Tài khoản" value="<?php echo $post['taikhoan']; ?>">
                   </div>
                   <div class="col-sm-2">
                     <label>Trạng Thái</label>
                     <select class="form-control" name="trangthai">
-                      <option value>Chọn Trạng Thái</option>
-                      <option value="-1">Đã Hủy Rút Tiền</option>
-                      <option value="1">Chờ Admin Duyệt</option>
-                      <option value="2">Đã Rút Tiền</option>
+                      <option value selected>Chọn Trạng Thái</option>
+                      <option value="-1" <?php if($post['trangthai'] == -1){ echo "selected"; } ?>>Đã Hủy Rút Tiền</option>
+                      <option value="1" <?php if($post['trangthai'] == 1){ echo "selected"; } ?>>Chờ Admin Duyệt</option>
+                      <option value="2" <?php if($post['trangthai'] == 2){ echo "selected"; } ?>>Đã Rút Tiền</option>
                     </select>
                   </div>
                   <div class="col-sm-2">
@@ -97,9 +97,10 @@
                 </table>
               </div>
               <div class="card-footer clearfix">
+                <a href="<?php echo base_url('admin/rut-tien/') ?>" class="btn btn-success">Quay Lại</a>
                 <ul class="pagination pagination-sm m-0 float-right">
                 	<?php for($i = 1; $i <= $totalPages; $i++){ ?>
-                  		<li class="page-item"><a class="page-link" href="<?php echo base_url('admin/rut-tien/'.$i.'/trang/') ?>"><?php echo $i; ?></a></li>
+                  		<li class="page-item"><a class="page-link" href="<?php echo base_url('admin/rut-tien/tim-kiem/'.$i.'/trang/?taikhoan='.$post['taikhoan'].'&trangthai='.$post['trangthai']) ?>"><?php echo $i; ?></a></li>
                   	<?php } ?>      
                 </ul>
               </div>

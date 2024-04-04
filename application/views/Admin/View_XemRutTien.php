@@ -75,6 +75,12 @@
                 </div>
                 <div class="col-md-12">
                   <div class="form-group">
+                    <label for="ten">Thực Nhận</label>
+                    <input type="text" class="form-control"  placeholder="Số tiền rút" value="<?php echo number_format($detail[0]['SoTienRut'] * (1 - ($phiruttien / 100))); ?> VND" disabled>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
                     <label for="ten">Trạng Thái</label>
                     <input type="text" class="form-control"  placeholder="Số tiền rút" 
                       <?php if($detail[0]['TrangThai'] == 0){ ?>
@@ -91,7 +97,7 @@
               <div class="mb-3">
                 <span>
                 <i>*Lưu ý: 
-                  <br> + Bạn cần chuyển khoản số tiền <b><?php echo number_format($detail[0]['SoTienRut']); ?> VND</b> cho tài khoản <b><?php echo $detail[0]['TaiKhoan']; ?></b> trước khi xác nhận rút tiền!
+                  <br> + Bạn cần chuyển khoản số tiền <b><?php echo number_format($detail[0]['SoTienRut'] * (1 - ($phiruttien / 100))); ?> VND</b> cho tài khoản <b><?php echo $detail[0]['TaiKhoan']; ?></b> trước khi xác nhận rút tiền!
                   <br> + Hệ thống sẽ tự động trừ <b><?php echo number_format($detail[0]['SoTienRut']); ?> VND</b> khỏi tài khoản <b><?php echo $detail[0]['TaiKhoan']; ?></b> sau khi xác nhận rút tiền!
                 </i>
                 </span>

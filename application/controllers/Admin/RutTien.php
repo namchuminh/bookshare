@@ -10,7 +10,8 @@ class RutTien extends CI_Controller {
 		}
 
 		$this->load->model('Admin/Model_RutTien');
-		$this->load->model('Admin/Model_NguoiDung');
+		$this->load->model('Admin/Model_RutTien');
+		$this->load->model('Admin/Model_CauHinh');
 	}
 
 	public function index()
@@ -19,6 +20,7 @@ class RutTien extends CI_Controller {
 		$recordsPerPage = 10;
 		$totalPages = ceil($totalRecords / $recordsPerPage); 
 
+		$data['phiruttien'] = $this->Model_CauHinh->getAll()[0]['PhiRutTien'];
 		$data['totalPages'] = $totalPages;
 		$data['list'] = $this->Model_RutTien->getAll();
 		$data['title'] = "Danh sách yêu cầu rút tiền";
@@ -41,7 +43,7 @@ class RutTien extends CI_Controller {
 
 		$start = ($trang - 1) * $recordsPerPage;
 
-
+		$data['phiruttien'] = $this->Model_CauHinh->getAll()[0]['PhiRutTien'];
 		if($start == 0){
 			$data['totalPages'] = $totalPages;
 			$data['list'] = $this->Model_RutTien->getAll();
@@ -60,7 +62,8 @@ class RutTien extends CI_Controller {
 		}
 
 		$data['detail'] = $this->Model_RutTien->getById($maruttien);
-		$data['wallet'] = $this->Model_NguoiDung->getWallet($this->Model_RutTien->getById($maruttien)[0]['MaNguoiDung']);
+		$data['wallet'] = $this->Model_RutTien->getWallet($this->Model_RutTien->getById($maruttien)[0]['MaNguoiDung']);
+		$data['phiruttien'] = $this->Model_CauHinh->getAll()[0]['PhiRutTien'];
 		$data['title'] = "Thông tin yêu cầu rút tiền";
 		return $this->load->view('Admin/View_XemRutTien', $data);
 	}
@@ -83,7 +86,7 @@ class RutTien extends CI_Controller {
 		$sotientru = $this->Model_RutTien->getById($maruttien)[0]['SoTienRut'];
 		$noidung = "Admin trừ tiền rút ".number_format($sotientru)." VND của tài khoản!";
 
-		$sotiencu = $this->Model_NguoiDung->getWallet($manguoidung)[0]['SoDuKhaDung'];
+		$sotiencu = $this->Model_RutTien->getWallet($manguoidung)[0]['SoDuKhaDung'];
 
 		if($sotientru > $sotiencu){
 			$this->session->set_flashdata('error', 'Số tiền rút không được lớn hơn số dư khả dụng!');
@@ -92,9 +95,9 @@ class RutTien extends CI_Controller {
 
 		$sotienmoi = $sotiencu - $sotientru;
 
-		$this->Model_NguoiDung->updateMoneyWallet($sotienmoi,$manguoidung);
+		$this->Model_RutTien->updateMoneyWallet($sotienmoi,$manguoidung);
 
-		$this->Model_NguoiDung->insertCashFlow($manguoidung,$sotiencu,$sotientru,$sotienmoi,$noidung);
+		$this->Model_RutTien->insertCashFlow($manguoidung,$sotiencu,$sotientru,$sotienmoi,$noidung);
 
 		$this->Model_RutTien->accept($maruttien);
 		$this->session->set_flashdata('success', 'Xác nhận rút '.number_format($sotientru).' cho người dùng thành công!');
@@ -117,6 +120,96 @@ class RutTien extends CI_Controller {
 
 		$this->session->set_flashdata('success', 'Hủy yêu cầu rút tiền của người dùng thành công!');
 		return redirect(base_url('admin/rut-tien/'.$maruttien.'/xem/'));
+	}
+
+	public function search(){
+		if(!isset($_GET['taikhoan']) && !isset($_GET['trangthai'])){
+			return redirect(base_url('admin/rut-tien/'));
+		}
+
+		$taikhoan = $this->input->get('taikhoan');
+		$trangthai = $this->input->get('trangthai');
+
+		if(empty($taikhoan) && empty($trangthai)){
+			return redirect(base_url('admin/rut-tien/'));
+		}
+
+		
+		$data['post'] = array(
+			'taikhoan' => $taikhoan,
+			'trangthai' => $trangthai
+		);
+
+		if($trangthai == -1){
+			$trangthai = 0;
+		}
+
+		if(empty($taikhoan)){
+			$taikhoan = -1;
+		}
+
+		$totalRecords = $this->Model_RutTien->checkNumberSearch($taikhoan,$trangthai);
+		$recordsPerPage = 10;
+		$totalPages = ceil($totalRecords / $recordsPerPage); 
+		$data['phiruttien'] = $this->Model_CauHinh->getAll()[0]['PhiRutTien'];
+		$data['totalPages'] = $totalPages;
+		$data['list'] = $this->Model_RutTien->search($taikhoan,$trangthai);
+		$data['title'] = "Danh sách yêu cầu rút tiền";
+		return $this->load->view('Admin/View_RutTienTimKiem', $data);
+	}
+
+	public function pageSearch($trang){
+		if(!isset($_GET['taikhoan']) && !isset($_GET['trangthai'])){
+			return redirect(base_url('admin/rut-tien/'));
+		}
+
+		$taikhoan = $this->input->get('taikhoan');
+		$trangthai = $this->input->get('trangthai');
+
+		if(empty($taikhoan) && empty($trangthai)){
+			return redirect(base_url('admin/rut-tien/'));
+		}
+
+		
+		$data['post'] = array(
+			'taikhoan' => $taikhoan,
+			'trangthai' => $trangthai
+		);
+
+
+		if($trangthai == -1){
+			$trangthai = 0;
+		}
+
+		if(empty($taikhoan)){
+			$taikhoan = -1;
+		}
+
+		$data['title'] = "Danh sách yêu cầu rút tiền";
+		$totalRecords = $this->Model_RutTien->checkNumberSearch($taikhoan,$trangthai);
+		$recordsPerPage = 10;
+		$totalPages = ceil($totalRecords / $recordsPerPage); 
+		$data['phiruttien'] = $this->Model_CauHinh->getAll()[0]['PhiRutTien'];
+		if($trang < 1){
+			return redirect(base_url('admin/rut-tien/'));
+		}
+
+		if($trang > $totalPages){
+			return redirect(base_url('admin/rut-tien/'));
+		}
+
+		$start = ($trang - 1) * $recordsPerPage;
+
+
+		if($start == 0){
+			$data['totalPages'] = $totalPages;
+			$data['list'] = $this->Model_RutTien->search($taikhoan,$trangthai);
+			return $this->load->view('Admin/View_RutTienTimKiem', $data);
+		}else{
+			$data['totalPages'] = $totalPages;
+			$data['list'] = $this->Model_RutTien->search($taikhoan,$trangthai,$start);
+			return $this->load->view('Admin/View_RutTienTimKiem', $data);
+		}
 	}
 }
 
