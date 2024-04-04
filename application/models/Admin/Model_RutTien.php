@@ -43,12 +43,14 @@ class Model_RutTien extends CI_Model {
 	}
 
 	public function checkNumberSearch($taikhoan,$trangthai){
+		$taikhoan = "%".$taikhoan."%";
 		$sql = "SELECT ruttien.*, nguoidung.MaNguoiDung, nguoidung.TaiKhoan, nguoidung.AnhChinh FROM nguoidung, ruttien WHERE nguoidung.PhanQuyen = 0 AND nguoidung.MaNguoiDung = ruttien.MaNguoiDung AND (nguoidung.TaiKhoan LIKE ? OR ruttien.TrangThai = ?)";
 		$result = $this->db->query($sql, array($taikhoan,$trangthai));
 		return $result->num_rows();
 	}
 
 	public function search($taikhoan, $trangthai, $start = 0, $end = 10){
+		$taikhoan = "%".$taikhoan."%";
 		$sql = "SELECT ruttien.*, nguoidung.MaNguoiDung, nguoidung.TaiKhoan, nguoidung.AnhChinh FROM nguoidung, ruttien WHERE nguoidung.PhanQuyen = 0 AND nguoidung.MaNguoiDung = ruttien.MaNguoiDung AND (nguoidung.TaiKhoan LIKE ? OR ruttien.TrangThai = ?) ORDER BY ruttien.MaRutTien DESC LIMIT ?, ?";
 		$result = $this->db->query($sql, array($taikhoan,$trangthai,$start,$end));
 		return $result->result_array();

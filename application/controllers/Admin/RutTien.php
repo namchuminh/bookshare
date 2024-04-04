@@ -10,7 +10,7 @@ class RutTien extends CI_Controller {
 		}
 
 		$this->load->model('Admin/Model_RutTien');
-		$this->load->model('Admin/Model_RutTien');
+		$this->load->model('Admin/Model_NguoiDung');
 		$this->load->model('Admin/Model_CauHinh');
 	}
 
@@ -62,7 +62,7 @@ class RutTien extends CI_Controller {
 		}
 
 		$data['detail'] = $this->Model_RutTien->getById($maruttien);
-		$data['wallet'] = $this->Model_RutTien->getWallet($this->Model_RutTien->getById($maruttien)[0]['MaNguoiDung']);
+		$data['wallet'] = $this->Model_NguoiDung->getWallet($this->Model_RutTien->getById($maruttien)[0]['MaNguoiDung']);
 		$data['phiruttien'] = $this->Model_CauHinh->getAll()[0]['PhiRutTien'];
 		$data['title'] = "Thông tin yêu cầu rút tiền";
 		return $this->load->view('Admin/View_XemRutTien', $data);
@@ -86,7 +86,7 @@ class RutTien extends CI_Controller {
 		$sotientru = $this->Model_RutTien->getById($maruttien)[0]['SoTienRut'];
 		$noidung = "Admin trừ tiền rút ".number_format($sotientru)." VND của tài khoản!";
 
-		$sotiencu = $this->Model_RutTien->getWallet($manguoidung)[0]['SoDuKhaDung'];
+		$sotiencu = $this->Model_NguoiDung->getWallet($manguoidung)[0]['SoDuKhaDung'];
 
 		if($sotientru > $sotiencu){
 			$this->session->set_flashdata('error', 'Số tiền rút không được lớn hơn số dư khả dụng!');
@@ -95,9 +95,9 @@ class RutTien extends CI_Controller {
 
 		$sotienmoi = $sotiencu - $sotientru;
 
-		$this->Model_RutTien->updateMoneyWallet($sotienmoi,$manguoidung);
+		$this->Model_NguoiDung->updateMoneyWallet($sotienmoi,$manguoidung);
 
-		$this->Model_RutTien->insertCashFlow($manguoidung,$sotiencu,$sotientru,$sotienmoi,$noidung);
+		$this->Model_NguoiDung->insertCashFlow($manguoidung,$sotiencu,$sotientru,$sotienmoi,$noidung);
 
 		$this->Model_RutTien->accept($maruttien);
 		$this->session->set_flashdata('success', 'Xác nhận rút '.number_format($sotientru).' cho người dùng thành công!');

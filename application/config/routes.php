@@ -25,11 +25,13 @@ $route['admin/dong-tien/tim-kiem'] = 'Admin/DongTien/search';
 $route['admin/dong-tien/tim-kiem/(:any)/trang'] = 'Admin/DongTien/pageSearch/$1';
 
 
-$route['admin/rut-tien'] = 'Admin/RutTien';
-$route['admin/rut-tien/(:any)/trang'] = 'Admin/RutTien/page/$1';
-$route['admin/rut-tien/them'] = 'Admin/RutTien/add';
-$route['admin/rut-tien/(:any)/sua'] = 'Admin/RutTien/update/$1';
-$route['admin/rut-tien/(:any)/xoa'] = 'Admin/RutTien/delete/$1';
+$route['admin/nap-tien'] = 'Admin/NapTien';
+$route['admin/nap-tien/(:any)/trang'] = 'Admin/NapTien/page/$1';
+$route['admin/nap-tien/(:any)/xem'] = 'Admin/NapTien/view/$1';
+$route['admin/nap-tien/(:any)/xac-nhan'] = 'Admin/NapTien/accept/$1';
+$route['admin/nap-tien/(:any)/huy'] = 'Admin/NapTien/cancel/$1';
+$route['admin/nap-tien/tim-kiem'] = 'Admin/NapTien/search';
+$route['admin/nap-tien/tim-kiem/(:any)/trang'] = 'Admin/NapTien/pageSearch/$1';
 
 $route['admin/rut-tien'] = 'Admin/RutTien';
 $route['admin/rut-tien/(:any)/trang'] = 'Admin/RutTien/page/$1';

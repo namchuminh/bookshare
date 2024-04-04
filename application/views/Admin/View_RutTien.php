@@ -73,9 +73,7 @@
                         <td><?php
                           echo number_format($value['SoTienRut'] * (1 - ($phiruttien / 100))); 
                         ?> VND</td>
-	                      <td>
-	                      	<?php echo $value['ThoiGian']; ?>
-	                      </td>
+	                      <td><?php echo date("H:i:s d/m/Y", strtotime($value['ThoiGian'])); ?></td>
                         <td>
                           <?php if($value['TrangThai'] == 0){ ?>
                             Đã Hủy Rút Tiền
