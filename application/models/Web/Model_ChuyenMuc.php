@@ -24,7 +24,7 @@ class Model_ChuyenMuc extends CI_Model {
 	}
 
 	public function getAllCategory($start = 0, $end = 6){
-		$sql = "SELECT cm.TenChuyenMuc, cm.DuongDan AS DuongDanChuyenMuc, cm.HinhAnh AS HinhAnhChuyenMuc, COUNT(sp.MaSanPham) AS SoLuongSanPham FROM chuyenmuc cm LEFT JOIN sanpham sp ON cm.MaChuyenMuc = sp.MaChuyenMuc WHERE cm.TrangThai = 1 GROUP BY cm.TenChuyenMuc, cm.DuongDan ORDER BY cm.MaChuyenMuc DESC LIMIT ?, ?";
+		$sql = "SELECT cm.TenChuyenMuc, cm.DuongDan AS DuongDanChuyenMuc, cm.HinhAnh AS HinhAnhChuyenMuc, COUNT(sp.Masach) AS SoLuongSach FROM chuyenmuc cm LEFT JOIN sach sp ON cm.MaChuyenMuc = sp.MaChuyenMuc WHERE cm.TrangThai = 1 GROUP BY cm.TenChuyenMuc, cm.DuongDan ORDER BY cm.MaChuyenMuc DESC LIMIT ?, ?";
 		$result = $this->db->query($sql, array($start, $end));
 		return $result->result_array();
 	}
@@ -36,18 +36,24 @@ class Model_ChuyenMuc extends CI_Model {
 	}
 
 	public function getBySlug($DuongDan,$start = 0, $end = 9){
-		$sql = "SELECT chuyenmuc.TenChuyenMuc, sanpham.* FROM chuyenmuc, sanpham WHERE sanpham.MaChuyenMuc = chuyenmuc.MaChuyenMuc AND chuyenmuc.DuongDan = ? AND chuyenmuc.TrangThai = 1 ORDER BY sanpham.MaSanPham DESC LIMIT ?, ?";
+		$sql = "SELECT chuyenmuc.TenChuyenMuc, sach.* FROM chuyenmuc, sach WHERE sach.MaChuyenMuc = chuyenmuc.MaChuyenMuc AND chuyenmuc.DuongDan = ? AND chuyenmuc.TrangThai = 1 ORDER BY sach.Masach DESC LIMIT ?, ?";
 		$result = $this->db->query($sql, array($DuongDan,$start,$end));
 		return $result->result_array();
 	}
 
 	public function checkNumberProduct($MaChuyenMuc)
 	{
-		$sql = "SELECT * FROM sanpham WHERE TrangThai = 1 AND MaChuyenMuc = ?";
+		$sql = "SELECT * FROM sach WHERE TrangThai = 1 AND MaChuyenMuc = ?";
 		$result = $this->db->query($sql, array($MaChuyenMuc));
 		return $result->num_rows();
 	}
 
+	public function getCategoryDisplay()
+	{
+		$sql = "SELECT * FROM chuyenmuc WHERE TrangThai = 1 AND HienThiTrenMenu = 1 ORDER BY MaChuyenMuc DESC";
+		$result = $this->db->query($sql);
+		return $result->result_array();
+	}
 }
 
 /* End of file Model_ChuyenMuc.php */

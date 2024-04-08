@@ -7,12 +7,12 @@ class ChuyenMuc extends MY_Controller {
 		parent::__construct();
 		$this->load->model('Web/Model_ChuyenMuc');
 		$this->load->model('Web/Model_GiaoDien');
-		$this->load->model('Web/Model_SanPham');
+		$this->load->model('Web/Model_Sach');
 	}
 
 	public function index()
 	{
-		$data['title'] = "Danh sách chuyên mục";
+		$data['title'] = "Chuyên mục sách";
 
 		$totalRecords = $this->Model_ChuyenMuc->checkNumber();
 		$recordsPerPage = 6;
@@ -23,7 +23,7 @@ class ChuyenMuc extends MY_Controller {
 	}
 
 	public function page($trang){
-		$data['title'] = "Danh sách chuyên mục";
+		$data['title'] = "Chuyên mục sách";
 	
 		$totalRecords = $this->Model_ChuyenMuc->checkNumber();
 		$recordsPerPage = 6;
@@ -58,10 +58,10 @@ class ChuyenMuc extends MY_Controller {
 
 		$data['title'] = $this->Model_ChuyenMuc->getBySlug($duongdan)[0]['TenChuyenMuc'];
 		$data['banner1'] = $this->Model_GiaoDien->getByType(2);
-		$data['new'] = $this->Model_SanPham->getByType(1);
-		$data['sale'] = $this->Model_SanPham->getByType(2);
-		$data['popular'] = $this->Model_SanPham->getByType(3);
-		$data['categoryNumber'] = $this->Model_SanPham->getCategoryNumber();
+		$data['new'] = $this->Model_Sach->getByType(1);
+		$data['sale'] = $this->Model_Sach->getByType(2);
+		$data['popular'] = $this->Model_Sach->getByType(3);
+		$data['categoryNumber'] = $this->Model_Sach->getCategoryNumber();
 
 		$totalRecords = $this->Model_ChuyenMuc->checkNumberProduct($this->Model_ChuyenMuc->getBySlug($duongdan)[0]['MaChuyenMuc']);
 		$recordsPerPage = 9;
@@ -69,16 +69,16 @@ class ChuyenMuc extends MY_Controller {
 		$data['totalPages'] = $totalPages;
 		$data['list'] = $this->Model_ChuyenMuc->getBySlug($duongdan);
 		$data['slugCategory'] = $duongdan;
-		return $this->load->view('Web/View_SanPham', $data);
+		return $this->load->view('Web/View_Sach', $data);
 	}
 
 	public function detailPage($duongdan,$trang){
 		$data['title'] = $this->Model_ChuyenMuc->getBySlug($duongdan)[0]['TenChuyenMuc'];
 		$data['banner1'] = $this->Model_GiaoDien->getByType(2);
-		$data['new'] = $this->Model_SanPham->getByType(1);
-		$data['sale'] = $this->Model_SanPham->getByType(2);
-		$data['popular'] = $this->Model_SanPham->getByType(3);
-		$data['categoryNumber'] = $this->Model_SanPham->getCategoryNumber();
+		$data['new'] = $this->Model_Sach->getByType(1);
+		$data['sale'] = $this->Model_Sach->getByType(2);
+		$data['popular'] = $this->Model_Sach->getByType(3);
+		$data['categoryNumber'] = $this->Model_Sach->getCategoryNumber();
 		
 		$totalRecords = $this->Model_ChuyenMuc->checkNumberProduct($this->Model_ChuyenMuc->getBySlug($duongdan)[0]['MaChuyenMuc']);
 		$recordsPerPage = 9;
@@ -98,11 +98,11 @@ class ChuyenMuc extends MY_Controller {
 		if($start == 0){
 			$data['totalPages'] = $totalPages;
 			$data['list'] = $this->Model_ChuyenMuc->getBySlug($duongdan);
-			return $this->load->view('Web/View_SanPham', $data);
+			return $this->load->view('Web/View_Sach', $data);
 		}else{
 			$data['totalPages'] = $totalPages;
 			$data['list'] = $this->Model_ChuyenMuc->getBySlug($duongdan,$start);
-			return $this->load->view('Web/View_SanPham', $data);
+			return $this->load->view('Web/View_Sach', $data);
 		}
 	}
 

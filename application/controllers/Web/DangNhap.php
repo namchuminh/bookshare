@@ -10,7 +10,7 @@ class DangNhap extends MY_Controller {
 		}
 
 		$this->load->model('Web/Model_DangNhap');
-		$this->load->model('Web/Model_KhachHang');
+		$this->load->model('Web/Model_NguoiDung');
 	}
 
 	public function index()
@@ -37,7 +37,7 @@ class DangNhap extends MY_Controller {
 					return $this->load->view('Web/View_DangNhap', $data);
 				}else{
 					$newdata = array(
-						'makhachhang' => $this->Model_DangNhap->getInfoByUsername($taikhoan)[0]['MaKhachHang'],
+						'makhachhang' => $this->Model_DangNhap->getInfoByUsername($taikhoan)[0]['MaNguoiDung'],
 					    'khachhang'  => $taikhoan,
 					    'hoten' => $this->Model_DangNhap->getInfoByUsername($taikhoan)[0]['HoTen'],
 					    'sodienthoai' => $this->Model_DangNhap->getInfoByUsername($taikhoan)[0]['SoDienThoai'],
@@ -46,15 +46,11 @@ class DangNhap extends MY_Controller {
 					);
 					$this->session->set_userdata($newdata);
 
-					if($this->session->has_userdata('lienhe')){
-			            return redirect(base_url('lien-he/'));
-			        }
-
 			        if($this->session->has_userdata('thanhtoan')){
 			            return redirect(base_url('thanh-toan/'));
 			        }
 					
-					return redirect(base_url('khach-hang/'));
+					return redirect(base_url('nguoi-dung/'));
 				}
 				
 			}else{
@@ -112,7 +108,7 @@ class DangNhap extends MY_Controller {
 				return $this->load->view('Web/View_DangKy', $data);
 			}
 
-			$this->Model_KhachHang->insert($hoten,$taikhoan,md5($matkhau),$sodienthoai,$email,$diachi);
+			$this->Model_NguoiDung->insert($hoten,$taikhoan,md5($matkhau),$sodienthoai,$email,$diachi);
 
 			$newdata = array(
 				'makhachhang' => $this->Model_DangNhap->getInfoByUsername($taikhoan)[0]['MaKhachHang'],

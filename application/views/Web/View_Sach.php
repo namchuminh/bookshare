@@ -17,7 +17,7 @@
             <div class="col-md-6">
                 <ol class="breadcrumb justify-content-md-end">
                     <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>">Trang Chủ</a></li>
-                    <li class="breadcrumb-item"><a href="<?php echo base_url('san-pham/'); ?>">Sản Phẩm</a></li>
+                    <li class="breadcrumb-item"><a href="<?php echo base_url('sach/'); ?>">Sách</a></li>
                     <li class="breadcrumb-item active">
                         <?php if(isset($_GET['s']) && !empty($_GET['s'])){ ?>
                             Tìm Kiếm
@@ -67,23 +67,23 @@
                         <div class="col-md-4 col-6">
                             <div class="product">
                                 <div class="product_img">
-                                    <a href="<?php echo base_url("san-pham/".$value['DuongDan'].'/'); ?>">
-                                        <img style="height: 290px;" src="<?php echo $value['AnhChinh']; ?>" alt="<?php echo $value['TenSanPham']; ?>">
+                                    <a href="<?php echo base_url("sach/".$value['DuongDan'].'/'); ?>">
+                                        <img style="height: 290px;" src="<?php echo $value['AnhChinh']; ?>" alt="<?php echo $value['TenSach']; ?>">
                                     </a>
                                     <div class="product_action_box">
                                         <ul class="list_none pr_action_btn">
-                                            <li class="add-to-cart" value="<?php echo $value['MaSanPham']; ?>"><a href="#"><i class="icon-basket-loaded"></i> Thêm Giỏ Hàng</a></li>
+                                            <li class="add-to-cart" value="<?php echo $value['MaSach']; ?>"><a href="#"><i class="icon-basket-loaded"></i> Thêm Giỏ Hàng</a></li>
                                             <li><a href="#"><i class="icon-heart"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="product_info">
-                                    <h6 class="product_title"><a href="<?php echo base_url("san-pham/".$value['DuongDan'].'/'); ?>"><?php echo $value['TenSanPham']; ?></a></h6>
+                                    <h6 class="product_title"><a href="<?php echo base_url("sach/".$value['DuongDan'].'/'); ?>"><?php echo $value['TenSach']; ?></a></h6>
                                     <div class="product_price">
-                                        <span class="price"><?php echo number_format($value['GiaBan']); ?></span>
-                                        <?php if($value['GiaBan'] != $value['GiaGoc']){ ?>
+                                        <span class="price"><?php echo number_format($value['GiaMuon']); ?></span>
+                                        <?php if($value['GiaMuon'] != $value['GiaGoc']){ ?>
                                             <del><?php echo number_format($value['GiaGoc']); ?></del>
-                                            <?php $phan_tram_khuyen_mai = ($value['GiaGoc'] - $value['GiaBan']) / $value['GiaGoc'] * 100; ?>
+                                            <?php $phan_tram_khuyen_mai = ($value['GiaGoc'] - $value['GiaMuon']) / $value['GiaGoc'] * 100; ?>
                                             <div class="on_sale">
                                                 <span>Giảm <?php echo round($phan_tram_khuyen_mai, 0); ?>%</span>
                                             </div>
@@ -122,7 +122,7 @@
                                 <?php } ?>
                             <?php }else{ ?>
                                 <?php for($i = 1; $i <= $totalPages; $i++){ ?>
-                                    <li class="page-item"><a class="page-link" href="<?php echo base_url('san-pham/trang/'.$i.'/') ?>"><?php echo $i; ?></a></li>
+                                    <li class="page-item"><a class="page-link" href="<?php echo base_url('sach/trang/'.$i.'/') ?>"><?php echo $i; ?></a></li>
                                 <?php } ?>
                             <?php } ?>
                             
@@ -135,7 +135,7 @@
                     <div class="widget">
                         <h5 class="widget_title">Tìm Kiếm</h5>
                         <div class="search_form">
-                            <form action="<?php echo base_url('san-pham/') ?>"> 
+                            <form action="<?php echo base_url('sach/') ?>"> 
                                 <input required class="form-control" name="s" placeholder="Nhập tên sản phẩm..." type="text">
                                 <button type="submit" title="Subscribe" class="btn icon_search" value="Tìm Kiếm">
                                     <i class="ion-ios-search-strong"></i>
@@ -147,7 +147,7 @@
                         <h5 class="widget_title">Chuyên Mục</h5>
                         <ul class="widget_categories">
                             <?php foreach ($categoryNumber as $key => $value): ?>
-                                <li><a href="<?php echo base_url('chuyen-muc/'.$value['DuongDanChuyenMuc'].'/'); ?>"><span class="categories_name"><?php echo $value['TenChuyenMuc']; ?></span><span class="categories_num">(<?php echo $value['SoLuongSanPham']; ?>)</span></a></li>
+                                <li><a href="<?php echo base_url('chuyen-muc/'.$value['DuongDanChuyenMuc'].'/'); ?>"><span class="categories_name"><?php echo $value['TenChuyenMuc']; ?></span><span class="categories_num">(<?php echo $value['SoLuongSach']; ?>)</span></a></li>
                             <?php endforeach ?>
                         </ul>
                     </div>
@@ -158,12 +158,12 @@
                                 <?php if($key >= 5){ break; } ?>
                                 <li>
                                     <div class="post_img">
-                                        <a href="<?php echo base_url('san-pham/'.$value['DuongDan'].'/'); ?>"><img style="height: 100px; width: 100px;" src="<?php echo $value['HinhAnh'] ?>" alt="shop_small1"></a>
+                                        <a href="<?php echo base_url('sach/'.$value['DuongDan'].'/'); ?>"><img style="height: 100px; width: 100px;" src="<?php echo $value['HinhAnh'] ?>" alt="shop_small1"></a>
                                     </div>
                                     <div class="post_content">
-                                        <h6 class="product_title" style="white-space: unset;"><a href="<?php echo base_url('san-pham/'.$value['DuongDan'].'/'); ?>"><?php echo $value['TenSanPham']; ?></a></h6>
+                                        <h6 class="product_title" style="white-space: unset;"><a href="<?php echo base_url('sach/'.$value['DuongDan'].'/'); ?>"><?php echo $value['TenSach']; ?></a></h6>
                                         <div class="product_price">
-                                            <span class="price"><?php echo number_format($value['GiaBan']); ?></span>
+                                            <span class="price"><?php echo number_format($value['GiaMuon']); ?></span>
                                             <del><?php echo number_format($value['GiaGoc']); ?></del>
                                         </div>
                                         <div class="rating_wrap">
@@ -196,8 +196,8 @@
     $(document).ready(function(){
         $(".add-to-cart").click(function(e){
             e.preventDefault()
-            var masanpham = $(this).attr("value");
-            let urlThem = "<?php echo base_url('gio-hang/them/') ?>" + masanpham + "/" + "1";
+            var MaSach = $(this).attr("value");
+            let urlThem = "<?php echo base_url('gio-hang/them/') ?>" + MaSach + "/" + "1";
 
             $.get(urlThem, function(data){
                 var cart = JSON.parse(data);
@@ -212,7 +212,7 @@
                         const item = cartList[key];
                         var formatter = new Intl.NumberFormat('en-US');
                         var price = formatter.format(item.price);
-                        $('.cart_list').append('<li> <a href="<?php echo base_url('san-pham/') ?>'+item.slug+'/"><img src="'+item.image+'" style="height: 80px">'+item.name+'</a> <span class="cart_quantity"> '+item.number+' x <span class="cart_amount"> <span class="price_symbole"></span></span>'+price+'đ</span> </li>');
+                        $('.cart_list').append('<li> <a href="<?php echo base_url('sach/') ?>'+item.slug+'/"><img src="'+item.image+'" style="height: 80px">'+item.name+'</a> <span class="cart_quantity"> '+item.number+' x <span class="cart_amount"> <span class="price_symbole"></span></span>'+price+'đ</span> </li>');
                     }
                 }
             })

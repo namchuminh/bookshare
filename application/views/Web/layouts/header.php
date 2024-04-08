@@ -62,7 +62,7 @@
                     <div class="d-flex align-items-center justify-content-center justify-content-md-end">
                         <?php if(isset($_SESSION['khachhang'])){ ?>
                             <div class="header_offer">
-                                <a href="<?php echo base_url('khach-hang/'); ?>" style="color: white;"><?php echo $_SESSION['hoten']; ?></a>
+                                <a href="<?php echo base_url('nguoi-dung/'); ?>" style="color: white;"><?php echo $_SESSION['hoten']; ?></a>
                             </div>
                             <div class="download_wrap">
                                 <a href="<?php echo base_url('dang-xuat/'); ?>" style="color: white;">Đăng Xuất</a>
@@ -93,16 +93,14 @@
                 <div class="collapse navbar-collapse justify-content-center " id="navbarSupportedContent">
                     <ul class="navbar-nav">
                         <li class="dropdown">
-                            <a class="nav-link" href="<?php echo base_url(); ?>" style="font-family: system-ui;"><i class="linearicons-home"></i> Trang Chủ</a>   
+                            <a class="nav-link" href="<?php echo base_url(); ?>" style="font-family: system-ui;">Trang Chủ</a>   
                         </li>
                         <li class="dropdown">
-                            <a class="nav-link" href="<?php echo base_url('san-pham/'); ?>" style="font-family: system-ui;"><i class="linearicons-box"></i> Sản Phẩm</a>   
+                            <a class="nav-link" href="<?php echo base_url('sach/'); ?>" style="font-family: system-ui;">Sách Mới</a>
                         </li>
-                        <li class="dropdown">
-                            <a class="nav-link" href="<?php echo base_url('chuyen-muc/'); ?>" style="font-family: system-ui;"><i class="linearicons-layers"></i> Chuyên Mục</a>   
-                        </li>
-                        <li><a class="nav-link nav_item" href="<?php echo base_url('tin-tuc/'); ?>" style="font-family: system-ui;"><i class="linearicons-news"></i> Tin Tức</a></li> 
-                        <li><a class="nav-link nav_item" href="<?php echo base_url('lien-he/'); ?>" style="font-family: system-ui;"><i class="linearicons-phone-wave"></i> Liên Hệ</a></li> 
+                        <?php foreach ($categoryMenu as $key => $value): ?>
+                            <li><a class="nav-link nav_item" href="<?php echo base_url('chuyen-muc/'.$value['DuongDan'].'/'); ?>" style="font-family: system-ui;"><?php echo $value['TenChuyenMuc']; ?></a></li> 
+                        <?php endforeach ?>
                     </ul>
                 </div>
                 <ul class="navbar-nav attr-nav align-items-center">
@@ -110,7 +108,7 @@
                         <div class="search_wrap">
                             <span class="close-search"><i class="ion-ios-close-empty"></i></span>
                             <form action="<?php echo base_url('san-pham/'); ?>">
-                                <input type="text" placeholder="Nhập tên sản phẩm" class="form-control" name="s" id="search_input">
+                                <input type="text" placeholder="Nhập tên sách" class="form-control" name="s" id="search_input">
                                 <button type="submit" class="search_icon"><i class="ion-ios-search-strong"></i></button>
                             </form>
                         </div><div class="search_overlay"></div>

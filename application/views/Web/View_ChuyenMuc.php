@@ -34,7 +34,7 @@
 	                        <div class="blog_text">
 	                            <h5 class="blog_title"><a href="<?php echo base_url('chuyen-muc/'.$value['DuongDanChuyenMuc'].'/'); ?>"><?php echo $value['TenChuyenMuc']; ?></a></h5>
 	                            <ul class="list_none blog_meta">
-	                                <li><a href="#"><i class="linearicons-box"></i> <?php echo $value['SoLuongSanPham']; ?> sản phẩm</a></li>
+	                                <li><a href="#"><i class="linearicons-box"></i> Hiện có <?php echo $value['SoLuongSach']; ?> sách</a></li>
 	                            </ul>
 	                            <hr>
 								<a style="padding: 7px 20px; font-size: 14px;" href="<?php echo base_url('chuyen-muc/'.$value['DuongDanChuyenMuc'].'/'); ?>" class="btn btn-fill-line border-2 btn-xs rounded-0 w-100">XEM CHI TIẾT</a>							

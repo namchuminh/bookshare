@@ -11,6 +11,7 @@ class MY_Controller extends CI_Controller {
         $this->load->model('Web/Model_DangNhap');
         $this->data['config'] = $this->Model_CauHinh->getAll();
         $this->data['category'] = $this->Model_ChuyenMuc->getAll();
+        $this->data['categoryMenu'] = $this->Model_ChuyenMuc->getCategoryDisplay();
         $this->load->vars($this->data);
 
         //Logout customer is deactive

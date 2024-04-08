@@ -2,51 +2,6 @@
 <!-- END MAIN CONTENT -->
 
 <!-- START FOOTER -->
-<div class="middle_footer">
-    <div class="custom-container">
-        <div class="row">
-            <div class="col-12">
-                <div class="shopping_info">
-                    <div class="row justify-content-center">
-                        <div class="col-md-4">  
-                            <div class="icon_box icon_box_style2">
-                                <div class="icon">
-                                    <i class="flaticon-shipped"></i>
-                                </div>
-                                <div class="icon_box_content">
-                                    <h5>Giao Hàng Miễn Phí</h5>
-                                    <p>Miễn phí giao hàng với đơn hàng từ <?php echo number_format($config[0]['MienPhiShip']); ?> VND</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">  
-                            <div class="icon_box icon_box_style2">
-                                <div class="icon">
-                                    <i class="flaticon-money-back"></i>
-                                </div>
-                                <div class="icon_box_content">
-                                    <h5>30 Ngày Hoàn Trả</h5>
-                                    <p>Cho phép hoàn trả trong 30 ngày</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">  
-                            <div class="icon_box icon_box_style2">
-                                <div class="icon">
-                                    <i class="flaticon-support"></i>
-                                </div>
-                                <div class="icon_box_content">
-                                    <h5>Hỗ trợ 24/7</h5>
-                                    <p>Luôn sẵn sàng hỗ trợ khách hàng mọi lúc</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 <footer class="footer_dark">
     <div class="footer_top">
         <div class="container">
