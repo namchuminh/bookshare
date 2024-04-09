@@ -42,7 +42,10 @@ class DangNhap extends MY_Controller {
 					    'hoten' => $this->Model_DangNhap->getInfoByUsername($taikhoan)[0]['HoTen'],
 					    'sodienthoai' => $this->Model_DangNhap->getInfoByUsername($taikhoan)[0]['SoDienThoai'],
 					    'email' => $this->Model_DangNhap->getInfoByUsername($taikhoan)[0]['Email'],
-					    'diachi' => $this->Model_DangNhap->getInfoByUsername($taikhoan)[0]['DiaChi']
+					    'diachi' => $this->Model_DangNhap->getInfoByUsername($taikhoan)[0]['DiaChi'],
+					    'sodukhadung' => $this->Model_DangNhap->getWallet($this->Model_DangNhap->getInfoByUsername($taikhoan)[0]['MaNguoiDung'])[0]['SoDuKhaDung'],
+					    'dasudung' => $this->Model_DangNhap->getWallet($this->Model_DangNhap->getInfoByUsername($taikhoan)[0]['MaNguoiDung'])[0]['DaSuDung'],
+					    'tongnap' => $this->Model_DangNhap->getWallet($this->Model_DangNhap->getInfoByUsername($taikhoan)[0]['MaNguoiDung'])[0]['TongNap'],
 					);
 					$this->session->set_userdata($newdata);
 

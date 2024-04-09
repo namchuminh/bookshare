@@ -41,16 +41,24 @@
                     <input class="form-control" required="" type="email" name="email" value="<?php echo $_SESSION['email']; ?>" placeholder="Email *" disabled>
                 </div>
                 <div class="form-group mb-3">
+                    <label class="form-label">Tỉnh / Thành Phố</label>
                     <input type="text" class="form-control" name="tinh" required="" placeholder="Tỉnh / Thành Phố *">
                 </div>
                 <div class="form-group mb-3">
+                    <label class="form-label">Quận / Huyện</label>
                     <input type="text" class="form-control" name="huyen" required="" placeholder="Quận / Huyện *">
                 </div>
                 <div class="form-group mb-3">
+                    <label class="form-label">Xã / Phường</label>
                     <input type="text" class="form-control" name="xa" required="" placeholder="Xã / Phường *">
                 </div>
                 <div class="form-group mb-3">
-                    <input class="form-control" required="" type="text" name="diachi" placeholder="Địa chỉ nhận hàng *">
+                    <label class="form-label">Địa Chỉ Nhận Sách</label>
+                    <input class="form-control" required="" type="text" name="diachi" placeholder="Địa chỉ nhận sách *">
+                </div>
+                <div class="form-group mb-3">
+                    <label class="form-label">Thời Gian Trả</label>
+                    <input class="form-control" required type="date" name="thoigiantra">
                 </div>
             </div>
             <div class="col-md-6">
@@ -71,9 +79,9 @@
                                 <?php foreach($list as $key => $value): ?>
                                     <tr>
                                         <td><?php echo $value['name']; ?> <span class="product-qty">x <?php echo $value['number']; ?></span></td>
-                                        <td><?php echo number_format($value['price'] * $value['number']); ?>đ</td>
+                                        <td><?php echo number_format($value['price_root'] * $value['number']); ?>đ</td>
                                     </tr>
-                                    <?php $tongtien += $value['number'] * $value['price']; ?>
+                                    <?php $tongtien += $value['number'] * $value['price_root']; ?>
                                 <?php endforeach ?>
                             </tbody>
                             <tfoot>
@@ -96,18 +104,15 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>Giảm Giá</th>
+                                    <th>Phí VAT(10%)</th>
                                     <td>
-                                        <?php if(!isset($_SESSION['saleCode'])){ ?>
-                                            - 0đ
-                                        <?php }else{ ?>
-                                            - <?php echo number_format($_SESSION['saleCode']) ?>đ
-                                        <?php } ?>
+                                        <?php $vat = $tongtien * 0.10; ?>
+                                        + <?php echo number_format($vat) ?>đ
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>Tổng Tiền</th>
-                                    <td class="product-subtotal"><?php echo number_format($_SESSION['sumCart'] + $phiship) ?>đ</td>
+                                    <td class="product-subtotal"><?php echo number_format($_SESSION['sumCart'] + $phiship + $vat) ?>đ</td>
                                 </tr>
                             </tfoot>
                         </table>
@@ -118,38 +123,31 @@
                         </div>
                         <div class="payment_option">
                             <div class="custome-radio nhanhang">
-                                <input class="form-check-input" required="" type="radio" name="payment_option" id="exampleRadios3" value="option3" checked="">
-                                <label class="form-check-label" for="exampleRadios3">Trả Tiền Mặt</label>
-                                <p data-method="option3" class="payment-text">Bạn sẽ thanh toán trực tiếp khi nhận được sản phẩm. </p>
+                                <label for="exampleRadios3" style="color: #141515;">Số Dư Tài Khoản: <?php echo $_SESSION['sodukhadung'] >= ($_SESSION['sumCart'] + $phiship + $vat) ? number_format($_SESSION['sodukhadung']) : number_format($_SESSION['sodukhadung']); ?> VND</label>
                             </div>
-                            <div class="custome-radio chuyenkhoan">
-                                <input class="form-check-input" type="radio" name="payment_option" id="exampleRadios4" value="option4">
-                                <label class="form-check-label" for="exampleRadios4">Chuyển Khoản</label>
-                                <p data-method="option4" class="payment-text">Nội dung: KH <?php echo $_SESSION['khachhang'] ?> TTDH <?php echo $_SESSION['sumCart'] + $phiship ?> VND</p>
-                                <div class="maqr"></div>
+                            <div class="custome-radio nhanhang">
+                                <label for="exampleRadios3" style="color: #141515;">Số Dư Sau Thanh Toán: <?php echo $_SESSION['sodukhadung'] >= ($_SESSION['sumCart'] + $phiship + $vat) ? number_format($_SESSION['sodukhadung'] - ($_SESSION['sumCart'] + $phiship + $vat)) : number_format($_SESSION['sodukhadung']); ?> VND</label>
                             </div>
                         </div>
-                    </div>
-                    <input type="hidden" class="thanhtoan" name="thanhtoan" value="0">
-                    <button type="submit" class="btn btn-fill-out btn-block">Đặt Hàng</button>
+                    </div>  
+                    <?php if($_SESSION['sodukhadung'] >= ($_SESSION['sumCart'] + $phiship + $vat)){ ?>
+                        <button type="submit" class="btn btn-fill-out btn-block">Thanh Toán</button>
+                    <?php }else{ ?>
+                        <button type="submit" class="btn btn-fill-out btn-block" disabled>Không Đủ Tiền</button>
+                        <div class="mt-4">
+                            <a href="<?php echo base_url('nap-tien/'); ?>" class="btn btn-fill-out btn-block">Nạp Tiền</a>
+                        </div>
+                    <?php } ?>
+                    <?php if(isset($_SESSION['error'])){ ?>
+                        <div class="text-center">
+                            <br>
+                            <span><?php echo $_SESSION['error'] ?></span>
+                        </div>
+                    <?php } ?>
+                    
                 </div>
             </div>
         </form>
     </div>
 </div>
 <?php require(APPPATH.'views/web/layouts/footer.php'); ?>
-
-
-<script type="text/javascript">
-    $(document).ready(function(){
-        $(".chuyenkhoan").click(function(e){
-            $(".maqr").html('<img src="<?php echo $config[0]['QRNganHang']; ?>">');
-            $(".thanhtoan").val(2);
-        });
-
-        $(".nhanhang").click(function(e){
-            $(".maqr").empty();
-            $(".thanhtoan").val(0);
-        });
-    });
-</script>

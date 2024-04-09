@@ -39,6 +39,13 @@ class Model_DangNhap extends CI_Model {
 		return $result->result_array();
 	}
 
+
+	public function getWallet($manguoidung){
+		$sql = "SELECT * FROM vitien WHERE MaNguoiDung = ?";
+		$result = $this->db->query($sql, array($manguoidung));
+		return $result->result_array();
+	}
+
 }
 
 /* End of file DangNhap.php */

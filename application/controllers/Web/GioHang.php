@@ -5,8 +5,7 @@ class GioHang extends MY_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('Web/Model_SanPham');
-        $this->load->model('Web/Model_MaGiamGia');
+		$this->load->model('Web/Model_Sach');
 	}
 
 	public function index()
@@ -28,31 +27,37 @@ class GioHang extends MY_Controller {
         	return;
         }
         
-        if(count($this->Model_SanPham->getById($product_id)) == 0){
+        if(count($this->Model_Sach->getById($product_id)) == 0){
         	return;
         }
 
-        if($quantity > $this->Model_SanPham->getById($product_id)[0]['SoLuong']){
+        if($quantity > $this->Model_Sach->getById($product_id)[0]['SoLuong']){
             return;
         }
 
         if(isset($cart[$product_id]['number'])){
-            if(($cart[$product_id]['number'] + $quantity) > $this->Model_SanPham->getById($product_id)[0]['SoLuong']){
+            if(($cart[$product_id]['number'] + $quantity) > $this->Model_Sach->getById($product_id)[0]['SoLuong']){
                 return;
             }
         }
+
+        if($this->session->userdata('makhachhang') == $this->Model_Sach->getById($product_id)[0]['MaNguoiDung']){
+            return;
+        }
         
 
-        $price = $this->Model_SanPham->getById($product_id)[0]['GiaBan'];
-        $image = $this->Model_SanPham->getById($product_id)[0]['AnhChinh'];
-        $name =  $this->Model_SanPham->getById($product_id)[0]['TenSanPham'];
-        $slug = $this->Model_SanPham->getById($product_id)[0]['DuongDan'];
+        $price = $this->Model_Sach->getById($product_id)[0]['GiaMuon'];
+        $price_root = $this->Model_Sach->getById($product_id)[0]['GiaGoc'];
+        $image = $this->Model_Sach->getById($product_id)[0]['AnhChinh'];
+        $name =  $this->Model_Sach->getById($product_id)[0]['TenSach'];
+        $slug = $this->Model_Sach->getById($product_id)[0]['DuongDan'];
         if (isset($cart[$product_id])) {
             $cart[$product_id]['number'] += $quantity;
         } else {
             $cart[$product_id] = array(
                 'id' => $product_id,
                 'number' => $quantity,
+                'price_root' => $price_root, 
                 'price' => $price,
                 'image' => $image,
                 'name' => $name,
@@ -63,14 +68,9 @@ class GioHang extends MY_Controller {
         $sumCart = 0;
 
         foreach ($cart as $key => $value) {
-        	$sumCart += $value['price'] * $value['number'];
+        	$sumCart += $value['price_root'] * $value['number'];
         }
 
-
-        if(isset($_SESSION['saleCode'])){
-            $saleCode = $this->session->userdata('saleCode');
-            $sumCart = $sumCart - $saleCode;
-        }
 
         $this->session->set_userdata('cart', $cart);
         $this->session->set_userdata('sumCart', $sumCart);
@@ -88,7 +88,7 @@ class GioHang extends MY_Controller {
     }
 
     public function updateNumber($product_id, $number){
-        if(count($this->Model_SanPham->getById($product_id)) == 0){
+        if(count($this->Model_Sach->getById($product_id)) == 0){
             return;
         }
 
@@ -96,11 +96,11 @@ class GioHang extends MY_Controller {
             return;
         }
         
-        if($number > $this->Model_SanPham->getById($product_id)[0]['SoLuong']){
+        if($number > $this->Model_Sach->getById($product_id)[0]['SoLuong']){
             return;
         }
 
-        if(($cart[$product_id]['number'] + $number) > $this->Model_SanPham->getById($product_id)[0]['SoLuong']){
+        if(($cart[$product_id]['number'] + $number) > $this->Model_Sach->getById($product_id)[0]['SoLuong']){
             return;
         }
 
@@ -127,7 +127,7 @@ class GioHang extends MY_Controller {
     }
 
     public function delete($product_id) {
-        if(count($this->Model_SanPham->getById($product_id)) == 0){
+        if(count($this->Model_Sach->getById($product_id)) == 0){
             return;
         }
 
@@ -163,60 +163,6 @@ class GioHang extends MY_Controller {
             unset($_SESSION['numberCart']);
         }
     }
-
-    public function code($magiamgia){
-        $cart = $this->session->userdata('cart');
-
-        $sumCart = 0;
-        foreach ($cart as $key => $value) {
-            $sumCart += $value['price'] * $value['number'];
-        }
-
-        if(count($this->Model_MaGiamGia->checkCode($magiamgia)) <= 0){
-            echo "Mã Giảm Giá Không Đúng!";
-            return;
-        }
-
-        $idmagiamgia = $this->Model_MaGiamGia->checkCode($magiamgia)[0]['MaGiamGia'];
-        $solandung = $this->Model_MaGiamGia->checkCode($magiamgia)[0]['DaSuDung'];
-        $soluong = $this->Model_MaGiamGia->checkCode($magiamgia)[0]['SoLuong'];
-        $ngayhethan = $this->Model_MaGiamGia->checkCode($magiamgia)[0]['ThoiGian'];
-
-        if($solandung >= $soluong){
-            echo "Mã Giảm Giá Đã Hết Số Lần Sử Dụng!";
-            return;
-        }
-
-        $currentDate = date("Y-m-d");
-        if (strtotime($currentDate) > strtotime($ngayhethan)) {
-            echo "Mã Giảm Giá Đã Hết Hạn Sử Dụng";
-            return;
-        }
-
-        $trigia = $this->Model_MaGiamGia->checkCode($magiamgia)[0]['GiaTriGiam'];
-
-        if($trigia >= $sumCart){
-            echo "Mã Giảm Giá Không Được Có Giá Trị Lớn Hơn Tổng Đơn Hàng!";
-            return;
-        }
-
-        $this->session->set_userdata('saleCode', $trigia);
-        $this->session->set_userdata('idSaleCode', $idmagiamgia);
-
-        if(isset($_SESSION['saleCode'])){
-            $saleCode = $this->session->userdata('saleCode');
-            $sumCart = $sumCart - $saleCode;
-        }
-
-        $this->session->set_userdata('sumCart', $sumCart);
-
-        $solandung = $solandung + 1;
-
-        $this->Model_MaGiamGia->updateCode($solandung,$magiamgia);
-
-        echo TRUE;
-    }
-
 }
 
 /* End of file GioHang.php */

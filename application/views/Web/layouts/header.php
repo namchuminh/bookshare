@@ -129,8 +129,8 @@
                                 <?php if(isset($_SESSION['cart'])){ ?>
                                     <?php foreach ($_SESSION['cart'] as $key => $value): ?>
                                         <li>
-                                            <a href="<?php echo base_url('san-pham/'.$value['slug'].'/') ?>"><img src="<?php echo $value['image'] ?>" style="height: 80px"><?php echo $value['name']; ?></a>
-                                            <span class="cart_quantity"> <?php echo $value['number']; ?> x <span class="cart_amount"> <span class="price_symbole"></span></span><?php echo number_format($value['price']); ?>đ</span>
+                                            <a href="<?php echo base_url('sach/'.$value['slug'].'/') ?>"><img src="<?php echo $value['image'] ?>" style="height: 80px"><?php echo $value['name']; ?></a>
+                                            <span class="cart_quantity"> <?php echo $value['number']; ?> x <span class="cart_amount"> <span class="price_symbole"></span></span><?php echo number_format($value['price_root']); ?>đ</span>
                                         </li>
                                     <?php endforeach ?>
                                 <?php } ?>
@@ -139,11 +139,7 @@
                                 <p class="cart_total"><strong>Tổng Tiền:</strong> <span class="cart_price"> </span><span class="price_symbole">
                                     <?php 
                                         if(isset($_SESSION['sumCart'])){ 
-                                            if(isset($_SESSION['saleCode'])){
-                                                echo number_format($_SESSION['sumCart'] + $_SESSION['saleCode']);
-                                            }else{
-                                                echo number_format($_SESSION['sumCart']);
-                                            }
+                                            echo number_format($_SESSION['sumCart']);
                                         }else{
                                             echo 0;
                                         }

@@ -211,7 +211,7 @@
                     if (cartList.hasOwnProperty(key)) {
                         const item = cartList[key];
                         var formatter = new Intl.NumberFormat('en-US');
-                        var price = formatter.format(item.price);
+                        var price = formatter.format(item.price_root);
                         $('.cart_list').append('<li> <a href="<?php echo base_url('sach/') ?>'+item.slug+'/"><img src="'+item.image+'" style="height: 80px">'+item.name+'</a> <span class="cart_quantity"> '+item.number+' x <span class="cart_amount"> <span class="price_symbole"></span></span>'+price+'đ</span> </li>');
                     }
                 }

@@ -26,8 +26,10 @@ class CauHinh extends CI_Controller {
 			$logo = $this->Model_CauHinh->getAll()[0]['Logo'];
 			$favicon = $this->Model_CauHinh->getAll()[0]['Favicon'];
 			$maqrnaptien = $this->Model_CauHinh->getAll()[0]['MaQRNapTien'];
+			$phiship = $this->input->post('phiship');
+			$mienphiship = $this->input->post('mienphiship');
 
-			if(empty($tenwebsite) || empty($motaweb) || empty($diachi) || empty($email) || empty($sodienthoai) || empty($phiruttien)){
+			if(empty($tenwebsite) || empty($motaweb) || empty($diachi) || empty($email) || empty($sodienthoai) || empty($phiruttien) || empty($phiship) || empty($mienphiship)){
 				$data['error'] = "Vui lòng nhập đủ thông tin!";
 				return $this->load->view('Admin/View_CauHinh', $data);
 			}
@@ -36,6 +38,16 @@ class CauHinh extends CI_Controller {
 
 			if (!preg_match($pattern, $sodienthoai)) {
 			    $data['error'] = "Vui lòng nhập số điện thoại hợp lệ!";
+				return $this->load->view('Admin/View_CauHinh', $data);
+			}
+
+			if(!is_numeric($phiship) || ($phiship < 1)){
+				$data['error'] = "Vui lòng nhập phí rút giao hàng là một số!";
+				return $this->load->view('Admin/View_CauHinh', $data);
+			}
+
+			if(!is_numeric($mienphiship) || ($mienphiship < 1)){
+				$data['error'] = "Vui lòng nhập giá trị miễn phí giao hàng là một số!";
 				return $this->load->view('Admin/View_CauHinh', $data);
 			}
 
@@ -65,7 +77,7 @@ class CauHinh extends CI_Controller {
 				$maqrnaptien = base_url('uploads')."/".$img['file_name'];
 			}
 
-			$this->Model_CauHinh->update($tenwebsite,$motaweb,$logo,$favicon,$diachi,$email,$sodienthoai,$maqrnaptien,$phiruttien);
+			$this->Model_CauHinh->update($tenwebsite,$motaweb,$logo,$favicon,$diachi,$email,$sodienthoai,$maqrnaptien,$phiruttien,$phiship,$mienphiship);
 
 			$data['success'] = "Lưu cấu hình thành công!";
 			$data['detail'] = $this->Model_CauHinh->getAll();

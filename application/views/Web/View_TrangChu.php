@@ -108,7 +108,7 @@
                                     <?php foreach ($_SESSION['cart'] as $key => $value): ?>
                                         <li>
                                             <a href="<?php echo base_url('sach/'.$value['slug'].'/') ?>"><img src="<?php echo $value['image'] ?>" style="height: 80px"><?php echo $value['name']; ?></a>
-                                            <span class="cart_quantity"> <?php echo $value['number']; ?> x <span class="cart_amount"> <span class="price_symbole"></span></span><?php echo number_format($value['price']); ?>đ</span>
+                                            <span class="cart_quantity"> <?php echo $value['number']; ?> x <span class="cart_amount"> <span class="price_symbole"></span></span><?php echo number_format($value['price_root']); ?>đ</span>
                                         </li>
                                     <?php endforeach ?>
                                 <?php } ?>
@@ -152,7 +152,7 @@
                             <ul> 
                                 <?php foreach ($category as $key => $value): ?>
                                     <li>
-                                        <a class="dropdown-item nav-link nav_item" href="coming-soon.html">
+                                        <a class="dropdown-item nav-link nav_item" href="<?php echo base_url('chuyen-muc/'.$value['DuongDan'].'/'); ?>">
                                             <img style="width: 30px; height: 30px;" src="<?php echo $value['HinhAnh']; ?>">
                                             <span style="color: black; font-family: system-ui; font-size:15px; margin-left: 10px;"><?php echo $value['TenChuyenMuc']; ?></span>
                                         </a>
@@ -973,7 +973,7 @@
                     if (cartList.hasOwnProperty(key)) {
                         const item = cartList[key];
                         var formatter = new Intl.NumberFormat('en-US');
-                        var price = formatter.format(item.price);
+                        var price = formatter.format(item.price_root);
                         $('.cart_list').append('<li> <a href="<?php echo base_url('sach/') ?>'+item.slug+'/"><img src="'+item.image+'" style="height: 80px">'+item.name+'</a> <span class="cart_quantity"> '+item.number+' x <span class="cart_amount"> <span class="price_symbole"></span></span>'+price+'đ</span> </li>');
                     }
                 }

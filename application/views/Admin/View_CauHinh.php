@@ -80,6 +80,18 @@
                     <input type="number" class="form-control" placeholder="Phí rút tiền của người dùng (%)" name="phiruttien" value="<?php echo $detail[0]['PhiRutTien']; ?>">
                   </div>
                 </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="ten">Phí Giao Hàng</label>
+                    <input type="number" class="form-control" placeholder="Phí giao hàng" name="phiship" value="<?php echo $detail[0]['PhiShip']; ?>">
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="ten">Giá Trị Miễn Phí Giao Hàng</label>
+                    <input type="number" class="form-control" placeholder="Miễn phí giao hàng" name="mienphiship" value="<?php echo $detail[0]['MienPhiShip']; ?>">
+                  </div>
+                </div>
               </div> 
               <a class="btn btn-success" href="<?php echo base_url('admin/'); ?>">Quay Lại</a>
               <button class="btn btn-primary">Lưu Cấu Hình</button>

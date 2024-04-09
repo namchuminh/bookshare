@@ -5,9 +5,6 @@ class NguoiDung extends MY_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		if(!$this->session->has_userdata('khachhang')){
-			return redirect(base_url('dang-nhap/'));
-		}
 		$this->load->model('Web/Model_NguoiDung');
 		$this->load->model('Web/Model_Sach');
 		$this->load->model('Web/Model_DangNhap');
@@ -18,6 +15,10 @@ class NguoiDung extends MY_Controller {
 
 	public function index()
 	{
+		if(!$this->session->has_userdata('khachhang')){
+			return redirect(base_url('dang-nhap/'));
+		}
+		
 		$data['title'] = "Trang cá nhân";
 		$data['detail'] = $this->Model_NguoiDung->getById($this->session->userdata('makhachhang'));
 		$data['fullname'] = $this->session->userdata('hoten');

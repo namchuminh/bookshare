@@ -29,7 +29,8 @@
                             <tr>
                                 <th class="product-thumbnail">&nbsp;</th>
                                 <th class="product-name">Tên Sản Phẩm</th>
-                                <th class="product-price">Giá Bán</th>
+                                <th class="product-price">Giá Mượn</th>
+                                <th class="product-price">Giá Gốc</th>
                                 <th class="product-quantity">Số Lượng</th>
                                 <th class="product-subtotal">Thành Tiền</th>
                                 <th class="product-remove">Xóa</th>
@@ -40,9 +41,10 @@
                                 <?php $tongtien = 0; ?>
                                 <?php foreach ($list as $key => $value): ?>
                                     <tr>
-                                        <td class="product-thumbnail"><a href="<?php echo base_url('san-pham/'.$value['slug'].'/') ?>"><img style="height: 111px;" src="<?php echo $value['image']; ?>"></a></td>
+                                        <td class="product-thumbnail"><a href="<?php echo base_url('san-pham/'.$value['slug'].'/') ?>"><img style="height: 150px;" src="<?php echo $value['image']; ?>"></a></td>
                                         <td class="product-name" data-title="Product"><a href="<?php echo base_url('san-pham/'.$value['slug'].'/') ?>"><?php echo $value['name']; ?></a></td>
                                         <td class="product-price" data-title="Price"><?php echo number_format($value['price']); ?>đ</td>
+                                        <td class="product-price" data-title="Price"><?php echo number_format($value['price_root']); ?>đ</td>
                                         <td class="product-quantity" data-title="Quantity">
                                             <div class="quantity">
                                                 <input type="button" value="-" class="minus sp-<?php echo $value['id']; ?>">
@@ -50,10 +52,10 @@
                                                 <input type="button" value="+" class="plus sp-<?php echo $value['id']; ?>">
                                             </div>
                                         </td>
-                                        <td class="product-subtotal" data-title="Total"><?php echo number_format($value['price'] * $value['number']); ?>đ</td>
+                                        <td class="product-subtotal" data-title="Total"><?php echo number_format($value['price_root'] * $value['number']); ?>đ</td>
                                         <td class="product-remove" data-title="Remove"><a href="#" class="remove-product" value="<?php echo $value['id']; ?>"><i class="ti-close"></i></a></td>
                                     </tr>
-                                    <?php $tongtien += $value['number'] * $value['price']; ?>
+                                    <?php $tongtien += $value['number'] * $value['price_root']; ?>
                                 <?php endforeach ?>
                             <?php } ?>
                         </tbody>
@@ -61,17 +63,6 @@
                             <tr>
                                 <td colspan="6" class="px-0">
                                     <?php if(isset($_SESSION['cart'])){ ?>
-                                        <div class="row g-0 align-items-center mt-3 mb-3">
-                                            <div class="col-lg-4 col-md-6 mb-3 mb-md-0">
-                                                <div class="coupon field_form input-group">
-                                                    <input type="text" value="" class="form-control form-control-sm code_input" placeholder="Nhập mã giảm giá...">
-                                                    <div class="input-group-append">
-                                                        <button class="btn btn-fill-out btn-sm sale-code" type="submit">Áp Dụng</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <p class="coupon-info mt-3"></p>
-                                        </div>
                                     <?php }else{ ?>
                                         <br>
                                         <p>Giỏ hàng hiện chưa có sản phẩm nào!</p>
@@ -119,18 +110,15 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="cart_total_label">Giảm Giá</td>
+                                        <td class="cart_total_label">Phí VAT (10%)</td>
                                         <td class="cart_total_amount">
-                                            <?php if(!isset($_SESSION['saleCode'])){ ?>
-                                                - 0đ
-                                            <?php }else{ ?>
-                                                - <?php echo number_format($_SESSION['saleCode']) ?>đ
-                                            <?php } ?>
+                                            <?php $vat = $tongtien * 0.10; ?>
+                                            + <?php echo number_format($vat) ?>đ
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="cart_total_label">Tổng Tiền</td>
-                                        <td class="cart_total_amount"><strong><?php echo number_format($_SESSION['sumCart'] + $phiship) ?>đ</strong></td>
+                                        <td class="cart_total_amount"><strong><?php echo number_format($tongtien + $phiship + $vat) ?>đ</strong></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -143,7 +131,7 @@
             </div>
         <?php }else{ ?>
             <div class="w-100 text-right">
-                <a href="<?php echo base_url('san-pham/') ?>" class="btn btn-fill-out">Quay Lại Mua Sắm</a>
+                <a href="<?php echo base_url('san-pham/') ?>" class="btn btn-fill-out">Quay Lại Tìm Sách</a>
             </div>
         <?php } ?>
     </div>

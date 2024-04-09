@@ -23,7 +23,8 @@ class ThanhToan extends MY_Controller {
 
         $this->load->model('Web/Model_HoaDon');
         $this->load->model('Web/Model_CauHinh');
-        $this->load->model('Web/Model_SanPham');
+        $this->load->model('Web/Model_Sach');
+        $this->load->model('Web/Model_MuonSach');
 	}
 
 	public function index()
@@ -35,42 +36,25 @@ class ThanhToan extends MY_Controller {
         	$config = $this->Model_CauHinh->getAll();
         	$makhachhang = $this->session->userdata('makhachhang');
         	$diachi = $this->input->post('diachi').", ".$this->input->post('xa').", ".$this->input->post('huyen').", ".$this->input->post('tinh');
-        	$soluong = 0;
+        	$thoigiantra = $this->input->post('thoigiantra');
+
+        	if(empty($thoigiantra)){
+        		$this->session->set_flashdata('error', 'Vui lòng chọn ngày trả sách!');
+        		return redirect('thanh-toan/');
+        	}
+
+        	if($thoigiantra <= date('Y-m-d')){
+        		$this->session->set_flashdata('error', 'Thời gian trả sách phải khác ngày mượn!');
+        		return redirect('thanh-toan/');
+        	}
+
         	$tongtien = 0;
-        	$thanhtoan = $this->input->post('thanhtoan');
-
-        	if(($thanhtoan != 0) && ($thanhtoan != 2)){
-        		return redirect(base_url('thanh-toan/'));
-        	}
-
+        
         	foreach($cart as $key => $value){
-        		$tongtien += $value['number'] * $value['price'];
-        		$soluong += $value['number'];
+        		$tongtien = $value['number'] * $value['price_root'];
+        		$this->Model_MuonSach->insert($value['id'],$this->session->userdata('makhachhang'),$tongtien,$thoigiantra,$diachi,$value['number']);
         	}
 
-        	if($tongtien < $config[0]['MienPhiShip']){
-        		$tongtien += $config[0]['PhiShip'];
-        	}
-
-        	if($this->session->has_userdata('saleCode')){
-        		$tongtien -= $this->session->userdata('saleCode');
-        	}
-        	
-        	$mahoadon = 0;
-        	if($this->session->has_userdata('idSaleCode')){
-        		$magiamgia = $this->session->userdata('idSaleCode');
-        		$mahoadon = $this->Model_HoaDon->addWithSale($makhachhang,$tongtien,$thanhtoan,$magiamgia,$soluong,$diachi);
-        	}else{
-        		$mahoadon = $this->Model_HoaDon->addWithoutSale($makhachhang,$tongtien,$thanhtoan,$soluong,$diachi);
-        	}
-        	
-        	foreach($cart as $key => $value){
-        		$this->Model_HoaDon->addDetail($mahoadon,$value['id'],$value['number']);
-
-        		$soluongmoi = $this->Model_SanPham->getById($value['id'])[0]['SoLuong'] - $value['number'];
-
-        		$this->Model_SanPham->updateNumber($value['id'],$soluongmoi);
-        	}
         	if (isset($_SESSION['saleCode'])) {
                 unset($_SESSION['saleCode']);
             }
