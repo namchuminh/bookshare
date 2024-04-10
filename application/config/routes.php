@@ -127,3 +127,7 @@ $route['thanh-toan'] = 'Web/ThanhToan';
 
 $route['nguoi-dung'] = 'Web/NguoiDung';
 $route['nguoi-dung/(:any)'] = 'Web/NguoiDung/detail/$1';
+
+$route['nap-tien'] = 'Web/NapTien';
+
+
