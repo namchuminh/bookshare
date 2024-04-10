@@ -64,6 +64,15 @@
                             <div class="header_offer">
                                 <a href="<?php echo base_url('nguoi-dung/'); ?>" style="color: white;"><?php echo $_SESSION['hoten']; ?></a>
                             </div>
+                            <div class="header_offer">
+                                <a href="<?php echo base_url('nguoi-dung/'); ?>" style="color: white;"><?php echo number_format($_SESSION['sodukhadung']); ?> VND</a>
+                            </div>
+                            <div class="header_offer">
+                                <a href="<?php echo base_url('nap-tien/'); ?>" style="color: white;">Nạp Tiền</a>
+                            </div>
+                            <div class="header_offer">
+                                <a href="<?php echo base_url('user/'); ?>" style="color: white;">Quản Lý</a>
+                            </div>
                             <div class="download_wrap">
                                 <a href="<?php echo base_url('dang-xuat/'); ?>" style="color: white;">Đăng Xuất</a>
                             </div>

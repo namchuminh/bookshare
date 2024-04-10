@@ -34,6 +34,19 @@ class Model_NguoiDung extends CI_Model {
 		$result = $this->db->query($sql, array($hoten,$matkhau,$sodienthoai,$email,$diachhi,$manguoidung));
 		return $result;
 	}
+
+	public function getWallet($manguoidung){
+		$sql = "SELECT * FROM vitien WHERE MaNguoiDung = ?";
+		$result = $this->db->query($sql, array($manguoidung));
+		return $result->result_array();
+	}
+
+	public function updateMoneyWallet($sotienmoi,$dasudung,$manguoidung){
+		$sql = "UPDATE vitien SET SoDuKhaDung = ?, DaSuDung = ? WHERE MaNguoiDung = ?";
+		$result = $this->db->query($sql, array($sotienmoi,$dasudung,$manguoidung));
+		return $result;
+	}
+
 }	
 
 /* End of file Model_nguoidung.php */

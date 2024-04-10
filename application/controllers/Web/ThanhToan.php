@@ -25,6 +25,7 @@ class ThanhToan extends MY_Controller {
         $this->load->model('Web/Model_CauHinh');
         $this->load->model('Web/Model_Sach');
         $this->load->model('Web/Model_MuonSach');
+        $this->load->model('Web/Model_NguoiDung');
 	}
 
 	public function index()
@@ -51,9 +52,33 @@ class ThanhToan extends MY_Controller {
         	$tongtien = 0;
         
         	foreach($cart as $key => $value){
-        		$tongtien = $value['number'] * $value['price_root'];
-        		$this->Model_MuonSach->insert($value['id'],$this->session->userdata('makhachhang'),$tongtien,$thoigiantra,$diachi,$value['number']);
+        		$tongtien += $value['number'] * $value['price_root'];
+        		$this->Model_MuonSach->insert($value['id'],$this->session->userdata('makhachhang'),$value['number'] * $value['price_root'],$thoigiantra,$diachi,$value['number']);
         	}
+
+        	$mienphiship = $this->Model_CauHinh->getAll()[0]['MienPhiShip'];
+        	$phiship = $this->Model_CauHinh->getAll()[0]['PhiShip'];
+
+
+        	if($tongtien >= $config[0]['MienPhiShip']){ 
+        		$phiship = 0;
+        	}
+
+        	$vat = $tongtien * 0.10;
+
+        	$sotiencu = $this->Model_NguoiDung->getWallet($this->session->userdata('makhachhang'))[0]['SoDuKhaDung'];
+        	$sotienmoi = $sotiencu - ($tongtien + $vat + $phiship);
+
+        	$dasudung = $this->Model_NguoiDung->getWallet($this->session->userdata('makhachhang'))[0]['DaSuDung'] + $tongtien + $vat + $phiship;
+
+        	$this->Model_NguoiDung->updateMoneyWallet($sotienmoi,$dasudung,$this->session->userdata('makhachhang'));
+
+        	$newdata = array(
+				'sodukhadung' => $sotienmoi,
+			    'dasudung'  => $dasudung
+			);
+
+			$this->session->set_userdata($newdata);
 
         	if (isset($_SESSION['saleCode'])) {
                 unset($_SESSION['saleCode']);

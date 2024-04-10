@@ -45,7 +45,6 @@ class GioHang extends MY_Controller {
             return;
         }
         
-
         $price = $this->Model_Sach->getById($product_id)[0]['GiaMuon'];
         $price_root = $this->Model_Sach->getById($product_id)[0]['GiaGoc'];
         $image = $this->Model_Sach->getById($product_id)[0]['AnhChinh'];

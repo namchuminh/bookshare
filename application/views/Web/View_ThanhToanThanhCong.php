@@ -30,10 +30,10 @@
                 <div class="text-center order_complete">
                     <i class="fas fa-check-circle"></i>
                     <div class="heading_s1">
-                    <h3>Đặt hàng thành công!</h3>
+                    <h3>Đặt sách thành công!</h3>
                     </div>
-                    <p>Cảm ơn bạn đã đặt hàng! Chúng tôi đã tiếp nhận đơn hàng của bạn, đơn hàng sẽ được xử lý sớm nhất, vui lòng kiểm tra trạng thái đơn hàng tại trang <a href="<?php echo base_url('khach-hang/'); ?>">khách hàng!</a></p>
-                    <a href="<?php echo base_url('san-pham/'); ?>" class="btn btn-fill-out">Tiếp Tục Mua Sắm</a>
+                    <p>Cảm ơn bạn đã mượn sách! Chúng tôi sẽ thông báo cho chủ sách để gửi sách đến cho bạn sớm nhất có thể, ngoài ra bạn có thể truy cập trang quản lý mượn sách của <a href="<?php echo base_url('user/muon-sach/'); ?>">người dùng!</a></p>
+                    <a href="<?php echo base_url('sach/'); ?>" class="btn btn-fill-out">Tiếp Tục Chọn Sách</a>
                 </div>
             </div>
         </div>

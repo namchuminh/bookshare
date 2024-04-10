@@ -41,8 +41,8 @@
                                 <?php $tongtien = 0; ?>
                                 <?php foreach ($list as $key => $value): ?>
                                     <tr>
-                                        <td class="product-thumbnail"><a href="<?php echo base_url('san-pham/'.$value['slug'].'/') ?>"><img style="height: 150px;" src="<?php echo $value['image']; ?>"></a></td>
-                                        <td class="product-name" data-title="Product"><a href="<?php echo base_url('san-pham/'.$value['slug'].'/') ?>"><?php echo $value['name']; ?></a></td>
+                                        <td class="product-thumbnail"><a href="<?php echo base_url('sach/'.$value['slug'].'/') ?>"><img style="height: 150px;" src="<?php echo $value['image']; ?>"></a></td>
+                                        <td class="product-name" data-title="Product"><a href="<?php echo base_url('sach/'.$value['slug'].'/') ?>"><?php echo $value['name']; ?></a></td>
                                         <td class="product-price" data-title="Price"><?php echo number_format($value['price']); ?>đ</td>
                                         <td class="product-price" data-title="Price"><?php echo number_format($value['price_root']); ?>đ</td>
                                         <td class="product-quantity" data-title="Quantity">
@@ -131,7 +131,7 @@
             </div>
         <?php }else{ ?>
             <div class="w-100 text-right">
-                <a href="<?php echo base_url('san-pham/') ?>" class="btn btn-fill-out">Quay Lại Tìm Sách</a>
+                <a href="<?php echo base_url('sach/') ?>" class="btn btn-fill-out">Quay Lại Tìm Sách</a>
             </div>
         <?php } ?>
     </div>

@@ -112,7 +112,7 @@
                                 </tr>
                                 <tr>
                                     <th>Tổng Tiền</th>
-                                    <td class="product-subtotal"><?php echo number_format($_SESSION['sumCart'] + $phiship + $vat) ?>đ</td>
+                                    <td class="product-subtotal"><?php echo number_format($tongtien + $phiship + $vat) ?>đ</td>
                                 </tr>
                             </tfoot>
                         </table>
@@ -123,14 +123,14 @@
                         </div>
                         <div class="payment_option">
                             <div class="custome-radio nhanhang">
-                                <label for="exampleRadios3" style="color: #141515;">Số Dư Tài Khoản: <?php echo $_SESSION['sodukhadung'] >= ($_SESSION['sumCart'] + $phiship + $vat) ? number_format($_SESSION['sodukhadung']) : number_format($_SESSION['sodukhadung']); ?> VND</label>
+                                <label for="exampleRadios3" style="color: #141515;">Số Dư Tài Khoản: <?php echo $_SESSION['sodukhadung'] >= ($tongtien + $phiship + $vat) ? number_format($_SESSION['sodukhadung']) : number_format($_SESSION['sodukhadung']); ?> VND</label>
                             </div>
                             <div class="custome-radio nhanhang">
-                                <label for="exampleRadios3" style="color: #141515;">Số Dư Sau Thanh Toán: <?php echo $_SESSION['sodukhadung'] >= ($_SESSION['sumCart'] + $phiship + $vat) ? number_format($_SESSION['sodukhadung'] - ($_SESSION['sumCart'] + $phiship + $vat)) : number_format($_SESSION['sodukhadung']); ?> VND</label>
+                                <label for="exampleRadios3" style="color: #141515;">Số Dư Sau Thanh Toán: <?php echo $_SESSION['sodukhadung'] >= ($tongtien + $phiship + $vat) ? number_format($_SESSION['sodukhadung'] - ($tongtien + $phiship + $vat)) : number_format($_SESSION['sodukhadung']); ?> VND</label>
                             </div>
                         </div>
                     </div>  
-                    <?php if($_SESSION['sodukhadung'] >= ($_SESSION['sumCart'] + $phiship + $vat)){ ?>
+                    <?php if($_SESSION['sodukhadung'] >= ($tongtien + $phiship + $vat)){ ?>
                         <button type="submit" class="btn btn-fill-out btn-block">Thanh Toán</button>
                     <?php }else{ ?>
                         <button type="submit" class="btn btn-fill-out btn-block" disabled>Không Đủ Tiền</button>
