@@ -130,4 +130,11 @@ $route['nguoi-dung/(:any)'] = 'Web/NguoiDung/detail/$1';
 
 $route['nap-tien'] = 'Web/NapTien';
 
+$route['to-cao'] = 'Web/ToCao';
+
+$route['yeu-thich'] = 'Web/YeuThich';
+$route['yeu-thich/them/(:any)'] = 'Web/YeuThich/add/$1';
+$route['yeu-thich/xoa/(:any)'] = 'Web/YeuThich/delete/$1';
+
+
 

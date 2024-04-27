@@ -97,7 +97,7 @@
                                     <div class="cart_btn" style="cursor: not-allowed;">
                                         <button class="btn btn-fill-out" type="button" disabled style="text-decoration: line-through;"> Tạm Hết Hàng!</button>
                                         <a class="add_compare" href="<?php echo base_url('sach/'.$suggest[rand(0,count($suggest) - 1)]['DuongDan'].'/'); ?>"><i class="icon-shuffle"></i></a>
-                                        <a class="add_wishlist" href="#"><i class="icon-heart"></i></a>
+                                        <a class="add_wishlist add-to-love" value="<?php echo $detail[0]['MaSach']; ?>" href="#"><i class="icon-heart"></i></a>
                                     </div>
                                 <?php }else{ ?>
                                     <div class="cart-product-quantity">
@@ -116,7 +116,7 @@
                                     <div class="cart_btn">
                                         <button class="btn btn-fill-out btn-addtocart" type="button"><i class="icon-basket-loaded"></i> Thêm Giỏ Hàng</button>
                                         <a class="add_compare" href="<?php echo base_url('sach/'.$suggest[rand(0,count($suggest) - 1)]['DuongDan'].'/'); ?>"><i class="icon-shuffle"></i></a>
-                                        <a class="add_wishlist" href="#"><i class="icon-heart"></i></a>
+                                        <a class="add_wishlist add-to-love" value="<?php echo $detail[0]['MaSach']; ?>" href="#"><i class="icon-heart"></i></a>
                                     </div>
                                 <?php } ?>
                             </div>
@@ -246,7 +246,7 @@
                         <!-- END SIDEBAR USER TITLE -->
                         <!-- SIDEBAR BUTTONS -->
                         <div class="profile-userbuttons">
-                            <button type="button" class="btn btn-fill-out"><i class="fa-solid fa-triangle-exclamation"></i> Tố Cáo</button>
+                            <a href="<?php echo base_url('to-cao/?id='.$user[0]['MaNguoiDung']) ?>" class="btn btn-fill-out"><i class="fa-solid fa-triangle-exclamation"></i> Tố Cáo</a>
                         </div>   
                     </div>
                     <div class="widget">
@@ -948,6 +948,21 @@
                     })
                 }
 
+            });
+
+            $(".add-to-love").click(function(e){
+                e.preventDefault()
+                var MaSach = $(this).attr("value");
+                let urlThem = "<?php echo base_url('yeu-thich/them/') ?>" + MaSach;
+                let login = "<?php echo isset($_SESSION['khachhang']) ?>"
+
+                if(!login){
+                    alert("Vui lòng đăng nhập để thêm yêu thích!");
+                }else{
+                    $.get(urlThem, function(data){
+                        $(".wishlist_count").html(data)
+                    })
+                }
             });
         });
     </script>

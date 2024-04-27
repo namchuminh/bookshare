@@ -43,7 +43,7 @@
                     <!-- END SIDEBAR USER TITLE -->
                     <!-- SIDEBAR BUTTONS -->
                     <div class="profile-userbuttons">
-                        <button type="button" class="btn btn-fill-out"><i class="fa-solid fa-triangle-exclamation"></i> Tố Cáo</button>
+                        <a href="<?php echo base_url('to-cao/?id='.$detail[0]['MaNguoiDung']); ?>" class="btn btn-fill-out"><i class="fa-solid fa-triangle-exclamation"></i> Tố Cáo</a>
                     </div>
                     <!-- END SIDEBAR BUTTONS -->
                     <!-- SIDEBAR MENU -->
@@ -150,8 +150,8 @@
             <div class="col-lg-9 col-md-8">
                 <div class="profile-content dashboard_menu" style="box-shadow: 0 0px 4px 0 #ffffff;">
                     <div class="row shop_container list">  
-                        <?php if(count($book) <= 0){ ?>        
-                            Người Dùng Chưa Đăng Sách!
+                        <?php if(count($book) <= 0){ ?>  
+                            <p class="text-center">Người Dùng Chưa Đăng Sách!</p>      
                         <?php }else{ ?>           
                             <?php foreach ($book as $key => $value): ?>                
                                 <div class="col-md-4 col-6">
@@ -162,8 +162,8 @@
                                             </a>
                                             <div class="product_action_box">
                                                 <ul class="list_none pr_action_btn">
-                                                    <li class="add-to-cart" value="<?php echo $value['MaSach']; ?>"><a href="#"><i class="icon-basket-loaded"></i> Thêm Giỏ Hàng</a></li>
-                                                    <li><a href="#"><i class="icon-heart"></i></a></li>
+                                                    <li class="add-to-cart" value="<?php echo $value['MaSach']; ?>"><a href="#"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
+                                                    <li><a value="<?php echo $value['MaSach']; ?>" class="add-to-love" href="#"><i class="icon-heart"></i></a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -189,8 +189,8 @@
                                             </div>
                                             <div class="list_product_action_box">
                                                 <ul class="list_none pr_action_btn">
-                                                    <li class="add-to-cart"><a href="#"><i class="icon-basket-loaded"></i> Thêm Giỏ Hàng</a></li>
-                                                    <li><a href="#"><i class="icon-heart"></i></a></li>
+                                                    <li class="add-to-cart" value="<?php echo $value['MaSach']; ?>"><a href="#"><i class="icon-basket-loaded"></i> Thêm Giỏ Hàng</a></li>
+                                                    <li><a value="<?php echo $value['MaSach']; ?>" class="add-to-love" href="#"><i class="icon-heart"></i></a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -199,13 +199,15 @@
                             <?php endforeach ?>
                         <?php } ?>
                     </div>
-                    <div class="row">
-                    <div class="col-12">
-                        <ul class="pagination mt-3 justify-content-center pagination_style1">
-                            <li class="page-item"><a class="page-link" href="http://localhost/book/sach/trang/1/">1</a></li>
-                        </ul>
-                    </div>
-                </div>                
+                    <?php if(count($book) >= 1){ ?>     
+                        <div class="row">
+                            <div class="col-12">
+                                <ul class="pagination mt-3 justify-content-center pagination_style1">
+                                    <li class="page-item"><a class="page-link" href="http://localhost/book/sach/trang/1/">1</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    <?php } ?>                
                 </div>
             </div>
         </div>
@@ -368,3 +370,47 @@
 </style>
 
 <?php require(APPPATH.'views/web/layouts/footer.php'); ?>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".add-to-cart").click(function(e){
+            e.preventDefault()
+            var MaSach = $(this).attr("value");
+            let urlThem = "<?php echo base_url('gio-hang/them/') ?>" + MaSach + "/" + "1";
+
+            $.get(urlThem, function(data){
+                var cart = JSON.parse(data);
+                $(".cart_count").text(cart.numberCart)
+                $(".price_symbole").text(cart.sumCart + "đ")
+
+                $('.cart_list').empty();
+                var cartList = cart.cart;
+
+                for (const key in cartList) {
+                    if (cartList.hasOwnProperty(key)) {
+                        const item = cartList[key];
+                        var formatter = new Intl.NumberFormat('en-US');
+                        var price = formatter.format(item.price_root);
+                        $('.cart_list').append('<li> <a href="<?php echo base_url('sach/') ?>'+item.slug+'/"><img src="'+item.image+'" style="height: 80px">'+item.name+'</a> <span class="cart_quantity"> '+item.number+' x <span class="cart_amount"> <span class="price_symbole"></span></span>'+price+'đ</span> </li>');
+                    }
+                }
+            })
+
+        });
+
+        $(".add-to-love").click(function(e){
+            e.preventDefault()
+            var MaSach = $(this).attr("value");
+            let urlThem = "<?php echo base_url('yeu-thich/them/') ?>" + MaSach;
+            let login = "<?php echo isset($_SESSION['khachhang']) ?>"
+
+            if(!login){
+                alert("Vui lòng đăng nhập để thêm yêu thích!");
+            }else{
+                $.get(urlThem, function(data){
+                    $(".wishlist_count").html(data)
+                })
+            }
+        });
+    });
+</script>

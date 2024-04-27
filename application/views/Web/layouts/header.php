@@ -116,16 +116,17 @@
                     <li><a href="javascript:void(0);" class="nav-link search_trigger"><i class="linearicons-magnifier"></i></a>
                         <div class="search_wrap">
                             <span class="close-search"><i class="ion-ios-close-empty"></i></span>
-                            <form action="<?php echo base_url('san-pham/'); ?>">
+                            <form action="<?php echo base_url('sach/'); ?>">
                                 <input type="text" placeholder="Nhập tên sách" class="form-control" name="s" id="search_input">
                                 <button type="submit" class="search_icon"><i class="ion-ios-search-strong"></i></button>
                             </form>
                         </div><div class="search_overlay"></div>
                     </li>
-                    <li class="dropdown cart_dropdown">
-                        <a class="nav-link cart_trigger" href="#">
-                            <i class="linearicons-heart"></i>
-                            <span class="wishlist_count">2</span>
+                    <li>
+                        <a href="<?php echo base_url('yeu-thich/') ?>" class="nav-link"><i class="linearicons-heart"></i>
+                            <?php if(isset($_SESSION['khachhang'])){ ?>
+                                <span class="wishlist_count"><?php echo $listLove; ?></span>
+                            <?php } ?>
                         </a>
                     </li>
                     <li class="dropdown cart_dropdown">

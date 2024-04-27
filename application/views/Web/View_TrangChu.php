@@ -104,7 +104,13 @@
                     </form>
                 </div>
                 <ul class="navbar-nav attr-nav align-items-center">
-                    <li><a href="#" class="nav-link"><i class="linearicons-heart"></i><span class="wishlist_count">0</span></a></li>
+                    <li>
+                        <a href="<?php echo base_url('yeu-thich/') ?>" class="nav-link"><i class="linearicons-heart"></i>
+                            <?php if(isset($_SESSION['khachhang'])){ ?>
+                                <span class="wishlist_count"><?php echo $listLove; ?></span>
+                            <?php } ?>
+                        </a>
+                    </li>
 
                     <li class="dropdown cart_dropdown">
                         <a class="nav-link cart_trigger" href="#" data-bs-toggle="dropdown">
@@ -290,7 +296,7 @@
                                             <div class="product_action_box">
                                                 <ul class="list_none pr_action_btn">
                                                     <li class="add-to-cart" value="<?php echo $value['MaSach']; ?>"><a href="#"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
-                                                    <li><a href="#"><i class="icon-heart"></i></a></li>
+                                                    <li><a value="<?php echo $value['MaSach']; ?>" class="add-to-love" href="#"><i class="icon-heart"></i></a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -410,7 +416,7 @@
                                             <div class="product_action_box">
                                                 <ul class="list_none pr_action_btn">
                                                     <li class="add-to-cart" value="<?php echo $value['MaSach']; ?>"><a href="#"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
-                                                    <li><a href="#"><i class="icon-heart"></i></a></li>
+                                                    <li><a value="<?php echo $value['MaSach']; ?>" class="add-to-love" href="#"><i class="icon-heart"></i></a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -988,6 +994,21 @@
                 }
             })
 
+        });
+
+        $(".add-to-love").click(function(e){
+            e.preventDefault()
+            var MaSach = $(this).attr("value");
+            let urlThem = "<?php echo base_url('yeu-thich/them/') ?>" + MaSach;
+            let login = "<?php echo isset($_SESSION['khachhang']) ?>"
+
+            if(!login){
+                alert("Vui lòng đăng nhập để thêm yêu thích!");
+            }else{
+                $.get(urlThem, function(data){
+                    $(".wishlist_count").html(data)
+                })
+            }
         });
     });
 </script>

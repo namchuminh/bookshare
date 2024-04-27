@@ -73,7 +73,7 @@
                                     <div class="product_action_box">
                                         <ul class="list_none pr_action_btn">
                                             <li class="add-to-cart" value="<?php echo $value['MaSach']; ?>"><a href="#"><i class="icon-basket-loaded"></i> Thêm Giỏ Hàng</a></li>
-                                            <li><a href="#"><i class="icon-heart"></i></a></li>
+                                            <li><a value="<?php echo $value['MaSach']; ?>" class="add-to-love" href="#"><i class="icon-heart"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -105,7 +105,7 @@
                                     <div class="list_product_action_box">
                                         <ul class="list_none pr_action_btn">
                                             <li class="add-to-cart"><a href="#"><i class="icon-basket-loaded"></i> Thêm Giỏ Hàng</a></li>
-                                            <li><a href="#"><i class="icon-heart"></i></a></li>
+                                            <li><a value="<?php echo $value['MaSach']; ?>" class="add-to-love" href="#"><i class="icon-heart"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -136,7 +136,7 @@
                         <h5 class="widget_title">Tìm Kiếm</h5>
                         <div class="search_form">
                             <form action="<?php echo base_url('sach/') ?>"> 
-                                <input required class="form-control" name="s" placeholder="Nhập tên sản phẩm..." type="text">
+                                <input required class="form-control" name="s" placeholder="Nhập tên sách..." type="text">
                                 <button type="submit" title="Subscribe" class="btn icon_search" value="Tìm Kiếm">
                                     <i class="ion-ios-search-strong"></i>
                                 </button>
@@ -217,6 +217,21 @@
                 }
             })
 
+        });
+
+        $(".add-to-love").click(function(e){
+            e.preventDefault()
+            var MaSach = $(this).attr("value");
+            let urlThem = "<?php echo base_url('yeu-thich/them/') ?>" + MaSach;
+            let login = "<?php echo isset($_SESSION['khachhang']) ?>"
+
+            if(!login){
+                alert("Vui lòng đăng nhập để thêm yêu thích!");
+            }else{
+                $.get(urlThem, function(data){
+                    $(".wishlist_count").html(data)
+                })
+            }
         });
     });
 </script>
