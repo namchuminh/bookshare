@@ -137,4 +137,34 @@ $route['yeu-thich/them/(:any)'] = 'Web/YeuThich/add/$1';
 $route['yeu-thich/xoa/(:any)'] = 'Web/YeuThich/delete/$1';
 
 
+$route['user/sach'] = 'User/Sach';
+$route['user/sach/(:any)/trang'] = 'User/Sach/page/$1';
+$route['user/sach/them'] = 'User/Sach/add';
+$route['user/sach/(:any)/sua'] = 'User/Sach/update/$1';
+$route['user/sach/(:any)/xoa'] = 'User/Sach/delete/$1';
+$route['user/sach/(:any)/trang-thai'] = 'User/Sach/status/$1';
 
+
+$route['user/muon-sach'] = 'User/MuonSach';
+$route['user/muon-sach/(:any)/trang'] = 'User/MuonSach/page/$1';
+$route['user/muon-sach/(:any)/trang-thai'] = 'User/MuonSach/status/$1';
+$route['user/muon-sach/(:any)/thanh-toan'] = 'User/MuonSach/pay/$1';
+$route['user/muon-sach/(:any)/huy'] = 'User/MuonSach/cancel/$1';
+$route['user/muon-sach/(:any)/trang-thai'] = 'User/MuonSach/status/$1';
+$route['user/muon-sach/tim-kiem'] = 'User/MuonSach/search';
+$route['user/muon-sach/tim-kiem/(:any)/trang'] = 'User/MuonSach/pageSearch/$1';
+
+
+$route['user/dong-tien'] = 'User/DongTien';
+$route['user/dong-tien/(:any)/trang'] = 'User/DongTien/page/$1';
+$route['user/dong-tien/tim-kiem'] = 'User/DongTien/search';
+$route['user/dong-tien/tim-kiem/(:any)/trang'] = 'User/DongTien/pageSearch/$1';
+
+$route['user/to-cao'] = 'User/ToCao';
+$route['user/to-cao/(:any)/trang'] = 'User/ToCao/page/$1';
+$route['user/to-cao/(:any)/xem'] = 'User/ToCao/view/$1';
+$route['user/to-cao/(:any)/trang-thai'] = 'User/ToCao/action/$1';
+$route['user/to-cao/tim-kiem'] = 'User/ToCao/search';
+$route['user/to-cao/tim-kiem/(:any)/trang'] = 'User/ToCao/pageSearch/$1';
+
+$route['admin/ca-nhan'] = 'Admin/CaNhan';

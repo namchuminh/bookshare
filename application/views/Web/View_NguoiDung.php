@@ -112,6 +112,7 @@
                     </div>
                 </div>
                 <?php if(count($banner1) >= 1){ ?>
+                    <hr>
                     <div class="widget">
                         <div class="shop_banner">
                             <a href="<?php echo base_url('chuyen-muc/'.$banner1[0]['DuongDan'].'/'); ?>" class="banner_img">
@@ -120,7 +121,7 @@
                         </div>
                     </div>
                 <?php } ?>
-                <br>
+                <hr>
                 <div class="widget">
                     <h5 class="widget_title">Phổ Biến</h5>
                     <ul class="widget_recent_post">
