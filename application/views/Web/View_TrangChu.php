@@ -314,7 +314,7 @@
                                             </div>
                                             <div class="rating_wrap">
                                                 <div class="rating">
-                                                    <div class="product_rate" style="width:100%"></div>
+                                                    <div class="product_rate" style="width:<?php echo $this->Model_BinhLuan->getRateByIdBook($value['MaSach']); ?>%"></div>
                                                 </div>
                                                 <span class="rating_num"></span>
                                             </div>
@@ -434,7 +434,7 @@
                                             </div>
                                             <div class="rating_wrap">
                                                 <div class="rating">
-                                                    <div class="product_rate" style="width:100%"></div>
+                                                    <div class="product_rate" style="width:<?php echo $this->Model_BinhLuan->getRateByIdBook($value['MaSach']); ?>%"></div>
                                                 </div>
                                                 <span class="rating_num"></span>
                                             </div>
@@ -498,7 +498,7 @@
                                                     </div>
                                                     <div class="rating_wrap">
                                                         <div class="rating">
-                                                            <div class="product_rate" style="width:100%"></div>
+                                                            <div class="product_rate" style="width:<?php echo $this->Model_BinhLuan->getRateByIdBook($value['MaSach']); ?>%"></div>
                                                         </div>
                                                         <span class="rating_num"></span>
                                                     </div>
@@ -533,7 +533,7 @@
                                                             </div>
                                                             <div class="rating_wrap">
                                                                 <div class="rating">
-                                                                    <div class="product_rate" style="width:100%"></div>
+                                                                    <div class="product_rate" style="width:<?php echo $this->Model_BinhLuan->getRateByIdBook($value['MaSach']); ?>%"></div>
                                                                 </div>
                                                                 <span class="rating_num"></span>
                                                             </div>
@@ -571,7 +571,7 @@
                                                             </div>
                                                             <div class="rating_wrap">
                                                                 <div class="rating">
-                                                                    <div class="product_rate" style="width:100%"></div>
+                                                                    <div class="product_rate" style="width:<?php echo $this->Model_BinhLuan->getRateByIdBook($value['MaSach']); ?>%"></div>
                                                                 </div>
                                                                 <span class="rating_num"></span>
                                                             </div>
@@ -627,7 +627,7 @@
                                                     </div>
                                                     <div class="rating_wrap">
                                                         <div class="rating">
-                                                            <div class="product_rate" style="width:100%"></div>
+                                                            <div class="product_rate" style="width:<?php echo $this->Model_BinhLuan->getRateByIdBook($value['MaSach']); ?>%"></div>
                                                         </div>
                                                         <span class="rating_num"></span>
                                                     </div>
@@ -662,7 +662,7 @@
                                                             </div>
                                                             <div class="rating_wrap">
                                                                 <div class="rating">
-                                                                    <div class="product_rate" style="width:100%"></div>
+                                                                    <div class="product_rate" style="width:<?php echo $this->Model_BinhLuan->getRateByIdBook($value['MaSach']); ?>%"></div>
                                                                 </div>
                                                                 <span class="rating_num"></span>
                                                             </div>
@@ -700,7 +700,7 @@
                                                             </div>
                                                             <div class="rating_wrap">
                                                                 <div class="rating">
-                                                                    <div class="product_rate" style="width:100%"></div>
+                                                                    <div class="product_rate" style="width:<?php echo $this->Model_BinhLuan->getRateByIdBook($value['MaSach']); ?>%"></div>
                                                                 </div>
                                                                 <span class="rating_num"></span>
                                                             </div>
@@ -754,7 +754,7 @@
                                                     </div>
                                                     <div class="rating_wrap">
                                                         <div class="rating">
-                                                            <div class="product_rate" style="width:100%"></div>
+                                                            <div class="product_rate" style="width:<?php echo $this->Model_BinhLuan->getRateByIdBook($value['MaSach']); ?>%"></div>
                                                         </div>
                                                         <span class="rating_num"></span>
                                                     </div>
@@ -789,7 +789,7 @@
                                                             </div>
                                                             <div class="rating_wrap">
                                                                 <div class="rating">
-                                                                    <div class="product_rate" style="width:100%"></div>
+                                                                    <div class="product_rate" style="width:<?php echo $this->Model_BinhLuan->getRateByIdBook($value['MaSach']); ?>%"></div>
                                                                 </div>
                                                                 <span class="rating_num"></span>
                                                             </div>
@@ -827,7 +827,7 @@
                                                             </div>
                                                             <div class="rating_wrap">
                                                                 <div class="rating">
-                                                                    <div class="product_rate" style="width:100%"></div>
+                                                                    <div class="product_rate" style="width:<?php echo $this->Model_BinhLuan->getRateByIdBook($value['MaSach']); ?>%"></div>
                                                                 </div>
                                                                 <span class="rating_num"></span>
                                                             </div>

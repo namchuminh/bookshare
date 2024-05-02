@@ -12,6 +12,7 @@ class MY_Controller extends CI_Controller {
         $this->load->model('Web/Model_NapTien');
         $this->load->model('Web/Model_NguoiDung');
         $this->load->model('Web/Model_YeuThich');
+        $this->load->model('Web/Model_BinhLuan');
         $this->data['config'] = $this->Model_CauHinh->getAll();
         $this->data['category'] = $this->Model_ChuyenMuc->getAll();
         $this->data['categoryMenu'] = $this->Model_ChuyenMuc->getCategoryDisplay();
