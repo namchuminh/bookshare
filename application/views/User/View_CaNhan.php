@@ -28,6 +28,14 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
+                    <img id="output" src="<?php echo $detail[0]['AnhChinh']; ?>" style="width: 150px; height: 150px; border-radius: 50%; display: block; margin-left: auto; margin-right: auto;">
+                    <br>
+                    <label class="form-label w-100 text-center" style="cursor: pointer;" for="anhchinh"><i class="fa-solid fa-camera"></i> Thay Đổi Ảnh</label>
+                    <input type="file" id="anhchinh" class="form-control" name="anhchinh" accept="image/*" onchange="loadFile(event)" hidden>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
                     <label for="ten">Họ Tên</label>
                     <input type="text" class="form-control" placeholder="Họ tên" name="hoten" value="<?php echo $detail[0]['HoTen']; ?>">
                   </div>
@@ -44,6 +52,30 @@
                     <input type="text" class="form-control" placeholder="Số điện thoại" name="sodienthoai" value="<?php echo $detail[0]['SoDienThoai']; ?>">
                   </div>
                 </div>
+              </div> 
+              <hr>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="ten">Tên Ngân Hàng</label>
+                    <input class="form-control" placeholder="Tên ngân hàng" name="tennganhang" value="<?php echo $detail[0]['TenNganHang']; ?>">
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="ten">Số Tài Khoản</label>
+                    <input class="form-control" placeholder="Số tài khoản" name="sotaikhoan" value="<?php echo $detail[0]['SoTaiKhoan']; ?>">
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="ten">Chủ Tài Khoản</label>
+                    <input class="form-control" placeholder="Chủ tài khoản" name="chutaikhoan" value="<?php echo $detail[0]['ChuTaiKhoan']; ?>">
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="ten">Tài Khoản</label>
@@ -56,9 +88,10 @@
                     <input type="password" class="form-control" placeholder="Nhập mật khẩu mới" name="matkhau">
                   </div>
                 </div>
-              </div> 
+              </div>
+
               <a class="btn btn-success" href="<?php echo base_url('user/'); ?>">Quay Lại</a>
-              <button class="btn btn-primary">Lưu Thông Tin</button>
+              <button class="btn btn-primary">Cập Nhật Thông Tin</button>
             </form>
           </div>
         </div>
@@ -66,4 +99,13 @@
     </section>
     <!-- /.content -->
 </div>
+<script>
+  var loadFile = function(event) {
+    var output = document.getElementById('output');
+    output.src = URL.createObjectURL(event.target.files[0]);
+    output.onload = function() {
+      URL.revokeObjectURL(output.src) // free memory
+    }
+  };
+</script>
 <?php require(APPPATH.'views/user/layouts/footer.php'); ?>

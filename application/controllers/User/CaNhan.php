@@ -21,9 +21,13 @@ class CaNhan extends CI_Controller {
 			$email = $this->input->post('email');
 			$sodienthoai = $this->input->post('sodienthoai');
 			$taikhoan = $this->input->post('taikhoan');
+			$tennganhang = $this->input->post('tennganhang');
+			$sotaikhoan = $this->input->post('sotaikhoan');
+			$chutaikhoan = $this->input->post('chutaikhoan');
 			$matkhau = $this->Model_CaNhan->getById($this->session->userdata('makhachhang'))[0]['MatKhau'];
+			$anhchinh = $this->Model_CaNhan->getById($this->session->userdata('makhachhang'))[0]['AnhChinh'];
 
-			if(empty($hoten) || empty($email) || empty($sodienthoai) || empty($taikhoan)){
+			if(empty($hoten) || empty($email) || empty($sodienthoai) || empty($taikhoan) || empty($tennganhang) || empty($sotaikhoan) || empty($chutaikhoan)){
 				$data['error'] = "Vui lòng nhập đủ thông tin!";
 				return $this->load->view('User/View_CaNhan', $data);
 			}
@@ -42,13 +46,28 @@ class CaNhan extends CI_Controller {
 				return $this->load->view('User/View_CaNhan', $data);
 			}
 
+			if(!is_numeric($sotaikhoan)){
+				$data['error'] = "Vui lòng nhập số tài khoản hợp lệ!";
+				return $this->load->view('User/View_CaNhan', $data);
+			}
+
 			if(isset($_POST['matkhau']) && !empty($_POST['matkhau'])){
 				$matkhau = md5($this->input->post('matkhau'));
 			}
 
-			$this->Model_CaNhan->update($hoten,$taikhoan,$matkhau,$email,$sodienthoai,$this->session->userdata('makhachhang'));
+			$config['upload_path'] = './uploads/';
+			$config['allowed_types'] = 'gif|jpg|png|jpeg';
 
-			$data['success'] = "Lưu thông tin cá nhân thành công!";
+			$this->load->library('upload', $config);
+
+			if ($this->upload->do_upload('anhchinh')){
+				$img = $this->upload->data();
+				$anhchinh = base_url('uploads')."/".$img['file_name'];
+			}
+
+			$this->Model_CaNhan->update($hoten,$taikhoan,$matkhau,$email,$sodienthoai,$anhchinh,$tennganhang,$sotaikhoan,$chutaikhoan,$this->session->userdata('makhachhang'));
+
+			$data['success'] = "Cập nhật thông tin cá nhân thành công!";
 			$data['detail'] = $this->Model_CaNhan->getById($this->session->userdata('makhachhang'));
 			return $this->load->view('User/View_CaNhan', $data);
 		}

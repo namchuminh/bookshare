@@ -11,15 +11,15 @@ class Model_CaNhan extends CI_Model {
 	}
 
 	public function getById($MaNguoiDung){
-		$sql = "SELECT * FROM nguoidung WHERE MaNguoiDung = ? AND PhanQuyen = 1";
+		$sql = "SELECT * FROM nguoidung WHERE MaNguoiDung = ? AND PhanQuyen = 0";
 		$result = $this->db->query($sql, array($MaNguoiDung));
 		return $result->result_array();
 	}
 
 
-	public function update($HoTen,$TaiKhoan,$MatKhau,$Email,$SoDienThoai,$MaNguoiDung){
-		$sql = "UPDATE nguoidung SET HoTen = ?, TaiKhoan = ?, MatKhau = ?, Email = ?, SoDienThoai = ? WHERE MaNguoiDung = ?";
-		$result = $this->db->query($sql, array($HoTen,$TaiKhoan,$MatKhau,$Email,$SoDienThoai,$MaNguoiDung));
+	public function update($HoTen,$TaiKhoan,$MatKhau,$Email,$SoDienThoai,$anhchinh,$tennganhang,$sotaikhoan,$chutaikhoan,$MaNguoiDung){
+		$sql = "UPDATE nguoidung SET HoTen = ?, TaiKhoan = ?, MatKhau = ?, Email = ?, SoDienThoai = ?, AnhChinh = ?, TenNganHang = ?, SoTaiKhoan = ?, ChuTaiKhoan = ?WHERE MaNguoiDung = ?";
+		$result = $this->db->query($sql, array($HoTen,$TaiKhoan,$MatKhau,$Email,$SoDienThoai,$anhchinh,$tennganhang,$sotaikhoan,$chutaikhoan,$MaNguoiDung));
 		return $result;
 	}
 }
