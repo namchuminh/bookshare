@@ -74,11 +74,13 @@ class DangNhap extends MY_Controller {
 			$hoten = $this->input->post('hoten');
 			$sodienthoai = $this->input->post('sodienthoai');
 			$email = $this->input->post('email');
-			$diachi = $this->input->post('diachi');
 			$taikhoan = $this->input->post('taikhoan');
+			$tennganhang = $this->input->post('nganhang');
+			$sotaikhoan = $this->input->post('sotaikhoan');
+			$chutaikhoan = $this->input->post('chutaikhoan');
 			$matkhau = $this->input->post('matkhau');
 
-			if($taikhoan == "" || $matkhau == "" || $sodienthoai == "" || $hoten == "" || $email == "" || $diachi == ""){
+			if($taikhoan == "" || $matkhau == "" || $sodienthoai == "" || $hoten == "" || $email == "" || $tennganhang == "" || $sotaikhoan == "" || $chutaikhoan == ""){
 				$data["error"] = "Vui lòng nhập đủ thông tin khách hàng!";
 				return $this->load->view('Web/View_DangKy', $data);
 			}
@@ -100,6 +102,11 @@ class DangNhap extends MY_Controller {
 				return $this->load->view('Web/View_DangKy', $data);
 			}
 
+			if(!is_numeric($sotaikhoan)){
+				$data['error'] = "Số tài khoản không hợp lệ!";
+				return $this->load->view('Web/View_DangKy', $data);
+			}
+
 			if(count($this->Model_DangNhap->getInfoByUsername($taikhoan)) >= 1){
 				$data['error'] = "Tài khoản đã tồn tại trong hệ thống!";
 				return $this->load->view('Web/View_DangKy', $data);
@@ -115,18 +122,28 @@ class DangNhap extends MY_Controller {
 				return $this->load->view('Web/View_DangKy', $data);
 			}
 
-			$this->Model_NguoiDung->insert($hoten,$taikhoan,md5($matkhau),$sodienthoai,$email,$diachi);
+			$this->Model_NguoiDung->insert($hoten,$taikhoan,md5($matkhau),$sodienthoai,$email,$tennganhang,$sotaikhoan,$chutaikhoan);
+
+			$manguoidung = $this->Model_DangNhap->getInfoByUsername($taikhoan)[0]['MaNguoiDung'];
+
+			$this->Model_NguoiDung->insertWallet($manguoidung);
 
 			$newdata = array(
-				'makhachhang' => $this->Model_DangNhap->getInfoByUsername($taikhoan)[0]['MaKhachHang'],
+				'makhachhang' => $this->Model_DangNhap->getInfoByUsername($taikhoan)[0]['MaNguoiDung'],
 			    'khachhang'  => $taikhoan,
 			    'hoten' => $this->Model_DangNhap->getInfoByUsername($taikhoan)[0]['HoTen'],
+			    'anhchinh' => $this->Model_DangNhap->getInfoByUsername($taikhoan)[0]['AnhChinh'],
 			    'sodienthoai' => $this->Model_DangNhap->getInfoByUsername($taikhoan)[0]['SoDienThoai'],
 			    'email' => $this->Model_DangNhap->getInfoByUsername($taikhoan)[0]['Email'],
-			    'diachi' => $this->Model_DangNhap->getInfoByUsername($taikhoan)[0]['DiaChi']
+			    'nganhang' => $tennganhang,
+				'sotaikhoan' => $sotaikhoan,
+				'chutaikhoan' => $chutaikhoan,
+				'sodukhadung' => 0,
+				'dasudung' => 0,
+				'tongnap' => 0,
 			);
 			$this->session->set_userdata($newdata);
-			return redirect(base_url('khach-hang/'));
+			return redirect(base_url('nguoi-dung/'));
 		}
 		return $this->load->view('Web/View_DangKy', $data);
 	}

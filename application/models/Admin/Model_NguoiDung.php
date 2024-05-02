@@ -41,9 +41,9 @@ class Model_NguoiDung extends CI_Model {
 		return $result->result_array();
 	}
 
-	public function updateMoneyWallet($sotienmoi,$manguoidung){
-		$sql = "UPDATE vitien SET SoDuKhaDung = ? WHERE MaNguoiDung = ?";
-		$result = $this->db->query($sql, array($sotienmoi,$manguoidung));
+	public function updateMoneyWallet($sotienmoi,$tongnap,$manguoidung){
+		$sql = "UPDATE vitien SET SoDuKhaDung = ?, TongNap = ? WHERE MaNguoiDung = ?";
+		$result = $this->db->query($sql, array($sotienmoi,$tongnap,$manguoidung));
 		return $result;
 	}
 

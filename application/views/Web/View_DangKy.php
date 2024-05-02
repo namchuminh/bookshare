@@ -44,8 +44,17 @@
                             <div class="form-group mb-3">
                                 <input type="email" required class="form-control" name="email" placeholder="Email">
                             </div>
+                            <div class="different_login">
+                                <span> Thông Tin Ngân Hàng</span>
+                            </div>
                             <div class="form-group mb-3">
-                                <input type="text" required class="form-control" name="diachi" placeholder="Địa chỉ">
+                                <input type="text" required class="form-control" name="nganhang" placeholder="Tên ngân hàng">
+                            </div>
+                            <div class="form-group mb-3">
+                                <input type="text" required class="form-control" name="sotaikhoan" placeholder="Số tài khoản">
+                            </div>
+                            <div class="form-group mb-3">
+                                <input type="text" required class="form-control" name="chutaikhoan" placeholder="Chủ tài khoản">
                             </div>
                             <div class="different_login">
                                 <span> Tài Khoản Đăng Nhập</span>

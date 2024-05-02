@@ -85,10 +85,12 @@ class NapTien extends CI_Controller {
 		$noidung = "Admin cộng tiền nạp ".number_format($sotiencong)." VND vào tài khoản!";
 
 		$sotiencu = $this->Model_NguoiDung->getWallet($manguoidung)[0]['SoDuKhaDung'];
-
+	
 		$sotienmoi = $sotiencu + $sotiencong;
 
-		$this->Model_NguoiDung->updateMoneyWallet($sotienmoi,$manguoidung);
+		$tongnap = $this->Model_NguoiDung->getWallet($manguoidung)[0]['TongNap'] + $sotiencong;
+
+		$this->Model_NguoiDung->updateMoneyWallet($sotienmoi,$tongnap,$manguoidung);
 
 		$this->Model_NguoiDung->insertCashFlow($manguoidung,$sotiencu,$sotiencong,$sotienmoi,$noidung);
 
