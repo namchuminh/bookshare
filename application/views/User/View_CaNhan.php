@@ -79,7 +79,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="ten">Tài Khoản</label>
-                    <input class="form-control" placeholder="Tài khoản" name="taikhoan" value="<?php echo $detail[0]['TaiKhoan']; ?>">
+                    <input class="form-control" placeholder="Tài khoản" name="taikhoan" value="<?php echo $detail[0]['TaiKhoan']; ?>" disabled>
                   </div>
                 </div>
                 <div class="col-md-12">
@@ -108,4 +108,11 @@
     }
   };
 </script>
+<style type="text/css">
+    .form-control:disabled, .form-control[readonly] {
+        background-color: #ffffff;
+        opacity: 1;
+        cursor: not-allowed;
+    }
+</style>
 <?php require(APPPATH.'views/user/layouts/footer.php'); ?>

@@ -20,7 +20,7 @@ class CaNhan extends CI_Controller {
 			$hoten = $this->input->post('hoten');
 			$email = $this->input->post('email');
 			$sodienthoai = $this->input->post('sodienthoai');
-			$taikhoan = $this->input->post('taikhoan');
+			$taikhoan = $this->Model_CaNhan->getById($this->session->userdata('makhachhang'))[0]['TaiKhoan'];
 			$tennganhang = $this->input->post('tennganhang');
 			$sotaikhoan = $this->input->post('sotaikhoan');
 			$chutaikhoan = $this->input->post('chutaikhoan');
@@ -66,6 +66,16 @@ class CaNhan extends CI_Controller {
 			}
 
 			$this->Model_CaNhan->update($hoten,$taikhoan,$matkhau,$email,$sodienthoai,$anhchinh,$tennganhang,$sotaikhoan,$chutaikhoan,$this->session->userdata('makhachhang'));
+
+			$newdata = array(
+			    'hoten' => $hoten,
+			    'sodienthoai' => $sodienthoai,
+			    'email' => $email,
+			    'nganhang' => $tennganhang,
+			    'sotaikhoan' => $sotaikhoan,
+			    'chutaikhoan' => $chutaikhoan,
+			);
+			$this->session->set_userdata($newdata);
 
 			$data['success'] = "Cập nhật thông tin cá nhân thành công!";
 			$data['detail'] = $this->Model_CaNhan->getById($this->session->userdata('makhachhang'));
