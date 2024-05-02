@@ -162,6 +162,66 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
+                        <div class="tab-style3">
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="Description-tab" data-bs-toggle="tab" href="#Description" role="tab" aria-controls="Description" aria-selected="true">Bình Luận & Đánh Giá</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content shop_info_tab">
+                                <div class="tab-pane fade active show" id="Reviews" role="tabpanel" aria-labelledby="Reviews-tab">
+                                <div class="comments">
+                                    <ul class="list_none comment_list mt-4">
+                                        <?php foreach ($comment as $key => $value): ?>
+                                            <li>
+                                                <div class="comment_img">
+                                                    <img style="border-radius: 0; height: 100px;" src="<?php echo $value['AnhChinh']; ?>" alt="<?php echo $value['HoTen']; ?>">
+                                                </div>
+                                                <div class="comment_block">
+                                                    <div class="rating_wrap">
+                                                        <div class="rating">
+                                                            <div class="product_rate" style="width:<?php echo ($value['SoSao'] / 5) * 100 ?>%"></div>
+                                                        </div>
+                                                    </div>
+                                                    <p class="customer_meta">
+                                                        <span class="review_author"><?php echo $value['HoTen']; ?></span>
+                                                        <span class="comment-date"><?php echo date("H:i:s d/m/Y", strtotime($value['ThoiGian'])); ?></span>
+                                                    </p>
+                                                    <div class="description">
+                                                        <p><?php echo $value['NoiDung']; ?></p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        <?php endforeach ?>
+                                    </ul>
+                                </div>
+                                <div class="review_form field_form">
+                                    <h5>Đánh Giá</h5>
+                                    <form class="row mt-3">
+                                        <div class="form-group col-12 mb-3">
+                                            <div class="star_rating">
+                                                <span data-value="1" class="selected"><i class="far fa-star"></i></span>
+                                                <span data-value="2" class="selected"><i class="far fa-star"></i></span> 
+                                                <span data-value="3" class="selected"><i class="far fa-star"></i></span>
+                                                <span data-value="4" class="selected"><i class="far fa-star"></i></span>
+                                                <span data-value="5" class="selected"><i class="far fa-star"></i></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-12 mb-3">
+                                            <textarea required="required" placeholder="Viết bình luận *" class="form-control noidungbinhluan" name="message" rows="4"></textarea>
+                                        </div>
+                                        <div class="form-group col-12 mb-3">
+                                            <button type="submit" class="btn btn-fill-out binhluan" name="submit" value="Submit">Bình Luận</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
                         <div class="small_divider"></div>
                         <div class="divider"></div>
                         <div class="medium_divider"></div>
@@ -869,6 +929,11 @@
     margin-right: 5px;
 }
 
+.form-control:disabled, .form-control[readonly] {
+    background-color: white;
+    opacity: 1;
+}
+
 </style>
 
 <?php require(APPPATH.'views/web/layouts/footer.php'); ?>
@@ -883,6 +948,59 @@
 </style>
 
 <script type="text/javascript">
+    function getNow(){
+        var currentDate = new Date();
+
+        var hours = currentDate.getHours();
+        var minutes = currentDate.getMinutes();
+        var seconds = currentDate.getSeconds();
+
+        // Thêm số 0 đằng trước nếu giờ, phút, giây < 10
+        hours = (hours < 10 ? "0" : "") + hours;
+        minutes = (minutes < 10 ? "0" : "") + minutes;
+        seconds = (seconds < 10 ? "0" : "") + seconds;
+
+        var formattedTime = hours + ":" + minutes + ":" + seconds;
+
+        var day = currentDate.getDate();
+        var month = currentDate.getMonth() + 1; // Lấy tháng từ 0 đến 11, nên cần cộng thêm 1
+        var year = currentDate.getFullYear();
+
+        // Thêm số 0 đằng trước nếu ngày, tháng < 10
+        day = (day < 10 ? "0" : "") + day;
+        month = (month < 10 ? "0" : "") + month;
+
+        var formattedDate = day + "/" + month + "/" + year;
+
+        return formattedTime + ' ' +formattedDate;
+    }
+
+    function getNowInsert(){
+        var currentDate = new Date();
+
+        var hours = currentDate.getHours();
+        var minutes = currentDate.getMinutes();
+        var seconds = currentDate.getSeconds();
+
+        // Thêm số 0 đằng trước nếu giờ, phút, giây < 10
+        hours = (hours < 10 ? "0" : "") + hours;
+        minutes = (minutes < 10 ? "0" : "") + minutes;
+        seconds = (seconds < 10 ? "0" : "") + seconds;
+
+        var formattedTime = hours + ":" + minutes + ":" + seconds;
+
+        var day = currentDate.getDate();
+        var month = currentDate.getMonth() + 1; // Lấy tháng từ 0 đến 11, nên cần cộng thêm 1
+        var year = currentDate.getFullYear();
+
+        // Thêm số 0 đằng trước nếu ngày, tháng < 10
+        day = (day < 10 ? "0" : "") + day;
+        month = (month < 10 ? "0" : "") + month;
+
+        var formattedDate = year + '-' + month + '-' + day;
+
+        return formattedDate + ' ' +formattedTime;
+    }
     $(document).ready(function(){
         $(".add-to-cart").click(function(e){
             e.preventDefault()
@@ -908,6 +1026,48 @@
             })
 
         });
+
+        $(".binhluan").click(function(e){
+            e.preventDefault();
+            var noidungbinhluan = $(".noidungbinhluan").val();
+            var sosao = 0;
+            var hoten = '<?php echo $_SESSION['hoten']; ?>'
+            var anhchinh = '<?php echo $_SESSION['anhchinh']; ?>';
+            var masach = '<?php echo $detail[0]['MaSach']; ?>';
+
+            if ($('[data-value="1"]').hasClass('selected')) {
+                sosao = 1;
+            }
+
+            if ($('[data-value="2"]').hasClass('selected')) {
+                sosao = 2;
+            }
+
+            if ($('[data-value="3"]').hasClass('selected')) {
+                sosao = 3;
+            }
+
+            if ($('[data-value="4"]').hasClass('selected')) {
+                sosao = 4;
+            }
+
+            if ($('[data-value="5"]').hasClass('selected')) {
+                sosao = 5;
+            }
+
+            if(noidungbinhluan != ""){
+                var phantram = (sosao / 5) * 100;
+                $(".comment_list").append('<li> <div class="comment_img"> <img style="border-radius: 0; height: 100px;" src="'+anhchinh+'" alt="user1"> </div> <div class="comment_block"> <div class="rating_wrap"> <div class="rating"> <div class="product_rate" style="width:'+phantram+'%"></div> </div> </div> <p class="customer_meta"> <span class="review_author">'+hoten+'</span> <span class="comment-date">'+getNow()+'</span> </p> <div class="description"> <p>'+noidungbinhluan+'</p> </div> </div> </li>');
+
+                $(".noidungbinhluan").val('');
+
+                $.post('<?php echo base_url('binh-luan/them/'); ?>', {masach, sosao, noidung: noidungbinhluan, thoigian: getNowInsert() }, function(data, status){
+                });
+            }
+
+            
+        })
+
     });
 </script>
 

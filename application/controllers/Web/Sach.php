@@ -8,6 +8,7 @@ class Sach extends MY_Controller {
 		$this->load->model('Web/Model_Sach');
 		$this->load->model('Web/Model_GiaoDien');
 		$this->load->model('Web/Model_NguoiDung');
+		$this->load->model('Web/Model_BinhLuan');
 	}
 
 	public function index()
@@ -85,6 +86,7 @@ class Sach extends MY_Controller {
 		$data['hot'] = $this->Model_Sach->getByType(4);
 		$data['suggest'] = $this->Model_Sach->getSuggest();
 		$data['categoryNumber'] = $this->Model_Sach->getCategoryNumber();
+		$data['comment'] = $this->Model_BinhLuan->getByIdBook($this->Model_Sach->getBySlug($duongdan)[0]['MaSach']);
 		return $this->load->view('Web/View_ChiTietSach', $data);
 	}
 

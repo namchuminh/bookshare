@@ -40,6 +40,7 @@ class DangNhap extends MY_Controller {
 						'makhachhang' => $this->Model_DangNhap->getInfoByUsername($taikhoan)[0]['MaNguoiDung'],
 					    'khachhang'  => $taikhoan,
 					    'hoten' => $this->Model_DangNhap->getInfoByUsername($taikhoan)[0]['HoTen'],
+					    'anhchinh' => $this->Model_DangNhap->getInfoByUsername($taikhoan)[0]['AnhChinh'],
 					    'sodienthoai' => $this->Model_DangNhap->getInfoByUsername($taikhoan)[0]['SoDienThoai'],
 					    'email' => $this->Model_DangNhap->getInfoByUsername($taikhoan)[0]['Email'],
 					    'diachi' => $this->Model_DangNhap->getInfoByUsername($taikhoan)[0]['DiaChi'],

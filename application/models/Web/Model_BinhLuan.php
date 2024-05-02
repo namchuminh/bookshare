@@ -30,6 +30,18 @@ class Model_BinhLuan extends CI_Model {
 		return $result->result_array()[0]['SoDanhGia'];
 	}
 
+	public function insert($manguoidung,$masach,$noidung,$sosao,$thoigian){
+		$sql = "INSERT INTO `binhluan`(`MaNguoiDung`, `MaSach`, `NoiDung`, `SoSao`, `ThoiGian`) VALUES (?, ?, ?, ?, ?)";
+		$result = $this->db->query($sql, array($manguoidung,$masach,$noidung,$sosao,$thoigian));
+		return $result;
+	}
+
+	public function getByIdBook($masach){
+		$sql = "SELECT nguoidung.AnhChinh, nguoidung.HoTen, binhluan.* FROM nguoidung, binhluan WHERE nguoidung.MaNguoiDung = binhluan.MaNguoiDung AND binhluan.MaSach = ? ORDER BY ThoiGian ASC";
+		$result = $this->db->query($sql, array($masach));
+		return $result->result_array();
+	}
+
 }
 
 /* End of file Model_BinhLuan.php */

@@ -103,6 +103,8 @@ $route['sach'] = 'Web/Sach/index';
 $route['sach/(:any)'] = 'Web/Sach/detail/$1';
 $route['sach/trang/(:any)'] = 'Web/Sach/page/$1';
 
+$route['binh-luan/them'] = 'Web/BinhLuan/add';
+
 $route['tin-tuc'] = 'Web/TinTuc/index';
 $route['tin-tuc/(:any)'] = 'Web/TinTuc/detail/$1';
 $route['tin-tuc/trang/(:any)'] = 'Web/TinTuc/page/$1';
