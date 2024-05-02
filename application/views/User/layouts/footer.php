@@ -1,5 +1,5 @@
  <footer class="main-footer">
-    <strong>&copy; 2023-2024 - Trang dành cho  <a href="<?php echo base_url('admin/'); ?>">Quản trị viên</a>.</strong>
+    <strong>&copy; 2023-2024 - Trang dành cho  <a href="<?php echo base_url('user/'); ?>">Quản trị người dùng</a>.</strong>
     <div class="float-right d-none d-sm-inline-block">
       <b>Phiên bản</b> 1.0.0
     </div>

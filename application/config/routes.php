@@ -139,6 +139,9 @@ $route['yeu-thich/them/(:any)'] = 'Web/YeuThich/add/$1';
 $route['yeu-thich/xoa/(:any)'] = 'Web/YeuThich/delete/$1';
 
 
+$route['user/doanh-thu-thang'] = 'User/TrangChu/sumRevenue';
+$route['user/cho-muon-thang'] = 'User/TrangChu/sumOrder';
+
 $route['user/sach'] = 'User/Sach';
 $route['user/sach/(:any)/trang'] = 'User/Sach/page/$1';
 $route['user/sach/them'] = 'User/Sach/add';
@@ -182,3 +185,5 @@ $route['user/nap-tien'] = 'User/NapTien';
 $route['user/rut-tien'] = 'User/RutTien';
 
 $route['user/ca-nhan'] = 'User/CaNhan';
+
+$route['user'] = 'User/TrangChu';
