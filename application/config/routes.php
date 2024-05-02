@@ -177,6 +177,6 @@ $route['user/binh-luan/tim-kiem/(:any)/trang'] = 'User/BinhLuan/pageSearch/$1';
 
 $route['user/nap-tien'] = 'User/NapTien';
 
-
+$route['user/rut-tien'] = 'User/RutTien';
 
 $route['user/ca-nhan'] = 'User/CaNhan';
