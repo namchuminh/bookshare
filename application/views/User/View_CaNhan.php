@@ -1,4 +1,4 @@
-<?php require(APPPATH.'views/admin/layouts/header.php'); ?>
+<?php require(APPPATH.'views/user/layouts/header.php'); ?>
 <div class="content-wrapper" style="min-height: 1203.31px;">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -9,8 +9,8 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="<?php echo base_url('admin/'); ?>">Trang Chủ</a></li>
-              <li class="breadcrumb-item"><a href="<?php echo base_url('admin/ca-nhan/'); ?>">Quản Lý Cá Nhân</a></li>
+              <li class="breadcrumb-item"><a href="<?php echo base_url('user/'); ?>">Trang Chủ</a></li>
+              <li class="breadcrumb-item"><a href="<?php echo base_url('user/ca-nhan/'); ?>">Quản Lý Cá Nhân</a></li>
               <li class="breadcrumb-item active">Cập Nhật Cá Nhân</li>
             </ol>
           </div>
@@ -57,7 +57,7 @@
                   </div>
                 </div>
               </div> 
-              <a class="btn btn-success" href="<?php echo base_url('admin/'); ?>">Quay Lại</a>
+              <a class="btn btn-success" href="<?php echo base_url('user/'); ?>">Quay Lại</a>
               <button class="btn btn-primary">Lưu Thông Tin</button>
             </form>
           </div>
@@ -66,4 +66,4 @@
     </section>
     <!-- /.content -->
 </div>
-<?php require(APPPATH.'views/admin/layouts/footer.php'); ?>
+<?php require(APPPATH.'views/user/layouts/footer.php'); ?>

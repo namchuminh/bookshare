@@ -1,4 +1,4 @@
-<?php require(APPPATH.'views/admin/layouts/header.php'); ?>
+<?php require(APPPATH.'views/user/layouts/header.php'); ?>
 <div class="content-wrapper" style="min-height: 1203.31px;">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -9,8 +9,8 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="<?php echo base_url('admin/'); ?>">Trang Chủ</a></li>
-              <li class="breadcrumb-item"><a href="<?php echo base_url('admin/binh-luan/'); ?>">Quản Lý Bình Luận</a></li>
+              <li class="breadcrumb-item"><a href="<?php echo base_url('user/'); ?>">Trang Chủ</a></li>
+              <li class="breadcrumb-item"><a href="<?php echo base_url('user/binh-luan/'); ?>">Quản Lý Bình Luận</a></li>
               <li class="breadcrumb-item active"><?php echo $detail[0]['TenSach']; ?></li>
             </ol>
           </div>
@@ -76,8 +76,7 @@
                   </div>
                 </div>
               </div> 
-              <a class="btn btn-success" href="<?php echo base_url('admin/binh-luan/'); ?>">Quay Lại</a>
-              <a class="btn btn-danger" href="<?php echo base_url('admin/binh-luan/'.$detail[0]['MaBinhLuan'].'/xoa/'); ?>">Xóa Bình Luận</a>
+              <a class="btn btn-success" href="<?php echo base_url('user/binh-luan/'); ?>">Quay Lại</a>
             </form>
           </div>
         </div>
@@ -95,4 +94,4 @@
       color: #F6BC3E;
     }
 </style>
-<?php require(APPPATH.'views/admin/layouts/footer.php'); ?>
+<?php require(APPPATH.'views/user/layouts/footer.php'); ?>

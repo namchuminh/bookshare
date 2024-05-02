@@ -167,4 +167,12 @@ $route['user/to-cao/(:any)/trang-thai'] = 'User/ToCao/action/$1';
 $route['user/to-cao/tim-kiem'] = 'User/ToCao/search';
 $route['user/to-cao/tim-kiem/(:any)/trang'] = 'User/ToCao/pageSearch/$1';
 
-$route['admin/ca-nhan'] = 'Admin/CaNhan';
+$route['user/binh-luan'] = 'User/BinhLuan';
+$route['user/binh-luan/(:any)/trang'] = 'User/BinhLuan/page/$1';
+$route['user/binh-luan/(:any)/xem'] = 'User/BinhLuan/view/$1';
+$route['user/binh-luan/(:any)/xoa'] = 'User/BinhLuan/delete/$1';
+$route['user/binh-luan/tim-kiem'] = 'User/BinhLuan/search';
+$route['user/binh-luan/tim-kiem/(:any)/trang'] = 'User/BinhLuan/pageSearch/$1';
+
+
+$route['user/ca-nhan'] = 'User/CaNhan';

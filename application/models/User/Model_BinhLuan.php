@@ -10,41 +10,35 @@ class Model_BinhLuan extends CI_Model {
 		
 	}
 
-	public function checkNumber()
+	public function checkNumber($manguoidung)
 	{
-		$sql = "SELECT binhluan.*, nguoidung.MaNguoiDung, nguoidung.TaiKhoan, sach.TenSach, sach.MaSach FROM nguoidung, binhluan, sach WHERE binhluan.TrangThai = 1 AND binhluan.MaNguoiDung = nguoidung.MaNguoiDung AND binhluan.MaSach = sach.MaSach";
-		$result = $this->db->query($sql);
+		$sql = "SELECT binhluan.*, nguoidung.MaNguoiDung, nguoidung.TaiKhoan, sach.TenSach, sach.MaSach FROM nguoidung, binhluan, sach WHERE binhluan.TrangThai = 1 AND binhluan.MaNguoiDung = nguoidung.MaNguoiDung AND binhluan.MaSach = sach.MaSach AND sach.MaNguoiDung = ?";
+		$result = $this->db->query($sql, array($manguoidung));
 		return $result->num_rows();
 	}
 
-	public function getAll($start = 0, $end = 10){
-		$sql = "SELECT binhluan.*, nguoidung.MaNguoiDung, nguoidung.TaiKhoan, sach.TenSach, sach.MaSach FROM nguoidung, binhluan, sach WHERE binhluan.TrangThai = 1 AND binhluan.MaNguoiDung = nguoidung.MaNguoiDung AND binhluan.MaSach = sach.MaSach ORDER BY binhluan.MaBinhLuan DESC LIMIT ?, ?";
-		$result = $this->db->query($sql, array($start, $end));
+	public function getAll($manguoidung, $start = 0, $end = 10){
+		$sql = "SELECT binhluan.*, nguoidung.MaNguoiDung, nguoidung.TaiKhoan, sach.TenSach, sach.MaSach FROM nguoidung, binhluan, sach WHERE binhluan.TrangThai = 1 AND binhluan.MaNguoiDung = nguoidung.MaNguoiDung AND binhluan.MaSach = sach.MaSach AND sach.MaNguoiDung = ? ORDER BY binhluan.MaBinhLuan DESC LIMIT ?, ?";
+		$result = $this->db->query($sql, array($manguoidung, $start, $end));
 		return $result->result_array();
 	}
 
-	public function getById($MaBinhLuan){
-		$sql = "SELECT binhluan.*, nguoidung.MaNguoiDung, nguoidung.TaiKhoan, sach.TenSach, sach.MaSach FROM nguoidung, binhluan, sach WHERE binhluan.TrangThai = 1 AND binhluan.MaNguoiDung = nguoidung.MaNguoiDung AND binhluan.MaSach = sach.MaSach AND binhluan.MaBinhLuan = ?";
-		$result = $this->db->query($sql, array($MaBinhLuan));
+	public function getById($manguoidung, $MaBinhLuan){
+		$sql = "SELECT binhluan.*, nguoidung.MaNguoiDung, nguoidung.TaiKhoan, sach.TenSach, sach.MaSach FROM nguoidung, binhluan, sach WHERE binhluan.TrangThai = 1 AND binhluan.MaNguoiDung = nguoidung.MaNguoiDung AND binhluan.MaSach = sach.MaSach AND sach.MaNguoiDung = ? AND binhluan.MaBinhLuan = ?";
+		$result = $this->db->query($sql, array($manguoidung,$MaBinhLuan));
 		return $result->result_array();
 	}
 
 
-	public function delete($MaBinhLuan){
-		$sql = "UPDATE binhluan SET TrangThai = 0 WHERE MaBinhLuan = ?";
-		$result = $this->db->query($sql, array($MaBinhLuan));
-		return $result;
-	}
-
-	public function search($tensach, $sosao, $start = 0, $end = 10){
-		$sql = "SELECT binhluan.*, nguoidung.MaNguoiDung, nguoidung.TaiKhoan, sach.TenSach, sach.MaSach FROM nguoidung, binhluan, sach WHERE binhluan.TrangThai = 1 AND binhluan.MaNguoiDung = nguoidung.MaNguoiDung AND binhluan.MaSach = sach.MaSach AND (sach.TenSach = ? OR binhluan.SoSao = ?) ORDER BY binhluan.MaBinhLuan DESC LIMIT ?, ?";
-		$result = $this->db->query($sql, array($tensach, $sosao, $start, $end));
+	public function search($manguoidung,$tensach, $sosao, $start = 0, $end = 10){
+		$sql = "SELECT binhluan.*, nguoidung.MaNguoiDung, nguoidung.TaiKhoan, sach.TenSach, sach.MaSach FROM nguoidung, binhluan, sach WHERE binhluan.TrangThai = 1 AND binhluan.MaNguoiDung = nguoidung.MaNguoiDung AND binhluan.MaSach = sach.MaSach AND sach.MaNguoiDung = ? AND (sach.TenSach = ? OR binhluan.SoSao = ?) ORDER BY binhluan.MaBinhLuan DESC LIMIT ?, ?";
+		$result = $this->db->query($sql, array($manguoidung, $tensach, $sosao, $start, $end));
 		return $result->result_array();
 	}
 
-	public function checkNumberSearch($tensach, $sosao){
-		$sql = "SELECT binhluan.*, nguoidung.MaNguoiDung, nguoidung.TaiKhoan, sach.TenSach, sach.MaSach FROM nguoidung, binhluan, sach WHERE binhluan.TrangThai = 1 AND binhluan.MaNguoiDung = nguoidung.MaNguoiDung AND binhluan.MaSach = sach.MaSach AND (sach.TenSach = ? OR binhluan.SoSao = ?)";
-		$result = $this->db->query($sql, array($tensach, $sosao));
+	public function checkNumberSearch($manguoidung,$tensach, $sosao){
+		$sql = "SELECT binhluan.*, nguoidung.MaNguoiDung, nguoidung.TaiKhoan, sach.TenSach, sach.MaSach FROM nguoidung, binhluan, sach WHERE binhluan.TrangThai = 1 AND binhluan.MaNguoiDung = nguoidung.MaNguoiDung AND binhluan.MaSach = sach.MaSach AND sach.MaNguoiDung = ? AND (sach.TenSach = ? OR binhluan.SoSao = ?)";
+		$result = $this->db->query($sql, array($manguoidung, $tensach, $sosao));
 		return $result->num_rows();
 	}
 

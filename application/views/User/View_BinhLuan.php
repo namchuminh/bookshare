@@ -1,4 +1,4 @@
-<?php require(APPPATH.'views/admin/layouts/header.php'); ?>
+<?php require(APPPATH.'views/user/layouts/header.php'); ?>
 <div class="content-wrapper" style="min-height: 1203.31px;">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -9,7 +9,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="<?php echo base_url('admin/'); ?>">Trang Chủ</a></li>
+              <li class="breadcrumb-item"><a href="<?php echo base_url('user/'); ?>">Trang Chủ</a></li>
               <li class="breadcrumb-item active">Quản Lý Bình Luận</li>
             </ol>
           </div>
@@ -25,7 +25,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <form class="row" action="<?php echo base_url('admin/binh-luan/tim-kiem/') ?>"> 
+                <form class="row" action="<?php echo base_url('user/binh-luan/tim-kiem/') ?>"> 
                   <div class="col-sm-2">
                     <label>Tên Sách</label>
                     <input type="text" name="tensach" class="form-control" placeholder="Tên sách">
@@ -58,7 +58,7 @@
                       <th>Tên Sách</th>
                       <th>Người Bình Luận</th>
                       <th>Đánh Giá</th>
-                      <th>Nội Dung</th>
+                      <th style="width: 200px;">Nội Dung</th>
                       <th>Thời Gian</th>
                       <th>Xem Bình Luận</th>
                     </tr>
@@ -68,9 +68,9 @@
                       <tr>
                         <td><?php echo $key + 1; ?></td>
                         <td>
-                          <a href="<?php echo base_url('admin/sach/'.$value['MaSach'].'/sua/') ?>"><?php echo $value['TenSach']; ?></a>
+                          <a href="<?php echo base_url('user/sach/'.$value['MaSach'].'/sua/') ?>"><?php echo $value['TenSach']; ?></a>
                         </td>
-                        <td><a href="<?php echo base_url('admin/nguoi-dung/'.$value['MaNguoiDung'].'/xem/') ?>"><?php echo $value['TaiKhoan']; ?></a></td>
+                        <td><a href="<?php echo base_url('nguoi-dung/'.$value['TaiKhoan'].'/') ?>" target="_blank"><?php echo $value['TaiKhoan']; ?></a></td>
                         <td>
                           <?php if($value['SoSao'] != 0){ ?>
                             <span>
@@ -103,7 +103,7 @@
                           <?php echo date("H:i:s d/m/Y", strtotime($value['ThoiGian'])); ?>
                         </td>
                         <td>
-                          <a href="<?php echo base_url('admin/binh-luan/'.$value['MaBinhLuan'].'/xem/'); ?>" class="btn btn-primary" style="color: white;">
+                          <a href="<?php echo base_url('user/binh-luan/'.$value['MaBinhLuan'].'/xem/'); ?>" class="btn btn-primary" style="color: white;">
                             <i class="fa-solid fa-comment"></i>
                               <span>XEM BÌNH LUẬN</span>
                           </a>
@@ -116,7 +116,7 @@
               <div class="card-footer clearfix">
                 <ul class="pagination pagination-sm m-0 float-right">
                   <?php for($i = 1; $i <= $totalPages; $i++){ ?>
-                      <li class="page-item"><a class="page-link" href="<?php echo base_url('admin/binh-luan/'.$i.'/trang/') ?>"><?php echo $i; ?></a></li>
+                      <li class="page-item"><a class="page-link" href="<?php echo base_url('user/binh-luan/'.$i.'/trang/') ?>"><?php echo $i; ?></a></li>
                     <?php } ?>      
                 </ul>
               </div>
@@ -134,4 +134,4 @@
       color: #F6BC3E;
     }
   </style>
-<?php require(APPPATH.'views/admin/layouts/footer.php'); ?>
+<?php require(APPPATH.'views/user/layouts/footer.php'); ?>

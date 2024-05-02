@@ -47,7 +47,7 @@
                       <th>Tiêu Đề</th>
                       <th>Thời Gian</th>
                       <th>Trạng Thái</th>
-                      <th>Hủy Tố Cáo</th>
+                      <th>Hành Động</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -80,10 +80,17 @@
                           <?php } ?>
                         </td>
                         <td>
-                          <a href="<?php echo base_url('user/to-cao/'.$value['MaToCao'].'/xem/'); ?>" class="btn btn-primary" style="color: white;">
-                            <i class="fa-solid fa-flag"></i>
-                              <span>HỦY TỐ CÁO</span>
-                          </a>
+                          <?php if($value['TrangThai'] == 1){ ?>
+                            <a href="<?php echo base_url('user/to-cao/'.$value['MaToCao'].'/xem/'); ?>" class="btn btn-primary" style="color: white;">
+                              <i class="fa-solid fa-flag"></i>
+                                <span>HỦY TỐ CÁO</span>
+                            </a>
+                          <?php }else{ ?>
+                            <a href="<?php echo base_url('user/to-cao/'.$value['MaToCao'].'/xem/'); ?>" class="btn btn-primary" style="color: white;">
+                              <i class="fa-solid fa-flag"></i>
+                                <span>XEM TỐ CÁO</span>
+                            </a>
+                          <?php } ?>
                         </td>
                       </tr>
                     <?php endforeach ?>
