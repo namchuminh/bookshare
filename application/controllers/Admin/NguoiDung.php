@@ -114,10 +114,11 @@ class NguoiDung extends CI_Controller {
 		}
 
 		$sotiencu = $this->Model_NguoiDung->getWallet($manguoidung)[0]['SoDuKhaDung'];
+		$tongnap = $this->Model_NguoiDung->getWallet($manguoidung)[0]['TongNap'];
 
 		$sotienmoi = $sotiencong + $sotiencu;
 
-		$this->Model_NguoiDung->updateMoneyWallet($sotienmoi,$manguoidung);
+		$this->Model_NguoiDung->updateMoneyWallet($sotienmoi,$tongnap,$manguoidung);
 
 		$this->Model_NguoiDung->insertCashFlow($manguoidung,$sotiencu,$sotiencong,$sotienmoi,$noidung);
 
@@ -146,6 +147,7 @@ class NguoiDung extends CI_Controller {
 		}
 
 		$sotiencu = $this->Model_NguoiDung->getWallet($manguoidung)[0]['SoDuKhaDung'];
+		$tongnap = $this->Model_NguoiDung->getWallet($manguoidung)[0]['TongNap'];
 
 		if($sotientru > $sotiencu){
 			$this->session->set_flashdata('error', 'Số tiền trừ không được lớn hơn số dư khả dụng!');
@@ -154,7 +156,7 @@ class NguoiDung extends CI_Controller {
 
 		$sotienmoi = $sotiencu - $sotientru;
 
-		$this->Model_NguoiDung->updateMoneyWallet($sotienmoi,$manguoidung);
+		$this->Model_NguoiDung->updateMoneyWallet($sotienmoi,$tongnap,$manguoidung);
 
 		$this->Model_NguoiDung->insertCashFlow($manguoidung,$sotiencu,$sotientru,$sotienmoi,$noidung);
 

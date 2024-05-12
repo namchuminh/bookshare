@@ -12,7 +12,7 @@
 <!-- SITE TITLE -->
 <title><?php echo $config[0]['TenWebsite']; ?> - <?php echo $title; ?></title>
 <!-- Favicon Icon -->
-<link rel="shortcut icon" type="image/x-icon" href="<?php echo $config[0]['Logo']; ?>">
+<link rel="shortcut icon" type="image/x-icon" href="<?php echo $config[0]['Favicon']; ?>">
 <!-- Animation CSS -->
 <link rel="stylesheet" href="<?php echo base_url('public/web/'); ?>assets/css/animate.css">	
 <!-- Latest Bootstrap min CSS -->
@@ -93,8 +93,8 @@
     	<div class="container">
             <nav class="navbar navbar-expand-lg"> 
                 <a class="navbar-brand" href="<?php echo base_url(); ?>">
-                    <img class="logo_light" src="<?php echo $config[0]['Logo']; ?>" alt="logo" />
-                    <img class="logo_dark" src="<?php echo $config[0]['Logo']; ?>" alt="logo" />
+                    <img style="width: 182px; height: 47px;" class="logo_light" src="<?php echo $config[0]['Logo']; ?>" alt="logo" />
+                    <img style="width: 182px; height: 47px;" class="logo_dark" src="<?php echo $config[0]['Logo']; ?>" alt="logo" />
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-expanded="false"> 
                     <span class="ion-android-menu"></span>

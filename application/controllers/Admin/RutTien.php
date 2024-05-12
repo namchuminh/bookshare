@@ -87,6 +87,7 @@ class RutTien extends CI_Controller {
 		$noidung = "Admin trừ tiền rút ".number_format($sotientru)." VND của tài khoản!";
 
 		$sotiencu = $this->Model_NguoiDung->getWallet($manguoidung)[0]['SoDuKhaDung'];
+		$tongnap = $this->Model_NguoiDung->getWallet($manguoidung)[0]['TongNap'];
 
 		if($sotientru > $sotiencu){
 			$this->session->set_flashdata('error', 'Số tiền rút không được lớn hơn số dư khả dụng!');
@@ -95,7 +96,7 @@ class RutTien extends CI_Controller {
 
 		$sotienmoi = $sotiencu - $sotientru;
 
-		$this->Model_NguoiDung->updateMoneyWallet($sotienmoi,$manguoidung);
+		$this->Model_NguoiDung->updateMoneyWallet($sotienmoi,$tongnap,$manguoidung);
 
 		$this->Model_NguoiDung->insertCashFlow($manguoidung,$sotiencu,$sotientru,$sotienmoi,$noidung);
 

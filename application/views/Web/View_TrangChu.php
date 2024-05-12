@@ -12,7 +12,7 @@
 <!-- SITE TITLE -->
 <title><?php echo $title; ?></title>
 <!-- Favicon Icon -->
-<link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url('public/web/'); ?>assets/images/favicon.png">
+<link rel="shortcut icon" type="image/x-icon" href="<?php echo $config[0]['Favicon']; ?>">
 <!-- Animation CSS -->
 <link rel="stylesheet" href="<?php echo base_url('public/web/'); ?>assets/css/animate.css">	
 <!-- Latest Bootstrap min CSS -->
@@ -92,8 +92,8 @@
     	<div class="custom-container">
         	<div class="nav_block">
                 <a class="navbar-brand" href="<?php echo base_url(); ?>">
-                    <img class="logo_light" src="<?php echo $config[0]['Logo'] ?>" alt="logo" />
-                    <img class="logo_dark" src="<?php echo $config[0]['Logo'] ?>" alt="logo" />
+                    <img style="width: 182px; height: 47px;" class="logo_light" src="<?php echo $config[0]['Logo'] ?>" alt="logo" />
+                    <img style="width: 182px; height: 47px;" class="logo_dark" src="<?php echo $config[0]['Logo'] ?>" alt="logo" />
                 </a>
                 <div class="product_search_form rounded_input">
                     <form action="<?php echo base_url('sach/') ?>">
