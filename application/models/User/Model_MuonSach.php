@@ -55,6 +55,18 @@ class Model_MuonSach extends CI_Model {
 		return $result->result_array();
 	}
 
+	public function number($soluong, $masach){
+		$sql = "UPDATE sach SET SoLuong = ? WHERE MaSach = ?";
+		$result = $this->db->query($sql, array($soluong,$masach));
+		return $result;
+	}
+
+	public function bookMuon($soluong, $masach){
+		$sql = "UPDATE sach SET TrangThaiMuon = ? WHERE MaSach = ?";
+		$result = $this->db->query($sql, array($soluong,$masach));
+		return $result;
+	}
+
 }
 
 /* End of file Model_ChuyenMuc.php */

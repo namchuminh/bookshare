@@ -10,6 +10,7 @@ class MuonSach extends CI_Controller {
 		}
 
 		$this->load->model('User/Model_MuonSach');
+		$this->load->model('User/Model_Sach');
 	}
 
 	public function index()
@@ -69,6 +70,32 @@ class MuonSach extends CI_Controller {
 				return redirect(base_url('User/muon-sach/'.$mamuonsach.'/trang-thai/'));
 			}
 
+			$soluong = $this->Model_MuonSach->getById($this->session->userdata('makhachhang'),$mamuonsach)[0]['SoLuong'];
+			$masach = $this->Model_MuonSach->getById($this->session->userdata('makhachhang'),$mamuonsach)[0]['MaSach'];
+			$trangthaihientai = $this->Model_MuonSach->getById($this->session->userdata('makhachhang'),$mamuonsach)[0]['TrangThai'];
+
+			$soluonghientai = $this->Model_Sach->getById($this->session->userdata('makhachhang'),$masach)[0]['SoLuong'];
+
+			$soluongmoi = $soluonghientai;
+
+			if(($trangthai == 0) && ($trangthaihientai == 3)){
+				$soluongmoi = $soluonghientai + $soluong;
+				$this->Model_MuonSach->number($soluongmoi,$masach);
+				$this->Model_MuonSach->bookMuon(0,$masach);
+			}
+
+			if(($trangthai == 4) && ($trangthaihientai == 3)){
+				$soluongmoi = $soluonghientai + $soluong;
+				$this->Model_MuonSach->number($soluongmoi,$masach);
+				$this->Model_MuonSach->bookMuon(0,$masach);
+			}
+
+			if(($trangthai == 3) && (($trangthaihientai == 1) || ($trangthaihientai == 2))){
+				$soluongmoi = $soluonghientai - $soluong;
+				$this->Model_MuonSach->number($soluongmoi,$masach);
+				$this->Model_MuonSach->bookMuon($soluong,$masach);
+			}
+			
 			$this->Model_MuonSach->status($trangthai,$mamuonsach);
 			
 			$data['detail'] = $this->Model_MuonSach->getById($this->session->userdata('makhachhang'),$mamuonsach);
